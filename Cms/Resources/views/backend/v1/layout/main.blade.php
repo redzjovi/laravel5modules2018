@@ -17,7 +17,7 @@
 </head>
 
 <body class="bg-light">
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+    <nav class="bg-dark navbar navbar-dark navbar-expand-md sticky-top">
         <a class="navbar-brand" href="#">@yield('title', config('app.name'))</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault"
             aria-expanded="false" aria-label="Toggle navigation">
@@ -53,10 +53,12 @@
             </form>
         </div>
     </nav>
-    <main class="container-fluid" role="main">
-        @yield('content')
-    </main>
-
+    
+    @hasSection('breadcrumb')
+        <nav>@yield('breadcrumb')</nav>
+    @endif
+    
+    <main class="container-fluid" role="main">@yield('content')</main>
     <script src="{{ asset('js/backend--app.js') }}"></script>
     @stack('scripts')
 </body>
