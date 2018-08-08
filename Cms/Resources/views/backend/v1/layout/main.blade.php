@@ -2,7 +2,8 @@
 <html lang="{{ app()->getLocale() }}">
 
 <head>
-    <link href="{{ asset('css/backend--app.css') }}" rel="stylesheet" /> @stack('styles')
+    <link href="{{ asset('css/backend--app.css') }}" rel="stylesheet" />
+    @stack('styles')
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -12,7 +13,7 @@
     <meta name="app_name" content="{{ config('app.name') }}" />
     <meta name="app_url" content="{{ config('app.url') }}" />
     <meta name="csrf_token" content="{{ csrf_token() }}" />
-    
+
     <title>@yield('title', config('app.name'))</title>
 </head>
 
@@ -53,11 +54,11 @@
             </form>
         </div>
     </nav>
-    
+
     @hasSection('breadcrumb')
         <nav>@yield('breadcrumb')</nav>
     @endif
-    
+
     <main class="container-fluid" role="main">@yield('content')</main>
     <script src="{{ asset('js/backend--app.js') }}"></script>
     @stack('scripts')
