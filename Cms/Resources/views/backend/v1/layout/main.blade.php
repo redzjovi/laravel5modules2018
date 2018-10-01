@@ -59,7 +59,10 @@
         <nav>@yield('breadcrumb')</nav>
     @endif
 
-    <main class="container-fluid" role="main">@yield('content')</main>
+    <main class="container-fluid" role="main">
+        @include('flash::message')
+        @yield('content')
+    </main>
     <script src="{{ asset('js/backend--app.js') }}"></script>
     @stack('scripts')
 </body>
