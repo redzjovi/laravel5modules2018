@@ -129,6 +129,7 @@ return [
     'newest' => 'Terbaru',
     'next' => 'Berikutnya',
     'no' => 'Tidak',
+    'no_action_selected' => 'Tidak ada tindakan yang dipilih',
     'no_data' => 'Tidak ada data',
     'of' => 'Dari',
     'older' => 'Lebih Lama',

@@ -60,6 +60,7 @@
     @endif
 
     <main class="container-fluid" role="main">
+        @include('cms::backend/v1/validation/error')
         @include('flash::message')
         @yield('content')
     </main>

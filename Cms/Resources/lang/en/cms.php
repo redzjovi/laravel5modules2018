@@ -129,6 +129,7 @@ return [
     'newest' => 'Newest',
     'next' => 'Next',
     'no' => 'No',
+    'no_action_selected' => 'No action selected',
     'no_data' => 'No data',
     'of' => 'Of',
     'older' => 'Older',
