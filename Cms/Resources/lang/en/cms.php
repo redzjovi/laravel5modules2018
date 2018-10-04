@@ -143,6 +143,7 @@ return [
     'our_store' => 'Our Store',
     'overwrite_permissions' => 'Overwrite permissions',
     'page' => 'Page',
+    'param1_to_param2_of_param3' => ':from to :to of :total',
     'password' => 'Password',
     'per_page' => 'Per page',
     'permission' => 'Permission',

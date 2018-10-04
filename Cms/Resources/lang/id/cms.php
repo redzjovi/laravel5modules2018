@@ -143,6 +143,7 @@ return [
     'our_store' => 'Toko Kami',
     'overwrite_permissions' => 'Menimpa izin',
     'page' => 'Halaman',
+    'param1_to_param2_of_param3' => ':from ke :to dari :total',
     'password' => 'Kata Sandi',
     'per_page' => 'Per halaman',
     'permission' => 'Izin',
