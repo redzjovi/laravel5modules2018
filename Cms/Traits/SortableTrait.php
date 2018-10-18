@@ -4,7 +4,7 @@ namespace Modules\Cms\Traits;
 
 trait SortableTrait
 {
-    public function sortablelink($orderBy, $title)
+    public function sortablelink($orderBy, $title, $options = [])
     {
         request()->query('sortedBy') ? request()->query('sortedBy') : request()->query->set('sortedBy', 'asc');
         $sortedBy = request()->query('sortedBy');
@@ -22,7 +22,10 @@ trait SortableTrait
         $titleIconClass = (request()->query('orderBy') == $orderBy && request()->query('sortedBy') == 'asc') ? 'fas fa-sort-up' : $titleIconClass;
         $titleIconClass = (request()->query('orderBy') == $orderBy && request()->query('sortedBy') == 'desc') ? 'fas fa-sort-down' : $titleIconClass;
 
-        $html = '<a href="'.$href.'">'.
+        $html = '<a '.
+            (isset($options['pjax-elements']) ? 'pjax-elements ' : '').
+            'href="'.$href.'" '.
+        '>'.
             $title.
             ' <i class="'.$titleIconClass.'"></i>'.
         '</a>';
