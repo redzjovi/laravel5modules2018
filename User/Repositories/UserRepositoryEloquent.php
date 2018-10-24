@@ -2,13 +2,13 @@
 
 namespace Modules\User\Repositories;
 
+use Modules\User\Models\User;
+use Modules\User\Repositories\UserRepository;
+use Modules\User\Repositories\Contracts\UserCriteria;
 use Prettus\Repository\Contracts\CacheableInterface;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Traits\CacheableRepository;
-use Modules\User\Models\User;
-use Modules\User\Repositories\UserRepository;
-use Modules\User\Repositories\Contracts\UserCriteria;
 
 /**
  * Class UserRepositoryEloquent.
@@ -44,6 +44,6 @@ class UserRepositoryEloquent extends BaseRepository implements CacheableInterfac
      */
     public function boot()
     {
-        // 
+        //
     }
 }

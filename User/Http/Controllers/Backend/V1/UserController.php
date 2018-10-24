@@ -11,8 +11,6 @@ use Modules\User\Repositories\UserRepository;
 
 class UserController extends \Modules\Cms\Http\Controllers\Backend\V1\RepositoryController
 {
-    protected $repository;
-
     public function __construct(UserRepository $repository)
     {
         $this->repository = $repository;
