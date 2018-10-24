@@ -49,7 +49,7 @@ class UserController extends \Modules\Cms\Http\Controllers\Backend\V1\Repository
     public function store(StoreRequest $request)
     {
         $this->repository->create($request->input());
-        flash(trans('cms::cms.created'))->important()->success();
+        flash(trans('cms::cms.stored'))->important()->success();
         return redirect()->back();
     }
 
