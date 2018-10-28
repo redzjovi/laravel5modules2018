@@ -215,6 +215,7 @@ return [
     'returned' => 'Dikembalikan',
     'reviews' => 'Ulasan',
     'role_permissions' => 'Izin peran',
+    'role' => 'Peran',
     'roles' => 'Peran',
     'sales' => 'Penjualan',
     'save' => 'Simpan',

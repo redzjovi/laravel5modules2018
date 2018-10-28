@@ -2,12 +2,11 @@
 
 namespace Modules\User\Models;
 
-use Illuminate\Database\Eloquent\Model;
-
-class User extends Model
+class User extends \App\User
 {
     use \Illuminate\Notifications\Notifiable;
     use \Modules\Cms\Traits\SortableTrait;
+    use \Spatie\Permission\Traits\HasRoles;
 
     protected $fillable = [
         'name',
@@ -15,6 +14,8 @@ class User extends Model
         'password',
         'verification_code',
     ];
+
+    protected $guard_name = 'web';
 
     protected $sortable = [
         'id',
@@ -28,6 +29,13 @@ class User extends Model
     ];
 
     protected $table = 'users';
+
+    public function getRoleNameAttribute()
+    {
+        $roleName = $this->roles->pluck('name', 'name')->toArray();
+        $roleName = old('role_name') ? old('role_name') : $roleName;
+        return $roleName;
+    }
 
     public function setPasswordAttribute($password)
     {

@@ -76,7 +76,8 @@ class PermissionController extends \Modules\Cms\Http\Controllers\Backend\V1\Repo
      */
     public function update(UpdateRequest $request, $id)
     {
-        $this->repository->sync($id, 'permissions', $request->input('permission_id'));
+        $role = $this->repository->find($id);
+        $role->syncPermissions($request->input('permission_id'));
         flash(trans('cms::cms.updated'))->important()->success();
         return redirect()->back();
     }

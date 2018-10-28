@@ -46,6 +46,38 @@
                 @endif
             </div>
         </div>
+
+        @can('modules.user.backend.v1.user.role.*')
+            <div class="card">
+                <div class="card-header" id="headingOne">
+                    <button class="btn btn-link btn-sm" data-target="#collapse_role" data-toggle="collapse" type="button">@lang('cms::cms.roles')</button>
+                </div>
+                <div class="collapse" id="collapse_role">
+                    <div class="card-body">
+                        <div class="form-group row">
+                            <label class="col-sm-2" for="role_name">@lang('cms::cms.roles')</label>
+                            <div class="col-sm-10">
+                                <select class="form-control form-control-sm" id="role_name" multiple name="role_name[]"
+                                    @if (Agent::isDesktop())
+                                        bootstrap-select="true"
+                                    @endif
+                                    data-live-search="true"
+                                    multiple data-actions-box="true"
+                                >
+                                    @foreach ($roles as $role)
+                                        <option {{ in_array($role->name, $model->role_name) ? 'selected' : '' }} value="{{ $role->name }}">{{ $role->name }}</option>
+                                    @endforeach
+                                </select>
+
+                                @if ($errors->has('role_name'))
+                                    <span class="invalid-feedback">{{ $errors->first('role_name') }}</span>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endcan
     </div>
     <div class="card-footer">
         <input class="btn btn-sm btn-success" type="submit" value="@lang('cms::cms.save')" />

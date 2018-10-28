@@ -25,6 +25,7 @@ class PermissionDatabaseSeeder extends Seeder
             ['name' => 'modules.role.backend.v1.role.*', 'guard_name' => 'web'],
             ['name' => 'modules.role.backend.v1.role.permission.*', 'guard_name' => 'web'],
             ['name' => 'modules.user.backend.v1.user.*', 'guard_name' => 'web'],
+            ['name' => 'modules.user.backend.v1.user.role.*', 'guard_name' => 'web'],
         ];
 
         foreach ($permissions as $permission) {

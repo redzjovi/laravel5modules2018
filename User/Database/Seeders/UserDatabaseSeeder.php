@@ -15,11 +15,17 @@ class UserDatabaseSeeder extends Seeder
      */
     public function run()
     {
-        Model::unguard();
+        Model::reguard();
 
         $users = [
-            ['name' => 'Admin', 'email' => 'admin@mailinator.com'],
-            ['name' => 'Super Admin', 'email' => 'superadmin@mailinator.com'],
+            [
+                'name' => 'Admin', 'email' => 'admin@mailinator.com',
+                'roles' => 'Admin',
+            ],
+            [
+                'name' => 'Super Admin', 'email' => 'superadmin@mailinator.com',
+                'roles' => 'Super Admin',
+            ],
         ];
 
         foreach ($users as $user) {
@@ -28,6 +34,8 @@ class UserDatabaseSeeder extends Seeder
                 $model->fill($user);
                 $model->password = $user['email'];
                 $model->save();
+
+                $model->assignRole($user['roles']);
             }
         }
     }

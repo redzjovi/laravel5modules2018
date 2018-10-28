@@ -215,6 +215,7 @@ return [
     'returned' => 'Returned',
     'reviews' => 'Reviews',
     'role_permissions' => 'Role permissions',
+    'role' => 'Role',
     'roles' => 'Roles',
     'sales' => 'Sales',
     'save' => 'Save',

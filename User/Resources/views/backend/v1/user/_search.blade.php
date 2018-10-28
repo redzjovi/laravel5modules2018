@@ -17,6 +17,27 @@
                         <input class="form-control form-control-sm" id="email" name="email" type="text" value="{{ request()->query('email') }}" />
                     </div>
                 </div>
+
+                @can('modules.user.backend.v1.user.role.*')
+                    <hr />
+                    <div class="form-group row">
+                        <label class="col-sm-2" for="role_id">@lang('cms::cms.roles')</label>
+                        <div class="col-sm-10">
+                            {{-- {{ dd(request()->query()) }} --}}
+                            <select class="form-control form-control-sm" id="role_id" multiple name="role_id[]"
+                                @if (Agent::isDesktop())
+                                    bootstrap-select="true"
+                                @endif
+                                data-live-search="true"
+                                multiple data-actions-box="true"
+                            >
+                                @foreach ($roles as $role)
+                                    <option {{ in_array($role->id, request()->query('role_id', [])) ? 'selected' : '' }} value="{{ $role->id }}">{{ $role->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                @endcan
             </div>
             <div class="card-footer">
                 <button class="btn btn-sm btn-success" type="submit">

@@ -4,6 +4,7 @@ namespace Modules\User\Http\Controllers\Backend\V1;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Modules\Role\Repositories\RoleRepository;
 use Modules\User\Http\Requests\Backend\V1\User\StoreRequest;
 use Modules\User\Http\Requests\Backend\V1\User\UpdateRequest;
 use Modules\User\Repositories\Criterias\UserCriteria;
@@ -11,10 +12,16 @@ use Modules\User\Repositories\UserRepository;
 
 class UserController extends \Modules\Cms\Http\Controllers\Backend\V1\RepositoryController
 {
-    public function __construct(UserRepository $repository)
+    protected $roleRepository;
+
+    public function __construct(
+        RoleRepository $roleRepository,
+        UserRepository $repository
+    )
     {
         $this->repository = $repository;
         $this->repository->pushCriteria(app(\Prettus\Repository\Criteria\RequestCriteria::class));
+        $this->roleRepository = $roleRepository;
     }
 
     /**
@@ -24,7 +31,8 @@ class UserController extends \Modules\Cms\Http\Controllers\Backend\V1\Repository
     public function index()
     {
         $data['model'] = $this->repository->getModel();
-        $data['users'] = $this->repository
+        $data['roles'] = $this->roleRepository->orderBy('name')->all();
+        $data['users'] = $this->repository->with(['roles'])
             ->pushCriteria(new UserCriteria(request()->query()))
             ->paginate();
         return view('user::backend/v1/user/index', $data);
@@ -37,6 +45,7 @@ class UserController extends \Modules\Cms\Http\Controllers\Backend\V1\Repository
     public function create()
     {
         $data['model'] = $this->repository->getModel();
+        $data['roles'] = $this->roleRepository->orderBy('name')->all();
         return view('user::backend/v1/user/create', $data);
     }
 
@@ -47,7 +56,12 @@ class UserController extends \Modules\Cms\Http\Controllers\Backend\V1\Repository
      */
     public function store(StoreRequest $request)
     {
-        $this->repository->create($request->input());
+        $user = $this->repository->create($request->input());
+
+        if (auth()->user()->can('modules.user.backend.v1.user.role.*')) {
+            $user->syncRoles($request->input('role_name'));
+        }
+
         flash(trans('cms::cms.stored'))->important()->success();
         return redirect()->back();
     }
@@ -68,6 +82,7 @@ class UserController extends \Modules\Cms\Http\Controllers\Backend\V1\Repository
     public function edit($id)
     {
         $data['model'] = $this->repository->find($id);
+        $data['roles'] = $this->roleRepository->orderBy('name')->all();
         return view('user::backend/v1/user/edit', $data);
     }
 
@@ -79,7 +94,12 @@ class UserController extends \Modules\Cms\Http\Controllers\Backend\V1\Repository
     public function update(UpdateRequest $request, $id)
     {
         ! $request->input('password') ? $request->request->remove('password') : '';
-        $this->repository->update($request->input(), $id);
+        $user = $this->repository->update($request->input(), $id);
+
+        if (auth()->user()->can('modules.user.backend.v1.user.role.*')) {
+            $user->syncRoles($request->input('role_name'));
+        }
+
         flash(trans('cms::cms.updated'))->important()->success();
         return redirect()->back();
     }
@@ -100,6 +120,9 @@ class UserController extends \Modules\Cms\Http\Controllers\Backend\V1\Repository
 
         $columns[] = trans('cms::cms.name');
         $columns[] = trans('cms::cms.email');
+        if (auth()->user()->can('modules.user.backend.v1.user.role.*')) {
+            $columns[] = trans('cms::cms.roles');
+        }
         $csv->insertOne($columns);
 
         $users = $this->repository->all();
@@ -107,6 +130,9 @@ class UserController extends \Modules\Cms\Http\Controllers\Backend\V1\Repository
             $columns = [];
             $columns[] = $user->name;
             $columns[] = $user->email;
+            if (auth()->user()->can('modules.user.backend.v1.user.role.*')) {
+                $columns[] = $user->roles->pluck('name')->implode(',');
+            }
             $csv->insertOne($columns);
         });
 
