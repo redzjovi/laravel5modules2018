@@ -21,7 +21,7 @@
                     <table class="table table-bordered table-condensed table-hover table-sm table-striped">
                         <thead>
                             <tr>
-                                <th colspan="5">
+                                <th colspan="4">
                                     <a class="btn btn-primary btn-sm" href="{{ route('modules.role.backend.v1.role.create', request()->query()) }}">@lang('cms::cms.create')</a>
                                 </th>
                             </tr>
@@ -29,7 +29,6 @@
                                 <th><input class="table_row_checkbox_all" type="checkbox" /></th>
                                 <th>{!! $model->sortablelink('name', trans('cms::cms.name')) !!}</th>
                                 <th>{!! $model->sortablelink('guard_name', trans('cms::cms.guard_name')) !!}</th>
-                                <th></th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -40,22 +39,22 @@
                                     <td>{{ $role->name }}</td>
                                     <td>{{ $role->guard_name }}</td>
                                     <td>
-                                        <a href="{{ route('modules.role.backend.v1.role.permission.edit', [$role->id] + request()->query()) }}">@lang('cms::cms.permission')</a>
-                                    </td>
-                                    <td>
                                         <a href="{{ route('modules.role.backend.v1.role.edit', [$role->id] + request()->query()) }}"><i class="fas fa-edit"></i></a>
                                         <a class="text-danger" href="{{ route('modules.role.backend.v1.role.delete', $role->id) }}" onclick="return confirm('@lang('cms::cms.are_you_sure_to_delete_this_permanently')?')"><i class="fas fa-trash"></i></a>
+                                        @can('modules.role.backend.v1.role.permission.*')
+                                            <a href="{{ route('modules.role.backend.v1.role.permission.edit', [$role->id] + request()->query()) }}">@lang('cms::cms.permissions')</a>
+                                        @endcan
                                     </td>
                                 </tr>
                             @empty
                                 <tr>
-                                    <td class="text-center" colspan="5">@lang('cms::cms.no_data')</td>
+                                    <td class="text-center" colspan="4">@lang('cms::cms.no_data')</td>
                                 </tr>
                             @endforelse
                         </tbody>
                         <tfoot>
                             <tr>
-                                <th colspan="5">
+                                <th colspan="4">
                                     <i class="text-danger">{{ $errors->first('id') }}</i>
                                     <div class="input-group">
                                         <select name="action" required>
@@ -71,7 +70,7 @@
                             </tr>
                             @if ($roles->hasPages())
                                 <tr>
-                                    <th colspan="5">{{ $roles->links('cms::vendor/pagination/bootstrap-4-custom') }}</th>
+                                    <th colspan="4">{{ $roles->links('cms::vendor/pagination/bootstrap-4-custom') }}</th>
                                 </tr>
                             @endif
                         </tfoot>

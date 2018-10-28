@@ -5,7 +5,10 @@
             <label class="col-sm-2" for="name">@lang('cms::cms.name') *</label>
             <div class="col-sm-10">
                 <input class="form-control form-control-sm" id="name" name="name" required type="text" value="{{ old('name', $model->name) }}" />
-                <i class="text-danger">{{ $errors->first('name') }}</i>
+
+                @if ($errors->has('name'))
+                    <span class="invalid-feedback">{{ $errors->first('name') }}</span>
+                @endif
             </div>
         </div>
         <div class="form-group row">
@@ -17,7 +20,10 @@
                         <option {{ $guardName == old('guard_name', $model->guard_name) ? 'selected' : '' }} value="{{ $guardName }}">{{ $guardNameDescription }}</option>
                     @endforeach
                 </select>
-                <i class="text-danger">{{ $errors->first('guard_name') }}</i>
+
+                @if ($errors->has('guard_name'))
+                    <span class="invalid-feedback">{{ $errors->first('guard_name') }}</span>
+                @endif
             </div>
         </div>
     </div>

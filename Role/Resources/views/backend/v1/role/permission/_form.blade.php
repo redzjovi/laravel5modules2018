@@ -2,7 +2,13 @@
 <div class="card">
     <div class="card-body">
         <div class="form-group row">
-            <label class="col-sm-2" for="permission_id">@lang('cms::cms.permission')</label>
+            <label class="col-sm-2" for="name">@lang('cms::cms.name')</label>
+            <div class="col-sm-10">
+                <input class="form-control form-control-sm" id="name" readonly type="text" value="{{ $model->name }}" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2" for="permission_id">@lang('cms::cms.permissions')</label>
             <div class="col-sm-10">
                 <select class="form-control form-control-sm" id="permission_id" multiple name="permission_id[]"
                     @if (Agent::isDesktop())

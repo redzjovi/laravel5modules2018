@@ -8,7 +8,7 @@
             <a href="{{ route('modules.role.backend.v1.role.index', request()->query()) }}">@lang('cms::cms.roles')</a>
         </li>
         <li class="active breadcrumb-item">{{ $model->id }}</li>
-        <li class="active breadcrumb-item">@lang('cms::cms.permission')</li>
+        <li class="active breadcrumb-item">@lang('cms::cms.permissions')</li>
         <li class="active breadcrumb-item">@lang('cms::cms.edit')</li>
     </ol>
 @endsection
