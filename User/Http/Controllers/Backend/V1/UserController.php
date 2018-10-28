@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Modules\User\Http\Requests\Backend\V1\User\StoreRequest;
 use Modules\User\Http\Requests\Backend\V1\User\UpdateRequest;
-use Modules\User\Repositories\Contracts\UserCriteria;
+use Modules\User\Repositories\Criterias\UserCriteria;
 use Modules\User\Repositories\UserRepository;
 
 class UserController extends \Modules\Cms\Http\Controllers\Backend\V1\RepositoryController
@@ -15,7 +15,6 @@ class UserController extends \Modules\Cms\Http\Controllers\Backend\V1\Repository
     {
         $this->repository = $repository;
         $this->repository->pushCriteria(app(\Prettus\Repository\Criteria\RequestCriteria::class));
-        $this->repository->pushCriteria(UserCriteria::class);
     }
 
     /**
@@ -25,7 +24,9 @@ class UserController extends \Modules\Cms\Http\Controllers\Backend\V1\Repository
     public function index()
     {
         $data['model'] = $this->repository->getModel();
-        $data['users'] = $this->repository->paginate();
+        $data['users'] = $this->repository
+            ->pushCriteria(new UserCriteria(request()->query()))
+            ->paginate();
         return view('user::backend/v1/user/index', $data);
     }
 

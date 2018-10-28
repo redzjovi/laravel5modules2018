@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Modules\Permission\Http\Requests\Backend\V1\Permission\StoreRequest;
 use Modules\Permission\Http\Requests\Backend\V1\Permission\UpdateRequest;
-use Modules\Permission\Repositories\Contracts\PermissionCriteria;
+use Modules\Permission\Repositories\Criterias\PermissionCriteria;
 use Modules\Permission\Repositories\PermissionRepository;
 
 class PermissionController extends \Modules\Cms\Http\Controllers\Backend\V1\RepositoryController
@@ -15,7 +15,6 @@ class PermissionController extends \Modules\Cms\Http\Controllers\Backend\V1\Repo
     {
         $this->repository = $repository;
         $this->repository->pushCriteria(app(\Prettus\Repository\Criteria\RequestCriteria::class));
-        $this->repository->pushCriteria(PermissionCriteria::class);
     }
 
     /**
@@ -25,7 +24,9 @@ class PermissionController extends \Modules\Cms\Http\Controllers\Backend\V1\Repo
     public function index()
     {
         $data['model'] = $this->repository->getModel();
-        $data['permissions'] = $this->repository->paginate();
+        $data['permissions'] = $this->repository
+            ->pushCriteria(new PermissionCriteria(request()->query()))
+            ->paginate();
         return view('permission::backend/v1/permission/index', $data);
     }
 

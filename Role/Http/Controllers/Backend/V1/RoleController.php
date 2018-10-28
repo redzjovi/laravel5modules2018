@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Modules\Role\Http\Requests\Backend\V1\Role\StoreRequest;
 use Modules\Role\Http\Requests\Backend\V1\Role\UpdateRequest;
-use Modules\Role\Repositories\Contracts\RoleCriteria;
+use Modules\Role\Repositories\Criterias\RoleCriteria;
 use Modules\Role\Repositories\RoleRepository;
 
 class RoleController extends \Modules\Cms\Http\Controllers\Backend\V1\RepositoryController
@@ -15,7 +15,6 @@ class RoleController extends \Modules\Cms\Http\Controllers\Backend\V1\Repository
     {
         $this->repository = $repository;
         $this->repository->pushCriteria(app(\Prettus\Repository\Criteria\RequestCriteria::class));
-        $this->repository->pushCriteria(RoleCriteria::class);
     }
 
     /**
@@ -25,7 +24,9 @@ class RoleController extends \Modules\Cms\Http\Controllers\Backend\V1\Repository
     public function index()
     {
         $data['model'] = $this->repository->getModel();
-        $data['roles'] = $this->repository->paginate();
+        $data['roles'] = $this->repository
+            ->pushCriteria(new RoleCriteria(request()->query()))
+            ->paginate();
         return view('role::backend/v1/role/index', $data);
     }
 
