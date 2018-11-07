@@ -9,8 +9,6 @@
         "Modules\\User\\Providers\\UserServiceProvider"
     ],
     "aliases": {},
-    "files": [
-        "start.php"
-    ],
+    "files": [],
     "requires": []
 }

@@ -9,8 +9,6 @@
         "Modules\\Queue\\Providers\\QueueServiceProvider"
     ],
     "aliases": {},
-    "files": [
-        "start.php"
-    ],
+    "files": [],
     "requires": []
 }

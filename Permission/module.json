@@ -9,8 +9,6 @@
         "Modules\\Permission\\Providers\\PermissionServiceProvider"
     ],
     "aliases": {},
-    "files": [
-        "start.php"
-    ],
+    "files": [],
     "requires": []
 }

@@ -9,8 +9,6 @@
         "Modules\\Cms\\Providers\\CmsServiceProvider"
     ],
     "aliases": {},
-    "files": [
-        "start.php"
-    ],
+    "files": [],
     "requires": []
 }

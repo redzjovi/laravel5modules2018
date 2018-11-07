@@ -9,8 +9,6 @@
         "Modules\\Role\\Providers\\RoleServiceProvider"
     ],
     "aliases": {},
-    "files": [
-        "start.php"
-    ],
+    "files": [],
     "requires": []
 }

@@ -39,6 +39,7 @@ class RoleServiceProvider extends ServiceProvider
             \Modules\Role\Repositories\RoleRepository::class,
             \Modules\Role\Repositories\RoleRepositoryEloquent::class
         );
+        $this->app->register(RouteServiceProvider::class);
     }
 
     /**
@@ -94,7 +95,8 @@ class RoleServiceProvider extends ServiceProvider
 
     /**
      * Register an additional directory of factories.
-     * @source https://github.com/sebastiaanluca/laravel-resource-flow/blob/develop/src/Modules/ModuleServiceProvider.php#L66
+     *
+     * @return void
      */
     public function registerFactories()
     {
