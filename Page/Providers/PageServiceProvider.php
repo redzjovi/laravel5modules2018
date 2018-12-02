@@ -35,6 +35,10 @@ class PageServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        $this->app->bind(
+            \Modules\Page\Repositories\PageRepository::class,
+            \Modules\Page\Repositories\PageRepositoryEloquent::class
+        );
         $this->app->register(RouteServiceProvider::class);
     }
 
@@ -91,7 +95,7 @@ class PageServiceProvider extends ServiceProvider
 
     /**
      * Register an additional directory of factories.
-     * 
+     *
      * @return void
      */
     public function registerFactories()

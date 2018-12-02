@@ -20,7 +20,6 @@
                                 <option {{ $guardName == request()->query('guard_name') ? 'selected' : '' }} value="{{ $guardName }}">{{ $guardNameDescription }}</option>
                             @endforeach
                         </select>
-
                     </div>
                 </div>
             </div>

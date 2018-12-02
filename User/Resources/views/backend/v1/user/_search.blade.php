@@ -23,7 +23,6 @@
                     <div class="form-group row">
                         <label class="col-sm-2" for="role_id">@lang('cms::cms.roles')</label>
                         <div class="col-sm-10">
-                            {{-- {{ dd(request()->query()) }} --}}
                             <select class="form-control form-control-sm" id="role_id" multiple name="role_id[]"
                                 @if (Agent::isDesktop())
                                     bootstrap-select="true"
