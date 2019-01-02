@@ -4,8 +4,6 @@ namespace Modules\Role\Models;
 
 class Role extends \Spatie\Permission\Models\Role
 {
-    use \Modules\Cms\Traits\SortableTrait;
-
     protected $fillable = [
         'name',
         'guard_name',

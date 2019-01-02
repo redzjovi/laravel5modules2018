@@ -46,8 +46,14 @@ class PasswordResetLink extends Notification implements ShouldQueue
             ->line(trans('cms::cms.please_reset_and_use_this_verification_code').': '.$this->user->verification_code.'.')
             ->action(
                 trans('cms::cms.reset'),
-                route('modules.authentication.backend.v1.authentication.password.reset.index',
-                ['email' => $this->user->email, 'verification_code' => $this->user->verification_code])
+                route(
+                    'modules.authentication.backend.v1.authentication.password.reset.index',
+                    [
+                        'email' => $this->user->email,
+                        'p' => $this->user->password,
+                        'verification_code' => $this->user->verification_code
+                    ]
+                )
             )
             ->line(trans('cms::cms.thank_you_for_using_our_application').'!');
     }

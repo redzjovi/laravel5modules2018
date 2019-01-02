@@ -35,10 +35,6 @@ class PermissionServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind(
-            \Modules\Permission\Repositories\PermissionRepository::class,
-            \Modules\Permission\Repositories\PermissionRepositoryEloquent::class
-        );
         $this->app->register(RouteServiceProvider::class);
     }
 

@@ -6,27 +6,23 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Modules\Role\Http\Requests\Backend\V1\Role\StoreRequest;
 use Modules\Role\Http\Requests\Backend\V1\Role\UpdateRequest;
-use Modules\Role\Repositories\Criterias\RoleCriteria;
+use Modules\Role\Models\Role;
 use Modules\Role\Repositories\RoleRepository;
 
-class RoleController extends \Modules\Cms\Http\Controllers\Backend\V1\RepositoryController
+class RoleController extends \Modules\Cms\Http\Controllers\Controller
 {
-    public function __construct(RoleRepository $repository)
-    {
-        $this->repository = $repository;
-        $this->repository->pushCriteria(app(\Prettus\Repository\Criteria\RequestCriteria::class));
-    }
-
     /**
      * Display a listing of the resource.
      * @return Response
      */
     public function index()
     {
-        $data['model'] = $this->repository->getModel();
-        $data['roles'] = $this->repository
-            ->pushCriteria(new RoleCriteria(request()->query()))
-            ->paginate();
+        $parameters = request()->query();
+        $parameters['paginate'] = 1;
+
+        $data['model'] = new RoleRepository;
+        $data['roles'] = RoleRepository::getRoles($parameters);
+
         return view('role::backend/v1/role/index', $data);
     }
 
@@ -36,7 +32,8 @@ class RoleController extends \Modules\Cms\Http\Controllers\Backend\V1\Repository
      */
     public function create()
     {
-        $data['model'] = $this->repository->getModel();
+        $data['model'] = new RoleRepository;
+
         return view('role::backend/v1/role/create', $data);
     }
 
@@ -47,7 +44,7 @@ class RoleController extends \Modules\Cms\Http\Controllers\Backend\V1\Repository
      */
     public function store(StoreRequest $request)
     {
-        $this->repository->create($request->input());
+        RoleRepository::create($request->input());
         flash(trans('cms::cms.stored'))->important()->success();
         return redirect()->back();
     }
@@ -67,7 +64,7 @@ class RoleController extends \Modules\Cms\Http\Controllers\Backend\V1\Repository
      */
     public function edit($id)
     {
-        $data['model'] = $this->repository->find($id);
+        $data['model'] = RoleRepository::findOrFail($id);
         return view('role::backend/v1/role/edit', $data);
     }
 
@@ -76,10 +73,9 @@ class RoleController extends \Modules\Cms\Http\Controllers\Backend\V1\Repository
      * @param  Request $request
      * @return Response
      */
-    public function update(UpdateRequest $request, $id)
+    public function update(UpdateRequest $request, RoleRepository $role)
     {
-        ! $request->input('password') ? $request->request->remove('password') : '';
-        $this->repository->update($request->input(), $id);
+        $role->fill($request->input())->save();
         flash(trans('cms::cms.updated'))->important()->success();
         return redirect()->back();
     }
@@ -94,22 +90,45 @@ class RoleController extends \Modules\Cms\Http\Controllers\Backend\V1\Repository
     }
 
 
+    public function action(\Modules\Cms\Http\Requests\Backend\V1\Repository\ActionRequest $request)
+    {
+        if ($action = $request->action) {
+            if ($action == 'actionDelete') {
+                if ($ids = $request->id) {
+                    foreach ($ids as $id) {
+                        Role::destroy($id);
+                    }
+                    flash(trans('cms::cms.deleted').' ('.count($ids).')')->important()->success();
+                }
+            }
+        }
+
+        return redirect()->back();
+    }
+
+    public function delete(int $id)
+    {
+        Role::destroy($id);
+        flash(trans('cms::cms.deleted'))->important()->success();
+        return redirect()->back();
+    }
+
     public function exportCsv(Request $request)
     {
         $csv = \League\Csv\Writer::createFromFileObject(new \SplTempFileObject());
 
         $columns[] = trans('cms::cms.name');
-        $columns[] = trans('cms::cms.email');
+        $columns[] = trans('cms::cms.guard_name');
         $csv->insertOne($columns);
 
-        $roles = $this->repository->all();
+        $roles = RoleRepository::getRoles($request->query());
         $roles->each(function ($role) use ($csv) {
             $columns = [];
             $columns[] = $role->name;
-            $columns[] = $role->email;
+            $columns[] = $role->guard_name;
             $csv->insertOne($columns);
         });
 
-        $csv->output($this->repository->getModel()->getTable().'_'.date('Ymd_His').'.csv');
+        $csv->output('role_'.date('Ymd_His').'.csv');
     }
 }

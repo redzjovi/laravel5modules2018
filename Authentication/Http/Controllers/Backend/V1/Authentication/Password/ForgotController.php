@@ -9,13 +9,6 @@ use Modules\User\Repositories\UserRepository;
 
 class ForgotController extends Controller
 {
-    protected $repository;
-
-    public function __construct(UserRepository $repository)
-    {
-        $this->repository = $repository;
-    }
-
     /**
      * Display a listing of the resource.
      * @return Response
@@ -32,11 +25,8 @@ class ForgotController extends Controller
      */
     public function store(\Modules\Authentication\Http\Requests\Api\V1\Authentication\Password\Forgot\StoreRequest $request)
     {
-        $user = $this->repository->findByField('email', $request->input('email'))->first();
-
-        $attributes['verification_code'] = rand(111111, 999999);
-        $user = $this->repository->update($attributes, $user->id);
-
+        $user = UserRepository::findByField('email', $request->input('email'));
+        $user = UserRepository::updateVerificationCodeById($user->id);
         $user->notify(new \Modules\Authentication\Notifications\PasswordResetLink($user));
 
         flash(trans('passwords.sent'))->success()->important();

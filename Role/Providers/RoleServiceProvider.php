@@ -35,10 +35,6 @@ class RoleServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind(
-            \Modules\Role\Repositories\RoleRepository::class,
-            \Modules\Role\Repositories\RoleRepositoryEloquent::class
-        );
         $this->app->register(RouteServiceProvider::class);
     }
 

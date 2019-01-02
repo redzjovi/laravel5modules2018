@@ -48,6 +48,15 @@
                             <a class="dropdown-item" href="#">Something else here</a>
                         </div>
                     </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Backend</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="{{ route('modules.page.backend.v1.page.index') }}">@lang('cms::cms.page')</a>
+                            <a class="dropdown-item" href="{{ route('modules.permission.backend.v1.permission.index') }}">@lang('cms::cms.permission')</a>
+                            <a class="dropdown-item" href="{{ route('modules.role.backend.v1.role.index') }}">@lang('cms::cms.role')</a>
+                            <a class="dropdown-item" href="{{ route('modules.user.backend.v1.user.index') }}">@lang('cms::cms.user')</a>
+                        </div>
+                    </li>
                 </ul>
                 <form class="form-inline my-2 my-lg-0">
                     <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">

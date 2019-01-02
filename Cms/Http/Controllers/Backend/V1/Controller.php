@@ -1,15 +1,12 @@
 <?php
 
-namespace Modules\Role\Http\Controllers\Backend\V1\Role;
+namespace Modules\Cms\Http\Controllers\Backend\V1;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Modules\Permission\Models\Permission;
-use Modules\Permission\Repositories\PermissionRepository;
-use Modules\Role\Http\Requests\Backend\V1\Role\Permission\UpdateRequest;
-use Modules\Role\Models\Role;
+use Illuminate\Routing\Controller;
 
-class PermissionController extends \Modules\Cms\Http\Controllers\Controller
+class Controller extends \Modules\Cms\Http\Controllers\Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,7 +14,7 @@ class PermissionController extends \Modules\Cms\Http\Controllers\Controller
      */
     public function index()
     {
-        //
+        return view('cms::index');
     }
 
     /**
@@ -26,7 +23,7 @@ class PermissionController extends \Modules\Cms\Http\Controllers\Controller
      */
     public function create()
     {
-        //
+        return view('cms::create');
     }
 
     /**
@@ -36,7 +33,6 @@ class PermissionController extends \Modules\Cms\Http\Controllers\Controller
      */
     public function store(Request $request)
     {
-        //
     }
 
     /**
@@ -45,19 +41,16 @@ class PermissionController extends \Modules\Cms\Http\Controllers\Controller
      */
     public function show()
     {
-        //
+        return view('cms::show');
     }
 
     /**
      * Show the form for editing the specified resource.
      * @return Response
      */
-    public function edit($id)
+    public function edit()
     {
-        $data['model'] = Role::findOrFail($id);
-        $data['permissions'] = PermissionRepository::getPermissionsOrderByName();
-
-        return view('role::backend/v1/role/permission/edit', $data);
+        return view('cms::edit');
     }
 
     /**
@@ -65,12 +58,8 @@ class PermissionController extends \Modules\Cms\Http\Controllers\Controller
      * @param  Request $request
      * @return Response
      */
-    public function update(UpdateRequest $request, $id)
+    public function update(Request $request)
     {
-        $role = Role::findOrFail($id);
-        $role->syncPermissions($request->input('permission_id'));
-        flash(trans('cms::cms.updated'))->important()->success();
-        return redirect()->back();
     }
 
     /**
@@ -79,6 +68,5 @@ class PermissionController extends \Modules\Cms\Http\Controllers\Controller
      */
     public function destroy()
     {
-        //
     }
 }

@@ -7,34 +7,24 @@ use Illuminate\Http\Response;
 use Modules\Role\Repositories\RoleRepository;
 use Modules\User\Http\Requests\Backend\V1\User\StoreRequest;
 use Modules\User\Http\Requests\Backend\V1\User\UpdateRequest;
-use Modules\User\Repositories\Criterias\UserCriteria;
 use Modules\User\Repositories\UserRepository;
 
-class UserController extends \Modules\Cms\Http\Controllers\Backend\V1\RepositoryController
+class UserController extends \Modules\Cms\Http\Controllers\Controller
 {
-    protected $roleRepository;
-
-    public function __construct(
-        RoleRepository $roleRepository,
-        UserRepository $repository
-    )
-    {
-        $this->repository = $repository;
-        $this->repository->pushCriteria(app(\Prettus\Repository\Criteria\RequestCriteria::class));
-        $this->roleRepository = $roleRepository;
-    }
-
     /**
      * Display a listing of the resource.
      * @return Response
      */
     public function index()
     {
-        $data['model'] = $this->repository->getModel();
-        $data['roles'] = $this->roleRepository->orderBy('name')->all();
-        $data['users'] = $this->repository->with(['roles'])
-            ->pushCriteria(new UserCriteria(request()->query()))
-            ->paginate();
+        $parameters = request()->query();
+        $parameters['paginate'] = 1;
+        $parameters['with'] = ['roles'];
+
+        $data['model'] = new UserRepository;
+        $data['roles'] = RoleRepository::getRolesOrderByName();
+        $data['users'] = UserRepository::getUsers($parameters);
+
         return view('user::backend/v1/user/index', $data);
     }
 
@@ -44,8 +34,9 @@ class UserController extends \Modules\Cms\Http\Controllers\Backend\V1\Repository
      */
     public function create()
     {
-        $data['model'] = $this->repository->getModel();
-        $data['roles'] = $this->roleRepository->orderBy('name')->all();
+        $data['model'] = new UserRepository;
+        $data['roles'] = RoleRepository::getRolesOrderByName();
+
         return view('user::backend/v1/user/create', $data);
     }
 
@@ -56,10 +47,10 @@ class UserController extends \Modules\Cms\Http\Controllers\Backend\V1\Repository
      */
     public function store(StoreRequest $request)
     {
-        $user = $this->repository->create($request->input());
+        $model = UserRepository::create($request->input());
 
         if (auth()->user()->can('modules.user.backend.v1.user.role.*')) {
-            $user->syncRoles($request->input('role_name'));
+            $model->syncRoles($request->input('role_name'));
         }
 
         flash(trans('cms::cms.stored'))->important()->success();
@@ -81,8 +72,9 @@ class UserController extends \Modules\Cms\Http\Controllers\Backend\V1\Repository
      */
     public function edit($id)
     {
-        $data['model'] = $this->repository->find($id);
-        $data['roles'] = $this->roleRepository->orderBy('name')->all();
+        $data['model'] = UserRepository::findById($id);
+        $data['roles'] = RoleRepository::getRolesOrderByName();
+
         return view('user::backend/v1/user/edit', $data);
     }
 
@@ -94,10 +86,10 @@ class UserController extends \Modules\Cms\Http\Controllers\Backend\V1\Repository
     public function update(UpdateRequest $request, $id)
     {
         ! $request->input('password') ? $request->request->remove('password') : '';
-        $user = $this->repository->update($request->input(), $id);
+        $model = UserRepository::updateById($request->input(), $id);
 
         if (auth()->user()->can('modules.user.backend.v1.user.role.*')) {
-            $user->syncRoles($request->input('role_name'));
+            $model->syncRoles($request->input('role_name'));
         }
 
         flash(trans('cms::cms.updated'))->important()->success();
@@ -114,6 +106,29 @@ class UserController extends \Modules\Cms\Http\Controllers\Backend\V1\Repository
     }
 
 
+    public function action(\Modules\Cms\Http\Requests\Backend\V1\Repository\ActionRequest $request)
+    {
+        if ($action = $request->action) {
+            if ($action == 'actionDelete') {
+                if ($ids = $request->id) {
+                    foreach ($ids as $id) {
+                        UserRepository::deleteById($id);
+                    }
+                    flash(trans('cms::cms.deleted').' ('.count($ids).')')->important()->success();
+                }
+            }
+        }
+
+        return redirect()->back();
+    }
+
+    public function delete(int $id)
+    {
+        UserRepository::deleteById($id);
+        flash(trans('cms::cms.deleted'))->important()->success();
+        return redirect()->back();
+    }
+
     public function exportCsv(Request $request)
     {
         $csv = \League\Csv\Writer::createFromFileObject(new \SplTempFileObject());
@@ -125,7 +140,7 @@ class UserController extends \Modules\Cms\Http\Controllers\Backend\V1\Repository
         }
         $csv->insertOne($columns);
 
-        $users = $this->repository->all();
+        $users = UserRepository::getUsers($request->query());
         $users->each(function ($user) use ($csv) {
             $columns = [];
             $columns[] = $user->name;
@@ -136,6 +151,6 @@ class UserController extends \Modules\Cms\Http\Controllers\Backend\V1\Repository
             $csv->insertOne($columns);
         });
 
-        $csv->output($this->repository->getModel()->getTable().'_'.date('Ymd_His').'.csv');
+        $csv->output('user_'.date('Ymd_His').'.csv');
     }
 }

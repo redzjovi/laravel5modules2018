@@ -6,27 +6,22 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Modules\Page\Http\Requests\Api\V1\Page\StoreRequest;
 use Modules\Page\Http\Requests\Api\V1\Page\UpdateRequest;
-use Modules\Page\Repositories\Criterias\PageCriteria;
 use Modules\Page\Repositories\PageRepository;
 
-class PageController extends \Modules\Cms\Http\Controllers\Backend\V1\RepositoryController
+class PageController extends \Modules\Cms\Http\Controllers\Controller
 {
-    public function __construct(PageRepository $repository)
-    {
-        $this->repository = $repository;
-        $this->repository->pushCriteria(app(\Prettus\Repository\Criteria\RequestCriteria::class));
-    }
-
     /**
      * Display a listing of the resource.
      * @return Response
      */
     public function index()
     {
-        $data['model'] = $this->repository->getModel();
-        $data['pages'] = $this->repository
-            ->pushCriteria(new PageCriteria(request()->query()))
-            ->paginate();
+        $parameters = request()->query();
+        $parameters['paginate'] = 1;
+
+        $data['model'] = new PageRepository;
+        $data['pages'] = PageRepository::getPages($parameters);
+
         return view('page::backend/v1/page/index', $data);
     }
 
@@ -36,7 +31,8 @@ class PageController extends \Modules\Cms\Http\Controllers\Backend\V1\Repository
      */
     public function create()
     {
-        $data['model'] = $this->repository->getModel();
+        $data['model'] = new PageRepository;
+
         return view('page::backend/v1/page/create', $data);
     }
 
@@ -47,7 +43,7 @@ class PageController extends \Modules\Cms\Http\Controllers\Backend\V1\Repository
      */
     public function store(StoreRequest $request)
     {
-        $this->repository->create($request->input());
+        PageRepository::createAttributes($request->input());
         flash(trans('cms::cms.stored'))->important()->success();
         return redirect()->back();
     }
@@ -67,7 +63,8 @@ class PageController extends \Modules\Cms\Http\Controllers\Backend\V1\Repository
      */
     public function edit($id)
     {
-        $data['model'] = $this->repository->find($id);
+        $data['model'] = PageRepository::findById($id);
+
         return view('page::backend/v1/page/edit', $data);
     }
 
@@ -78,8 +75,7 @@ class PageController extends \Modules\Cms\Http\Controllers\Backend\V1\Repository
      */
     public function update(UpdateRequest $request, $id)
     {
-        ! $request->input('password') ? $request->request->remove('password') : '';
-        $this->repository->update($request->input(), $id);
+        PageRepository::updateAttributesById($request->input(), $id);
         flash(trans('cms::cms.updated'))->important()->success();
         return redirect()->back();
     }
@@ -94,22 +90,49 @@ class PageController extends \Modules\Cms\Http\Controllers\Backend\V1\Repository
     }
 
 
+    public function action(\Modules\Cms\Http\Requests\Backend\V1\Repository\ActionRequest $request)
+    {
+        if ($action = $request->action) {
+            if ($action == 'actionDelete') {
+                if ($ids = $request->id) {
+                    foreach ($ids as $id) {
+                        PageRepository::deleteById($id);
+                    }
+                    flash(trans('cms::cms.deleted').' ('.count($ids).')')->important()->success();
+                }
+            }
+        }
+
+        return redirect()->back();
+    }
+
+    public function delete(int $id)
+    {
+        PageRepository::deleteById($id);
+        flash(trans('cms::cms.deleted'))->important()->success();
+        return redirect()->back();
+    }
+
     public function exportCsv(Request $request)
     {
         $csv = \League\Csv\Writer::createFromFileObject(new \SplTempFileObject());
 
-        $columns[] = trans('cms::cms.name');
-        $columns[] = trans('cms::cms.email');
+        $columns[] = trans('cms::cms.title');
+        $columns[] = trans('cms::cms.slug');
+        $columns[] = trans('cms::cms.excerpt');
+        $columns[] = trans('cms::cms.content');
         $csv->insertOne($columns);
 
-        $pages = $this->repository->all();
+        $pages = PageRepository::getPages($request->query());
         $pages->each(function ($page) use ($csv) {
             $columns = [];
-            $columns[] = $page->name;
-            $columns[] = $page->email;
+            $columns[] = $page->title;
+            $columns[] = $page->slug;
+            $columns[] = $page->excerpt;
+            $columns[] = $page->content;
             $csv->insertOne($columns);
         });
 
-        $csv->output($this->repository->getModel()->getTable().'_'.date('Ymd_His').'.csv');
+        $csv->output('page_'.date('Ymd_His').'.csv');
     }
 }

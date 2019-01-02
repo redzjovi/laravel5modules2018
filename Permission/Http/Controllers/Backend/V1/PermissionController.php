@@ -6,27 +6,20 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Modules\Permission\Http\Requests\Backend\V1\Permission\StoreRequest;
 use Modules\Permission\Http\Requests\Backend\V1\Permission\UpdateRequest;
-use Modules\Permission\Repositories\Criterias\PermissionCriteria;
+use Modules\Permission\Models\Permission;
 use Modules\Permission\Repositories\PermissionRepository;
 
-class PermissionController extends \Modules\Cms\Http\Controllers\Backend\V1\RepositoryController
+class PermissionController extends \Modules\Cms\Http\Controllers\Controller
 {
-    public function __construct(PermissionRepository $repository)
-    {
-        $this->repository = $repository;
-        $this->repository->pushCriteria(app(\Prettus\Repository\Criteria\RequestCriteria::class));
-    }
-
     /**
      * Display a listing of the resource.
      * @return Response
      */
     public function index()
     {
-        $data['model'] = $this->repository->getModel();
-        $data['permissions'] = $this->repository
-            ->pushCriteria(new PermissionCriteria(request()->query()))
-            ->paginate();
+        $data['model'] = new PermissionRepository;
+        $data['permissions'] = PermissionRepository::search(request()->query())->paginate();
+
         return view('permission::backend/v1/permission/index', $data);
     }
 
@@ -36,7 +29,8 @@ class PermissionController extends \Modules\Cms\Http\Controllers\Backend\V1\Repo
      */
     public function create()
     {
-        $data['model'] = $this->repository->getModel();
+        $data['model'] = new PermissionRepository;
+
         return view('permission::backend/v1/permission/create', $data);
     }
 
@@ -47,7 +41,7 @@ class PermissionController extends \Modules\Cms\Http\Controllers\Backend\V1\Repo
      */
     public function store(StoreRequest $request)
     {
-        $this->repository->create($request->input());
+        PermissionRepository::create($request->input());
         flash(trans('cms::cms.stored'))->important()->success();
         return redirect()->back();
     }
@@ -65,9 +59,10 @@ class PermissionController extends \Modules\Cms\Http\Controllers\Backend\V1\Repo
      * Show the form for editing the specified resource.
      * @return Response
      */
-    public function edit($id)
+    public function edit(PermissionRepository $permission)
     {
-        $data['model'] = $this->repository->find($id);
+        $data['model'] = $permission;
+
         return view('permission::backend/v1/permission/edit', $data);
     }
 
@@ -76,10 +71,9 @@ class PermissionController extends \Modules\Cms\Http\Controllers\Backend\V1\Repo
      * @param  Request $request
      * @return Response
      */
-    public function update(UpdateRequest $request, $id)
+    public function update(UpdateRequest $request, PermissionRepository $permission)
     {
-        ! $request->input('password') ? $request->request->remove('password') : '';
-        $this->repository->update($request->input(), $id);
+        $permission->fill($request->input())->save();
         flash(trans('cms::cms.updated'))->important()->success();
         return redirect()->back();
     }
@@ -94,22 +88,45 @@ class PermissionController extends \Modules\Cms\Http\Controllers\Backend\V1\Repo
     }
 
 
+    public function action(\Modules\Cms\Http\Requests\Backend\V1\Repository\ActionRequest $request)
+    {
+        if ($action = $request->action) {
+            if ($action == 'actionDelete') {
+                if ($ids = $request->id) {
+                    foreach ($ids as $id) {
+                        Permission::destroy($id);
+                    }
+                    flash(trans('cms::cms.deleted').' ('.count($ids).')')->important()->success();
+                }
+            }
+        }
+
+        return redirect()->back();
+    }
+
+    public function delete(int $id)
+    {
+        Permission::destroy($id);
+        flash(trans('cms::cms.deleted'))->important()->success();
+        return redirect()->back();
+    }
+
     public function exportCsv(Request $request)
     {
         $csv = \League\Csv\Writer::createFromFileObject(new \SplTempFileObject());
 
         $columns[] = trans('cms::cms.name');
-        $columns[] = trans('cms::cms.email');
+        $columns[] = trans('cms::cms.guard_name');
         $csv->insertOne($columns);
 
-        $permissions = $this->repository->all();
+        $permissions = PermissionRepository::search(request()->query())->get();
         $permissions->each(function ($permission) use ($csv) {
             $columns = [];
             $columns[] = $permission->name;
-            $columns[] = $permission->email;
+            $columns[] = $permission->guard_name;
             $csv->insertOne($columns);
         });
 
-        $csv->output($this->repository->getModel()->getTable().'_'.date('Ymd_His').'.csv');
+        $csv->output('permission_'.date('Ymd_His').'.csv');
     }
 }

@@ -9,16 +9,13 @@ use Modules\User\Repositories\UserRepository;
 
 class ResetController extends Controller
 {
-    protected $repository;
-
-    public function __construct(UserRepository $repository)
-    {
-        $this->repository = $repository;
-    }
-
     public function index(Request $request)
     {
-        $user = $this->repository->findWhere(['email' => $request->query('email'), 'verification_code' => $request->query('verification_code')])->first();
+        $user = UserRepository::getUserByEmailAndPasswordAndVerificationCode(
+            $request->query('email'),
+            $request->query('p'),
+            $request->query('verification_code')
+        );
 
         if ($user) {
             $data['user'] = $user;
@@ -28,12 +25,16 @@ class ResetController extends Controller
 
     public function update(\Modules\Authentication\Http\Requests\Api\V1\Authentication\Password\Reset\UpdateRequest $request)
     {
-        $user = $this->repository->findWhere(['email' => $request->input('email'), 'verification_code' => $request->input('verification_code')])->first();
+        $user = UserRepository::getUserByEmailAndVerificationCode(
+            $request->input('email'),
+            $request->input('verification_code')
+        );
 
         if ($user) {
-            $attributes['password'] = $request->input('password');
-            $attributes['verification_code'] = rand(111111, 999999);
-            $this->repository->update($attributes, $user->id);
+            UserRepository::updatePasswordAndVerificationCodeById(
+                $request->input('password'),
+                $user->id
+            );
             flash(trans('passwords.reset'))->success()->important();
             return redirect()->route('modules.authentication.backend.v1.authentication.login.index');
         }

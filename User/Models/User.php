@@ -4,8 +4,6 @@ namespace Modules\User\Models;
 
 class User extends \App\User
 {
-    use \Illuminate\Notifications\Notifiable;
-    use \Modules\Cms\Traits\SortableTrait;
     use \Spatie\Permission\Traits\HasRoles;
 
     protected $fillable = [
@@ -35,6 +33,12 @@ class User extends \App\User
         $roleName = $this->roles->pluck('name', 'name')->toArray();
         $roleName = old('role_name') ? old('role_name') : $roleName;
         return $roleName;
+    }
+
+    public function roles()
+    {
+        return $this->belongsToMany(\Modules\Role\Models\Role::class, 'model_has_roles', 'model_id', 'role_id')
+            ->where('model_type', 'Modules\User\Models\User');
     }
 
     public function setPasswordAttribute($password)
