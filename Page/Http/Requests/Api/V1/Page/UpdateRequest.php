@@ -25,6 +25,8 @@ class UpdateRequest extends FormRequest
     {
         return [
             'title' => ['required'],
+            'image.*' => ['image'],
+            'gallery.*' => ['image'],
         ];
     }
 }

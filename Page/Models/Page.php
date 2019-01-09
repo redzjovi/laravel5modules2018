@@ -6,8 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Page extends Model
 {
-    use \Modules\Cms\Traits\SortableTrait;
-
     protected $fillable = [
         'title',
         'slug',

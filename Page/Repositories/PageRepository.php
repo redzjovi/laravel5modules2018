@@ -3,11 +3,14 @@
 namespace Modules\Page\Repositories;
 
 use Modules\Page\Models\Page;
+use Spatie\MediaLibrary\HasMedia\HasMedia;
+use Spatie\MediaLibrary\Models\Media;
 
-class PageRepository extends Page
+class PageRepository extends Page implements HasMedia
 {
     use \Modules\Cms\Traits\ModelRepositoryTrait;
     use \Modules\Cms\Traits\SortableTrait;
+    use \Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 
     public function scopeSearch($query, $parameters)
     {
@@ -68,6 +71,37 @@ class PageRepository extends Page
     public static function updateAttributesById(array $attributes = [], int $id)
     {
         $attributes['slug'] = str_slug($attributes['title']).'-'.$id;
-        return self::updateById($attributes, $id);
+        $page = self::updateById($attributes, $id);
+
+        // delete image
+        $media = $page->getMedia('page_image');
+        if (isset($attributes['image_id'])) {
+            $media = $media->whereNotIn('id', $attributes['image_id']);
+        }
+        $media->each(function ($medium) {
+            $medium->delete();
+        });
+        // image to media
+        if (isset($attributes['image'])) {
+            collect($attributes['image'])->each(function ($image) use ($page) {
+                $page->addMedia($image)->toMediaCollection('page_image', 'media');
+            });
+        }
+        // delete gallery
+        $media = $page->getMedia('page_gallery');
+        if (isset($attributes['gallery_id'])) {
+            $media = $media->whereNotIn('id', $attributes['gallery_id']);
+        }
+        $media->each(function ($medium) {
+            $medium->delete();
+        });
+        // gallery to media
+        if (isset($attributes['gallery'])) {
+            collect($attributes['gallery'])->each(function ($gallery) use ($page) {
+                $page->addMedia($gallery)->toMediaCollection('page_gallery', 'media');
+            });
+        }
+
+        return $page;
     }
 }
