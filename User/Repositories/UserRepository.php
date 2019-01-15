@@ -6,7 +6,7 @@ use Modules\User\Models\User;
 
 class UserRepository extends User
 {
-    use \Modules\Cms\Traits\ModelRepositoryTrait;
+    use \Modules\Cms\Traits\ModelTrait;
     use \Modules\Cms\Traits\SortableTrait;
 
     public function scopeSearch($query, $parameters)

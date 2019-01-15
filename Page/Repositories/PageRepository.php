@@ -8,7 +8,7 @@ use Spatie\MediaLibrary\Models\Media;
 
 class PageRepository extends Page implements HasMedia
 {
-    use \Modules\Cms\Traits\ModelRepositoryTrait;
+    use \Modules\Cms\Traits\ModelTrait;
     use \Modules\Cms\Traits\SortableTrait;
     use \Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 
