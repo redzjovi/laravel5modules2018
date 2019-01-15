@@ -1,14 +1,9 @@
 <?php
 
-namespace Modules\User\Repositories;
+namespace Modules\User\Traits;
 
-use Modules\User\Models\User;
-
-class UserRepository extends User
+trait UserTrait
 {
-    use \Modules\Cms\Traits\ModelTrait;
-    use \Modules\Cms\Traits\SortableTrait;
-
     public function scopeSearch($query, $parameters)
     {
         if (isset($parameters['name'])) {
@@ -42,6 +37,11 @@ class UserRepository extends User
         }
 
         return $query;
+    }
+
+    public static function getUserByEmail(string $email)
+    {
+        return self::where('email', $email)->first();
     }
 
     public static function getUserByEmailAndPasswordAndVerificationCode(string $email, string $password, int $verificationCode)

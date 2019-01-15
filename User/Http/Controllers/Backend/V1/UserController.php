@@ -7,7 +7,7 @@ use Illuminate\Http\Response;
 use Modules\Role\Repositories\RoleRepository;
 use Modules\User\Http\Requests\Backend\V1\User\StoreRequest;
 use Modules\User\Http\Requests\Backend\V1\User\UpdateRequest;
-use Modules\User\Repositories\UserRepository;
+use Modules\User\Models\User;
 
 class UserController extends \Modules\Cms\Http\Controllers\Controller
 {
@@ -21,9 +21,9 @@ class UserController extends \Modules\Cms\Http\Controllers\Controller
         $parameters['paginate'] = 1;
         $parameters['with'] = ['roles'];
 
-        $data['model'] = new UserRepository;
+        $data['model'] = new User;
         $data['roles'] = RoleRepository::getRolesOrderByName();
-        $data['users'] = UserRepository::getUsers($parameters);
+        $data['users'] = User::getUsers($parameters);
 
         return view('user::backend/v1/user/index', $data);
     }
@@ -34,7 +34,7 @@ class UserController extends \Modules\Cms\Http\Controllers\Controller
      */
     public function create()
     {
-        $data['model'] = new UserRepository;
+        $data['model'] = new User;
         $data['roles'] = RoleRepository::getRolesOrderByName();
 
         return view('user::backend/v1/user/create', $data);
@@ -47,7 +47,7 @@ class UserController extends \Modules\Cms\Http\Controllers\Controller
      */
     public function store(StoreRequest $request)
     {
-        $model = UserRepository::create($request->input());
+        $model = User::create($request->input());
 
         if (auth()->user()->can('modules.user.backend.v1.user.role.*')) {
             $model->syncRoles($request->input('role_name'));
@@ -72,7 +72,7 @@ class UserController extends \Modules\Cms\Http\Controllers\Controller
      */
     public function edit($id)
     {
-        $data['model'] = UserRepository::findById($id);
+        $data['model'] = User::findById($id);
         $data['roles'] = RoleRepository::getRolesOrderByName();
 
         return view('user::backend/v1/user/edit', $data);
@@ -86,7 +86,7 @@ class UserController extends \Modules\Cms\Http\Controllers\Controller
     public function update(UpdateRequest $request, $id)
     {
         ! $request->input('password') ? $request->request->remove('password') : '';
-        $model = UserRepository::updateById($request->input(), $id);
+        $model = User::updateById($request->input(), $id);
 
         if (auth()->user()->can('modules.user.backend.v1.user.role.*')) {
             $model->syncRoles($request->input('role_name'));
@@ -112,7 +112,7 @@ class UserController extends \Modules\Cms\Http\Controllers\Controller
             if ($action == 'actionDelete') {
                 if ($ids = $request->id) {
                     foreach ($ids as $id) {
-                        UserRepository::deleteById($id);
+                        User::deleteById($id);
                     }
                     flash(trans('cms::cms.deleted').' ('.count($ids).')')->important()->success();
                 }
@@ -124,7 +124,7 @@ class UserController extends \Modules\Cms\Http\Controllers\Controller
 
     public function delete(int $id)
     {
-        UserRepository::deleteById($id);
+        User::deleteById($id);
         flash(trans('cms::cms.deleted'))->important()->success();
         return redirect()->back();
     }
@@ -140,7 +140,7 @@ class UserController extends \Modules\Cms\Http\Controllers\Controller
         }
         $csv->insertOne($columns);
 
-        $users = UserRepository::getUsers($request->query());
+        $users = User::getUsers($request->query());
         $users->each(function ($user) use ($csv) {
             $columns = [];
             $columns[] = $user->name;
