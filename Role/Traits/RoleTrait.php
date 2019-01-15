@@ -1,11 +1,9 @@
 <?php
 
-namespace Modules\Permission\Repositories;
+namespace Modules\Role\Traits;
 
-class PermissionRepository extends \Modules\Permission\Models\Permission
+trait RoleTrait
 {
-    use \Modules\Cms\Traits\SortableTrait;
-
     public function scopeSearch($query, $parameters)
     {
         if (isset($parameters['name'])) {
@@ -32,7 +30,20 @@ class PermissionRepository extends \Modules\Permission\Models\Permission
         return $query;
     }
 
-    public static function getPermissionsOrderByName()
+    public static function getRoles($parameters)
+    {
+        $query = self::query()->search($parameters);
+
+        if (isset($parameters['paginate']) && $parameters['paginate'] == 1) {
+            $roles = $query->paginate();
+        } else {
+            $roles = $query->get();
+        }
+
+        return $roles;
+    }
+
+    public static function getRolesOrderByName()
     {
         return self::orderBy('name')->get();
     }

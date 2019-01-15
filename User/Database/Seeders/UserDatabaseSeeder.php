@@ -19,22 +19,18 @@ class UserDatabaseSeeder extends Seeder
 
         $users = [
             [
-                'name' => 'Admin', 'email' => 'admin@mailinator.com',
+                'name' => 'Admin', 'email' => 'admin@mailinator.com', 'password' => 'admin@mailinator.com',
                 'roles' => 'Admin',
             ],
             [
-                'name' => 'Super Admin', 'email' => 'superadmin@mailinator.com',
+                'name' => 'Super Admin', 'email' => 'superadmin@mailinator.com', 'password' => 'superadmin@mailinator.com',
                 'roles' => 'Super Admin',
             ],
         ];
 
         foreach ($users as $user) {
-            if (! $exist = User::where('email', $user['email'])->first()) {
-                $model = new User;
-                $model->fill($user);
-                $model->password = $user['email'];
-                $model->save();
-
+            if (! $exist = User::getUserByEmail($user['email'])) {
+                $model = User::create($user);
                 $model->assignRole($user['roles']);
             }
         }

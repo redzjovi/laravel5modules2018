@@ -5,7 +5,7 @@ namespace Modules\Authentication\Http\Controllers\Backend\V1\Authentication\Pass
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
-use Modules\User\Repositories\UserRepository;
+use Modules\User\Models\User;
 
 class ForgotController extends Controller
 {
@@ -25,8 +25,8 @@ class ForgotController extends Controller
      */
     public function store(\Modules\Authentication\Http\Requests\Api\V1\Authentication\Password\Forgot\StoreRequest $request)
     {
-        $user = UserRepository::findByField('email', $request->input('email'));
-        $user = UserRepository::updateVerificationCodeById($user->id);
+        $user = User::findByField('email', $request->input('email'));
+        $user = User::updateVerificationCodeById($user->id);
         $user->notify(new \Modules\Authentication\Notifications\PasswordResetLink($user));
 
         flash(trans('passwords.sent'))->success()->important();

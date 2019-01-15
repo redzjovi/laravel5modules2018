@@ -5,13 +5,13 @@ namespace Modules\Authentication\Http\Controllers\Backend\V1\Authentication\Pass
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
-use Modules\User\Repositories\UserRepository;
+use Modules\User\Models\User;
 
 class ResetController extends Controller
 {
     public function index(Request $request)
     {
-        $user = UserRepository::getUserByEmailAndPasswordAndVerificationCode(
+        $user = User::getUserByEmailAndPasswordAndVerificationCode(
             $request->query('email'),
             $request->query('p'),
             $request->query('verification_code')
@@ -25,13 +25,13 @@ class ResetController extends Controller
 
     public function update(\Modules\Authentication\Http\Requests\Api\V1\Authentication\Password\Reset\UpdateRequest $request)
     {
-        $user = UserRepository::getUserByEmailAndVerificationCode(
+        $user = User::getUserByEmailAndVerificationCode(
             $request->input('email'),
             $request->input('verification_code')
         );
 
         if ($user) {
-            UserRepository::updatePasswordAndVerificationCodeById(
+            User::updatePasswordAndVerificationCodeById(
                 $request->input('password'),
                 $user->id
             );
