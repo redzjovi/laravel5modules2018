@@ -70,9 +70,9 @@ class UserController extends \Modules\Cms\Http\Controllers\Controller
      * Show the form for editing the specified resource.
      * @return Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
-        $data['model'] = User::findById($id);
+        $data['model'] = $user;
         $data['roles'] = Role::getRolesOrderByName();
 
         return view('user::backend/v1/user/edit', $data);
@@ -83,10 +83,10 @@ class UserController extends \Modules\Cms\Http\Controllers\Controller
      * @param  Request $request
      * @return Response
      */
-    public function update(UpdateRequest $request, $id)
+    public function update(UpdateRequest $request, User $user)
     {
         ! $request->input('password') ? $request->request->remove('password') : '';
-        $model = User::updateById($request->input(), $id);
+        $model = User::updateById($request->input(), $user->id);
 
         if (auth()->user()->can('modules.user.backend.v1.user.role.*')) {
             $model->syncRoles($request->input('role_name'));
@@ -122,9 +122,9 @@ class UserController extends \Modules\Cms\Http\Controllers\Controller
         return redirect()->back();
     }
 
-    public function delete(int $id)
+    public function delete(User $user)
     {
-        User::deleteById($id);
+        User::deleteById($user->id);
         flash(trans('cms::cms.deleted'))->important()->success();
         return redirect()->back();
     }

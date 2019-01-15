@@ -21,6 +21,11 @@ trait ModelTrait
         return self::find($id, $columns);
     }
 
+    public static function findOrFailById(int $id, array $columns = ['*'])
+    {
+        return self::findOrFail($id, $columns);
+    }
+
     public static function findByField(string $field, $value)
     {
         return self::where($field, $value)->first();

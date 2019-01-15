@@ -1,17 +1,9 @@
 <?php
 
-namespace Modules\Page\Repositories;
+namespace Modules\Page\Traits;
 
-use Modules\Page\Models\Page;
-use Spatie\MediaLibrary\HasMedia\HasMedia;
-use Spatie\MediaLibrary\Models\Media;
-
-class PageRepository extends Page implements HasMedia
+trait PageTrait
 {
-    use \Modules\Cms\Traits\ModelTrait;
-    use \Modules\Cms\Traits\SortableTrait;
-    use \Spatie\MediaLibrary\HasMedia\HasMediaTrait;
-
     public function scopeSearch($query, $parameters)
     {
         if (isset($parameters['title'])) {

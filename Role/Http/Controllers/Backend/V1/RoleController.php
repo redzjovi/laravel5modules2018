@@ -61,9 +61,9 @@ class RoleController extends \Modules\Cms\Http\Controllers\Controller
      * Show the form for editing the specified resource.
      * @return Response
      */
-    public function edit($id)
+    public function edit(Role $role)
     {
-        $data['model'] = Role::findOrFail($id);
+        $data['model'] = $role;
         return view('role::backend/v1/role/edit', $data);
     }
 
@@ -105,9 +105,9 @@ class RoleController extends \Modules\Cms\Http\Controllers\Controller
         return redirect()->back();
     }
 
-    public function delete(int $id)
+    public function delete(Role $role)
     {
-        Role::destroy($id);
+        $role->delete();
         flash(trans('cms::cms.deleted'))->important()->success();
         return redirect()->back();
     }

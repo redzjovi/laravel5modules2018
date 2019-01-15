@@ -103,9 +103,9 @@ class PermissionController extends \Modules\Cms\Http\Controllers\Controller
         return redirect()->back();
     }
 
-    public function delete(int $id)
+    public function delete(Permission $permission)
     {
-        Permission::destroy($id);
+        $permission->delete();
         flash(trans('cms::cms.deleted'))->important()->success();
         return redirect()->back();
     }

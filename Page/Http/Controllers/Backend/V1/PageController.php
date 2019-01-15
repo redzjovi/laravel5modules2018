@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Modules\Page\Http\Requests\Api\V1\Page\StoreRequest;
 use Modules\Page\Http\Requests\Api\V1\Page\UpdateRequest;
-use Modules\Page\Repositories\PageRepository;
+use Modules\Page\Models\Page;
 
 class PageController extends \Modules\Cms\Http\Controllers\Controller
 {
@@ -19,8 +19,8 @@ class PageController extends \Modules\Cms\Http\Controllers\Controller
         $parameters = request()->query();
         $parameters['paginate'] = 1;
 
-        $data['model'] = new PageRepository;
-        $data['pages'] = PageRepository::getPages($parameters);
+        $data['model'] = new Page;
+        $data['pages'] = Page::getPages($parameters);
 
         return view('page::backend/v1/page/index', $data);
     }
@@ -31,7 +31,7 @@ class PageController extends \Modules\Cms\Http\Controllers\Controller
      */
     public function create()
     {
-        $data['model'] = new PageRepository;
+        $data['model'] = new Page;
 
         return view('page::backend/v1/page/create', $data);
     }
@@ -43,7 +43,7 @@ class PageController extends \Modules\Cms\Http\Controllers\Controller
      */
     public function store(StoreRequest $request)
     {
-        PageRepository::createAttributes($request->all());
+        Page::createAttributes($request->all());
         flash(trans('cms::cms.stored'))->important()->success();
         return redirect()->back();
     }
@@ -61,9 +61,9 @@ class PageController extends \Modules\Cms\Http\Controllers\Controller
      * Show the form for editing the specified resource.
      * @return Response
      */
-    public function edit($id)
+    public function edit(Page $page)
     {
-        $data['model'] = PageRepository::findById($id);
+        $data['model'] = $page;
 
         return view('page::backend/v1/page/edit', $data);
     }
@@ -73,9 +73,9 @@ class PageController extends \Modules\Cms\Http\Controllers\Controller
      * @param  Request $request
      * @return Response
      */
-    public function update(UpdateRequest $request, $id)
+    public function update(UpdateRequest $request, Page $page)
     {
-        PageRepository::updateAttributesById($request->all(), $id);
+        Page::updateAttributesById($request->all(), $page->id);
         flash(trans('cms::cms.updated'))->important()->success();
         return redirect()->back();
     }
@@ -96,7 +96,7 @@ class PageController extends \Modules\Cms\Http\Controllers\Controller
             if ($action == 'actionDelete') {
                 if ($ids = $request->id) {
                     foreach ($ids as $id) {
-                        PageRepository::deleteById($id);
+                        Page::deleteById($id);
                     }
                     flash(trans('cms::cms.deleted').' ('.count($ids).')')->important()->success();
                 }
@@ -106,9 +106,9 @@ class PageController extends \Modules\Cms\Http\Controllers\Controller
         return redirect()->back();
     }
 
-    public function delete(int $id)
+    public function delete(Page $page)
     {
-        PageRepository::deleteById($id);
+        Page::deleteById($page->id);
         flash(trans('cms::cms.deleted'))->important()->success();
         return redirect()->back();
     }
@@ -123,7 +123,7 @@ class PageController extends \Modules\Cms\Http\Controllers\Controller
         $columns[] = trans('cms::cms.content');
         $csv->insertOne($columns);
 
-        $pages = PageRepository::getPages($request->query());
+        $pages = Page::getPages($request->query());
         $pages->each(function ($page) use ($csv) {
             $columns = [];
             $columns[] = $page->title;
