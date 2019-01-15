@@ -4,7 +4,7 @@ namespace Modules\Permission\Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
-use Spatie\Permission\Models\Permission;
+use Modules\Permission\Models\Permission;
 
 class PermissionDatabaseSeeder extends Seeder
 {
@@ -30,7 +30,7 @@ class PermissionDatabaseSeeder extends Seeder
         ];
 
         foreach ($permissions as $permission) {
-            if (! $exist = Permission::where('name', $permission['name'])->first()) {
+            if (! $exist = Permission::getPermissionByName($permission['name'])) {
                 Permission::create($permission);
             }
         }

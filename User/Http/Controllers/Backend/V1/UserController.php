@@ -4,7 +4,7 @@ namespace Modules\User\Http\Controllers\Backend\V1;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Modules\Role\Repositories\RoleRepository;
+use Modules\Role\Models\Role;
 use Modules\User\Http\Requests\Backend\V1\User\StoreRequest;
 use Modules\User\Http\Requests\Backend\V1\User\UpdateRequest;
 use Modules\User\Models\User;
@@ -22,7 +22,7 @@ class UserController extends \Modules\Cms\Http\Controllers\Controller
         $parameters['with'] = ['roles'];
 
         $data['model'] = new User;
-        $data['roles'] = RoleRepository::getRolesOrderByName();
+        $data['roles'] = Role::getRolesOrderByName();
         $data['users'] = User::getUsers($parameters);
 
         return view('user::backend/v1/user/index', $data);
@@ -35,7 +35,7 @@ class UserController extends \Modules\Cms\Http\Controllers\Controller
     public function create()
     {
         $data['model'] = new User;
-        $data['roles'] = RoleRepository::getRolesOrderByName();
+        $data['roles'] = Role::getRolesOrderByName();
 
         return view('user::backend/v1/user/create', $data);
     }
@@ -73,7 +73,7 @@ class UserController extends \Modules\Cms\Http\Controllers\Controller
     public function edit($id)
     {
         $data['model'] = User::findById($id);
-        $data['roles'] = RoleRepository::getRolesOrderByName();
+        $data['roles'] = Role::getRolesOrderByName();
 
         return view('user::backend/v1/user/edit', $data);
     }

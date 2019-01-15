@@ -7,7 +7,6 @@ use Illuminate\Http\Response;
 use Modules\Permission\Http\Requests\Backend\V1\Permission\StoreRequest;
 use Modules\Permission\Http\Requests\Backend\V1\Permission\UpdateRequest;
 use Modules\Permission\Models\Permission;
-use Modules\Permission\Repositories\PermissionRepository;
 
 class PermissionController extends \Modules\Cms\Http\Controllers\Controller
 {
@@ -17,8 +16,8 @@ class PermissionController extends \Modules\Cms\Http\Controllers\Controller
      */
     public function index()
     {
-        $data['model'] = new PermissionRepository;
-        $data['permissions'] = PermissionRepository::search(request()->query())->paginate();
+        $data['model'] = new Permission;
+        $data['permissions'] = Permission::search(request()->query())->paginate();
 
         return view('permission::backend/v1/permission/index', $data);
     }
@@ -29,7 +28,7 @@ class PermissionController extends \Modules\Cms\Http\Controllers\Controller
      */
     public function create()
     {
-        $data['model'] = new PermissionRepository;
+        $data['model'] = new Permission;
 
         return view('permission::backend/v1/permission/create', $data);
     }
@@ -41,7 +40,7 @@ class PermissionController extends \Modules\Cms\Http\Controllers\Controller
      */
     public function store(StoreRequest $request)
     {
-        PermissionRepository::create($request->input());
+        Permission::create($request->input());
         flash(trans('cms::cms.stored'))->important()->success();
         return redirect()->back();
     }
@@ -59,7 +58,7 @@ class PermissionController extends \Modules\Cms\Http\Controllers\Controller
      * Show the form for editing the specified resource.
      * @return Response
      */
-    public function edit(PermissionRepository $permission)
+    public function edit(Permission $permission)
     {
         $data['model'] = $permission;
 
@@ -71,7 +70,7 @@ class PermissionController extends \Modules\Cms\Http\Controllers\Controller
      * @param  Request $request
      * @return Response
      */
-    public function update(UpdateRequest $request, PermissionRepository $permission)
+    public function update(UpdateRequest $request, Permission $permission)
     {
         $permission->fill($request->input())->save();
         flash(trans('cms::cms.updated'))->important()->success();
@@ -119,7 +118,7 @@ class PermissionController extends \Modules\Cms\Http\Controllers\Controller
         $columns[] = trans('cms::cms.guard_name');
         $csv->insertOne($columns);
 
-        $permissions = PermissionRepository::search(request()->query())->get();
+        $permissions = Permission::search(request()->query())->get();
         $permissions->each(function ($permission) use ($csv) {
             $columns = [];
             $columns[] = $permission->name;

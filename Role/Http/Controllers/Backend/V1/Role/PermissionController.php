@@ -5,7 +5,6 @@ namespace Modules\Role\Http\Controllers\Backend\V1\Role;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Modules\Permission\Models\Permission;
-use Modules\Permission\Repositories\PermissionRepository;
 use Modules\Role\Http\Requests\Backend\V1\Role\Permission\UpdateRequest;
 use Modules\Role\Models\Role;
 
@@ -55,7 +54,7 @@ class PermissionController extends \Modules\Cms\Http\Controllers\Controller
     public function edit($id)
     {
         $data['model'] = Role::findOrFail($id);
-        $data['permissions'] = PermissionRepository::getPermissionsOrderByName();
+        $data['permissions'] = Permission::getPermissionsOrderByName();
 
         return view('role::backend/v1/role/permission/edit', $data);
     }

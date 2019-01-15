@@ -7,7 +7,6 @@ use Illuminate\Http\Response;
 use Modules\Role\Http\Requests\Backend\V1\Role\StoreRequest;
 use Modules\Role\Http\Requests\Backend\V1\Role\UpdateRequest;
 use Modules\Role\Models\Role;
-use Modules\Role\Repositories\RoleRepository;
 
 class RoleController extends \Modules\Cms\Http\Controllers\Controller
 {
@@ -20,8 +19,8 @@ class RoleController extends \Modules\Cms\Http\Controllers\Controller
         $parameters = request()->query();
         $parameters['paginate'] = 1;
 
-        $data['model'] = new RoleRepository;
-        $data['roles'] = RoleRepository::getRoles($parameters);
+        $data['model'] = new Role;
+        $data['roles'] = Role::getRoles($parameters);
 
         return view('role::backend/v1/role/index', $data);
     }
@@ -32,7 +31,7 @@ class RoleController extends \Modules\Cms\Http\Controllers\Controller
      */
     public function create()
     {
-        $data['model'] = new RoleRepository;
+        $data['model'] = new Role;
 
         return view('role::backend/v1/role/create', $data);
     }
@@ -44,7 +43,7 @@ class RoleController extends \Modules\Cms\Http\Controllers\Controller
      */
     public function store(StoreRequest $request)
     {
-        RoleRepository::create($request->input());
+        Role::create($request->input());
         flash(trans('cms::cms.stored'))->important()->success();
         return redirect()->back();
     }
@@ -64,7 +63,7 @@ class RoleController extends \Modules\Cms\Http\Controllers\Controller
      */
     public function edit($id)
     {
-        $data['model'] = RoleRepository::findOrFail($id);
+        $data['model'] = Role::findOrFail($id);
         return view('role::backend/v1/role/edit', $data);
     }
 
@@ -73,7 +72,7 @@ class RoleController extends \Modules\Cms\Http\Controllers\Controller
      * @param  Request $request
      * @return Response
      */
-    public function update(UpdateRequest $request, RoleRepository $role)
+    public function update(UpdateRequest $request, Role $role)
     {
         $role->fill($request->input())->save();
         flash(trans('cms::cms.updated'))->important()->success();
@@ -121,7 +120,7 @@ class RoleController extends \Modules\Cms\Http\Controllers\Controller
         $columns[] = trans('cms::cms.guard_name');
         $csv->insertOne($columns);
 
-        $roles = RoleRepository::getRoles($request->query());
+        $roles = Role::getRoles($request->query());
         $roles->each(function ($role) use ($csv) {
             $columns = [];
             $columns[] = $role->name;
