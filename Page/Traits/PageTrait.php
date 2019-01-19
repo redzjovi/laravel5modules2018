@@ -9,27 +9,47 @@ trait PageTrait
         if (isset($parameters['title'])) {
             $query = $query->where('title', 'like', '%'.$parameters['title'].'%');
         }
-
         if (isset($parameters['slug'])) {
             $query = $query->where('slug', $parameters['slug']);
         }
-
         if (isset($parameters['excerpt'])) {
             $query = $query->where('excerpt', 'like', '%'.$parameters['excerpt'].'%');
         }
-
         if (isset($parameters['content'])) {
             $query = $query->where('content', 'like', '%'.$parameters['content'].'%');
         }
 
-        if (isset($parameters['orderBy']) && isset($parameters['sortedBy'])) {
-            $orderBys = explode(',', $parameters['orderBy']);
-            $sortedBys = explode(',', $parameters['sortedBy']);
 
-            foreach ($orderBys as $i => $orderBy) {
-                $query = $query->orderBy($orderBy, $sortedBys[$i]);
-            }
+        if (isset($parameters['sort'])) {
+            $sorts = explode(',', $parameters['sort']);
+            collect($sorts)->map(function ($sort) use ($query) {
+                if ($sort == 'title') {
+                    $query = $query->orderBy('title');
+                }
+                if ($sort == '-title') {
+                    $query = $query->orderBy('title', 'desc');
+                }
+                if ($sort == 'slug') {
+                    $query = $query->orderBy('slug');
+                }
+                if ($sort == '-slug') {
+                    $query = $query->orderBy('slug', 'desc');
+                }
+                if ($sort == 'excerpt') {
+                    $query = $query->orderBy('excerpt');
+                }
+                if ($sort == '-excerpt') {
+                    $query = $query->orderBy('excerpt', 'desc');
+                }
+                if ($sort == 'content') {
+                    $query = $query->orderBy('content');
+                }
+                if ($sort == '-content') {
+                    $query = $query->orderBy('content', 'desc');
+                }
+            });
         }
+        
 
         if (isset($parameters['with'])) {
             $query = $query->with($parameters['with']);

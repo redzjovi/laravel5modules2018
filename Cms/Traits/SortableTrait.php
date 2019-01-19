@@ -6,21 +6,24 @@ trait SortableTrait
 {
     public function sortablelink($orderBy, $title, $options = [])
     {
-        request()->query('sortedBy') ? request()->query('sortedBy') : request()->query->set('sortedBy', 'asc');
-        $sortedBy = request()->query('sortedBy');
+        $titleIconClass = '';
 
-        $sortedByNew = '';
-        $sortedByNew = ($sortedBy == 'asc') ? 'desc' : $sortedByNew;
-        $sortedByNew = ($sortedBy == 'desc') ? 'asc' : $sortedByNew;
+        $sorts = explode(',', request()->query('sort'));
+        foreach ($sorts as $i => $sort) {
+            if ($sort == $orderBy) {
+                $sorts[$i] = '-'.$orderBy;
+                $titleIconClass = 'fas fa-sort-up';
+            } elseif ($sort == '-'.$orderBy) {
+                $sorts[$i] = $orderBy;
+                $titleIconClass = 'fas fa-sort-down';
+            } else {
+                $sorts[$i] = $orderBy;
+            }
+        }
 
         $href = request()->fullUrlWithQuery([
-            'orderBy' => $orderBy,
-            'sortedBy' => $sortedByNew,
+            'sort' => implode(',', $sorts),
         ]);
-
-        $titleIconClass = '';
-        $titleIconClass = (request()->query('orderBy') == $orderBy && request()->query('sortedBy') == 'asc') ? 'fas fa-sort-up' : $titleIconClass;
-        $titleIconClass = (request()->query('orderBy') == $orderBy && request()->query('sortedBy') == 'desc') ? 'fas fa-sort-down' : $titleIconClass;
 
         $html = '<a '.
             (isset($options['pjax-elements']) ? 'pjax-elements ' : '').

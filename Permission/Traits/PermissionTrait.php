@@ -9,19 +9,29 @@ trait PermissionTrait
         if (isset($parameters['name'])) {
             $query = $query->where('name', 'like', '%'.$parameters['name'].'%');
         }
-
         if (isset($parameters['guard_name'])) {
             $query = $query->where('guard_name', $parameters['guard_name']);
         }
 
-        if (isset($parameters['orderBy']) && isset($parameters['sortedBy'])) {
-            $orderBys = explode(',', $parameters['orderBy']);
-            $sortedBys = explode(',', $parameters['sortedBy']);
 
-            foreach ($orderBys as $i => $orderBy) {
-                $query = $query->orderBy($orderBy, $sortedBys[$i]);
-            }
+        if (isset($parameters['sort'])) {
+            $sorts = explode(',', $parameters['sort']);
+            collect($sorts)->map(function ($sort) use ($query) {
+                if ($sort == 'name') {
+                    $query = $query->orderBy('name');
+                }
+                if ($sort == '-name') {
+                    $query = $query->orderBy('name', 'desc');
+                }
+                if ($sort == 'guard_name') {
+                    $query = $query->orderBy('guard_name');
+                }
+                if ($sort == '-guard_name') {
+                    $query = $query->orderBy('guard_name', 'desc');
+                }
+            });
         }
+
 
         if (isset($parameters['with'])) {
             $query = $query->with($parameters['with']);

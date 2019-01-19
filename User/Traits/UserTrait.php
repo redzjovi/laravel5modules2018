@@ -9,11 +9,9 @@ trait UserTrait
         if (isset($parameters['name'])) {
             $query = $query->where('name', 'like', '%'.$parameters['name'].'%');
         }
-
         if (isset($parameters['email'])) {
             $query = $query->where('email', 'like', '%'.$parameters['email'].'%');
         }
-
         if (isset($parameters['role_id'])) {
             $roleId = $parameters['role_id'];
             $query = $query->whereHas('roles', function ($roles) use ($roleId) {
@@ -23,14 +21,25 @@ trait UserTrait
             });
         }
 
-        if (isset($parameters['orderBy']) && isset($parameters['sortedBy'])) {
-            $orderBys = explode(',', $parameters['orderBy']);
-            $sortedBys = explode(',', $parameters['sortedBy']);
 
-            foreach ($orderBys as $i => $orderBy) {
-                $query = $query->orderBy($orderBy, $sortedBys[$i]);
-            }
+        if (isset($parameters['sort'])) {
+            $sorts = explode(',', $parameters['sort']);
+            collect($sorts)->map(function ($sort) use ($query) {
+                if ($sort == 'name') {
+                    $query = $query->orderBy('name');
+                }
+                if ($sort == '-name') {
+                    $query = $query->orderBy('name', 'desc');
+                }
+                if ($sort == 'email') {
+                    $query = $query->orderBy('email');
+                }
+                if ($sort == '-email') {
+                    $query = $query->orderBy('email', 'desc');
+                }
+            });
         }
+
 
         if (isset($parameters['with'])) {
             $query = $query->with($parameters['with']);
