@@ -29,6 +29,12 @@ trait PermissionTrait
                 if ($sort == '-guard_name') {
                     $query = $query->orderBy('guard_name', 'desc');
                 }
+                if ($sort == 'updated_at') {
+                    $query = $query->orderBy('updated_at');
+                }
+                if ($sort == '-updated_at') {
+                    $query = $query->orderBy('updated_at', 'desc');
+                }
             });
         }
 

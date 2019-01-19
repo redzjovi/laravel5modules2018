@@ -37,6 +37,12 @@ trait UserTrait
                 if ($sort == '-email') {
                     $query = $query->orderBy('email', 'desc');
                 }
+                if ($sort == 'updated_at') {
+                    $query = $query->orderBy('updated_at');
+                }
+                if ($sort == '-updated_at') {
+                    $query = $query->orderBy('updated_at', 'desc');
+                }
             });
         }
 
@@ -72,13 +78,13 @@ trait UserTrait
     {
         $query = self::query()->search($parameters);
 
-        if (isset($parameters['paginate']) && $parameters['paginate'] == 1) {
-            $users = $query->paginate();
+        if (isset($parameters['per_page'])) {
+            $query = $query->paginate((int) $parameters['per_page'])->appends($parameters);
         } else {
-            $users = $query->get();
+            $query = $query->get();
         }
 
-        return $users;
+        return $query;
     }
 
     public static function updatePasswordAndVerificationCodeById(string $password, int $id)

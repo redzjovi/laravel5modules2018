@@ -47,9 +47,15 @@ trait PageTrait
                 if ($sort == '-content') {
                     $query = $query->orderBy('content', 'desc');
                 }
+                if ($sort == 'updated_at') {
+                    $query = $query->orderBy('updated_at');
+                }
+                if ($sort == '-updated_at') {
+                    $query = $query->orderBy('updated_at', 'desc');
+                }
             });
         }
-        
+
 
         if (isset($parameters['with'])) {
             $query = $query->with($parameters['with']);
@@ -71,13 +77,13 @@ trait PageTrait
     {
         $query = self::query()->search($parameters);
 
-        if (isset($parameters['paginate']) && $parameters['paginate'] == 1) {
-            $pages = $query->paginate();
+        if (isset($parameters['per_page'])) {
+            $query = $query->paginate((int) $parameters['per_page'])->appends($parameters);
         } else {
-            $pages = $query->get();
+            $query = $query->get();
         }
 
-        return $pages;
+        return $query;
     }
 
     public static function updateAttributesById(array $attributes = [], int $id)

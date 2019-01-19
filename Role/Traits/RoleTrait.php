@@ -29,6 +29,12 @@ trait RoleTrait
                 if ($sort == '-guard_name') {
                     $query = $query->orderBy('guard_name', 'desc');
                 }
+                if ($sort == 'updated_at') {
+                    $query = $query->orderBy('updated_at');
+                }
+                if ($sort == '-updated_at') {
+                    $query = $query->orderBy('updated_at', 'desc');
+                }
             });
         }
 
@@ -44,13 +50,13 @@ trait RoleTrait
     {
         $query = self::query()->search($parameters);
 
-        if (isset($parameters['paginate']) && $parameters['paginate'] == 1) {
-            $roles = $query->paginate();
+        if (isset($parameters['per_page'])) {
+            $query = $query->paginate((int) $parameters['per_page'])->appends($parameters);
         } else {
-            $roles = $query->get();
+            $query = $query->get();
         }
 
-        return $roles;
+        return $query;
     }
 
     public static function getRolesOrderByName()

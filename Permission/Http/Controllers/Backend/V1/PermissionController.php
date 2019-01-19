@@ -16,8 +16,14 @@ class PermissionController extends \Modules\Cms\Http\Controllers\Controller
      */
     public function index()
     {
+        request()->query('per_page') ?: request()->query->set('per_page', '10');
+        request()->query('sort') ?: request()->query->set('sort', '-updated_at');
+        $parameters = request()->query();
+
         $data['model'] = new Permission;
-        $data['permissions'] = Permission::search(request()->query())->paginate();
+        $data['permissions'] = Permission::search($parameters)
+            ->paginate((int) $parameters['per_page'])
+            ->appends($parameters);
 
         return view('permission::backend/v1/permission/index', $data);
     }

@@ -16,8 +16,9 @@ class RoleController extends \Modules\Cms\Http\Controllers\Controller
      */
     public function index()
     {
+        request()->query('per_page') ?: request()->query->set('per_page', '10');
+        request()->query('sort') ?: request()->query->set('sort', '-updated_at');
         $parameters = request()->query();
-        $parameters['paginate'] = 1;
 
         $data['model'] = new Role;
         $data['roles'] = Role::getRoles($parameters);
