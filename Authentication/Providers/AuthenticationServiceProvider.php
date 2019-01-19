@@ -49,7 +49,8 @@ class AuthenticationServiceProvider extends ServiceProvider
             __DIR__.'/../Config/config.php' => config_path('authentication.php'),
         ], 'config');
         $this->mergeConfigFrom(
-            __DIR__.'/../Config/config.php', 'authentication'
+            __DIR__.'/../Config/config.php',
+            'authentication'
         );
     }
 
@@ -66,7 +67,7 @@ class AuthenticationServiceProvider extends ServiceProvider
 
         $this->publishes([
             $sourcePath => $viewPath
-        ],'views');
+        ], 'views');
 
         $this->loadViewsFrom(array_merge(array_map(function ($path) {
             return $path . '/modules/authentication';
@@ -91,7 +92,7 @@ class AuthenticationServiceProvider extends ServiceProvider
 
     /**
      * Register an additional directory of factories.
-     * 
+     *
      * @return void
      */
     public function registerFactories()

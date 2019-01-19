@@ -51,7 +51,8 @@ class CmsServiceProvider extends ServiceProvider
             __DIR__.'/../Config/config.php' => config_path('cms.php'),
         ], 'config');
         $this->mergeConfigFrom(
-            __DIR__.'/../Config/config.php', 'cms'
+            __DIR__.'/../Config/config.php',
+            'cms'
         );
     }
 
@@ -68,7 +69,7 @@ class CmsServiceProvider extends ServiceProvider
 
         $this->publishes([
             $sourcePath => $viewPath
-        ],'views');
+        ], 'views');
 
         $this->loadViewsFrom(array_merge(array_map(function ($path) {
             return $path . '/modules/cms';

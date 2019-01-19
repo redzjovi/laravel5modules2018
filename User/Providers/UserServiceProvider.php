@@ -49,7 +49,8 @@ class UserServiceProvider extends ServiceProvider
             __DIR__.'/../Config/config.php' => config_path('user.php'),
         ], 'config');
         $this->mergeConfigFrom(
-            __DIR__.'/../Config/config.php', 'user'
+            __DIR__.'/../Config/config.php',
+            'user'
         );
     }
 
@@ -66,7 +67,7 @@ class UserServiceProvider extends ServiceProvider
 
         $this->publishes([
             $sourcePath => $viewPath
-        ],'views');
+        ], 'views');
 
         $this->loadViewsFrom(array_merge(array_map(function ($path) {
             return $path . '/modules/user';

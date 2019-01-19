@@ -49,7 +49,8 @@ class QueueServiceProvider extends ServiceProvider
             __DIR__.'/../Config/config.php' => config_path('queue.php'),
         ], 'config');
         $this->mergeConfigFrom(
-            __DIR__.'/../Config/config.php', 'queue'
+            __DIR__.'/../Config/config.php',
+            'queue'
         );
     }
 
@@ -66,7 +67,7 @@ class QueueServiceProvider extends ServiceProvider
 
         $this->publishes([
             $sourcePath => $viewPath
-        ],'views');
+        ], 'views');
 
         $this->loadViewsFrom(array_merge(array_map(function ($path) {
             return $path . '/modules/queue';
@@ -91,7 +92,7 @@ class QueueServiceProvider extends ServiceProvider
 
     /**
      * Register an additional directory of factories.
-     * 
+     *
      * @return void
      */
     public function registerFactories()

@@ -49,7 +49,8 @@ class PageServiceProvider extends ServiceProvider
             __DIR__.'/../Config/config.php' => config_path('page.php'),
         ], 'config');
         $this->mergeConfigFrom(
-            __DIR__.'/../Config/config.php', 'page'
+            __DIR__.'/../Config/config.php',
+            'page'
         );
     }
 
@@ -66,7 +67,7 @@ class PageServiceProvider extends ServiceProvider
 
         $this->publishes([
             $sourcePath => $viewPath
-        ],'views');
+        ], 'views');
 
         $this->loadViewsFrom(array_merge(array_map(function ($path) {
             return $path . '/modules/page';

@@ -13,8 +13,8 @@ use Modules\Authentication\Http\Middleware\Backend\V1\AuthenticationMiddleware;
 |
 */
 
-Route::group(['middleware' => [AuthenticationMiddleware::class]], function() {
-    Route::group(['middleware' => ['permission:modules.user.backend.v1.user.*']], function() {
+Route::group(['middleware' => [AuthenticationMiddleware::class]], function () {
+    Route::group(['middleware' => ['permission:modules.user.backend.v1.user.*']], function () {
         Route::resource('modules/user/backend/v1/user', 'Backend\V1\UserController', ['as' => 'modules.user.backend.v1'])->only(['index', 'create', 'store', 'edit', 'update']);
         Route::post('modules/user/backend/v1/user/action')->name('modules.user.backend.v1.user.action')->uses('Backend\V1\UserController@action');
         Route::get('modules/user/backend/v1/user/delete/{user}')->name('modules.user.backend.v1.user.delete')->uses('Backend\V1\UserController@delete');
