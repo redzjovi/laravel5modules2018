@@ -2,6 +2,7 @@
 <html lang="{{ app()->getLocale() }}">
 
 <head>
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet" />
     <link href="{{ asset('css/backend--app.css') }}" rel="stylesheet" />
     @stack('styles')
 
