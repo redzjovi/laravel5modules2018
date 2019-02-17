@@ -15,10 +15,13 @@ class CreateTablePage extends Migration
     {
         Schema::create('page', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('title');
-            $table->string('slug');
-            $table->longText('excerpt')->nullable();
-            $table->longText('content')->nullable();
+
+            foreach (config('cms.locales') as $locale => $localeName) {
+                $table->string('title_'.$locale)->nullable();
+                $table->string('slug_'.$locale)->nullable();
+                $table->longText('excerpt_'.$locale)->nullable();
+                $table->longText('content_'.$locale)->nullable();
+            }
 
             $table->timestamps();
         });

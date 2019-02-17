@@ -7,16 +7,36 @@ trait PageTrait
     public function scopeSearch($query, $parameters)
     {
         if (isset($parameters['title'])) {
-            $query = $query->where('title', 'like', '%'.$parameters['title'].'%');
+            $query = $query->where('title_'.config('app.locale'), 'like', '%'.$parameters['title'].'%');
+        }
+        foreach (config('cms.locales') as $locale => $localeName) {
+            if (isset($parameters['title_'.$locale])) {
+                $query = $query->where('title_'.$locale, 'like', '%'.$parameters['title_'.$locale].'%');
+            }
         }
         if (isset($parameters['slug'])) {
-            $query = $query->where('slug', $parameters['slug']);
+            $query = $query->where('slug_'.config('app.locale'), $parameters['slug']);
+        }
+        foreach (config('cms.locales') as $locale => $localeName) {
+            if (isset($parameters['slug_'.$locale])) {
+                $query = $query->where('slug_'.$locale, 'like', '%'.$parameters['slug_'.$locale].'%');
+            }
         }
         if (isset($parameters['excerpt'])) {
-            $query = $query->where('excerpt', 'like', '%'.$parameters['excerpt'].'%');
+            $query = $query->where('excerpt_'.config('app.locale'), 'like', '%'.$parameters['excerpt'].'%');
+        }
+        foreach (config('cms.locales') as $locale => $localeName) {
+            if (isset($parameters['excerpt_'.$locale])) {
+                $query = $query->where('excerpt_'.$locale, 'like', '%'.$parameters['excerpt_'.$locale].'%');
+            }
         }
         if (isset($parameters['content'])) {
-            $query = $query->where('content', 'like', '%'.$parameters['content'].'%');
+            $query = $query->where('content_'.config('app.locale'), 'like', '%'.$parameters['content'].'%');
+        }
+        foreach (config('cms.locales') as $locale => $localeName) {
+            if (isset($parameters['content_'.$locale])) {
+                $query = $query->where('content_'.$locale, 'like', '%'.$parameters['content_'.$locale].'%');
+            }
         }
 
 
@@ -24,28 +44,60 @@ trait PageTrait
             $sorts = explode(',', $parameters['sort']);
             collect($sorts)->map(function ($sort) use ($query) {
                 if ($sort == 'title') {
-                    $query = $query->orderBy('title');
+                    $query = $query->orderBy('title_'.config('app.locale'));
                 }
                 if ($sort == '-title') {
-                    $query = $query->orderBy('title', 'desc');
+                    $query = $query->orderBy('title_'.config('app.locale'), 'desc');
+                }
+                foreach (config('cms.locales') as $locale => $localeName) {
+                    if ($sort == 'title_'.$locale) {
+                        $query = $query->orderBy('title_'.$locale);
+                    }
+                    if ($sort == '-title_'.$locale) {
+                        $query = $query->orderBy('title_'.$locale, 'desc');
+                    }
                 }
                 if ($sort == 'slug') {
-                    $query = $query->orderBy('slug');
+                    $query = $query->orderBy('slug_'.config('app.locale'));
                 }
                 if ($sort == '-slug') {
-                    $query = $query->orderBy('slug', 'desc');
+                    $query = $query->orderBy('slug_'.config('app.locale'), 'desc');
+                }
+                foreach (config('cms.locales') as $locale => $localeName) {
+                    if ($sort == 'slug_'.$locale) {
+                        $query = $query->orderBy('slug_'.$locale);
+                    }
+                    if ($sort == '-slug_'.$locale) {
+                        $query = $query->orderBy('slug_'.$locale, 'desc');
+                    }
                 }
                 if ($sort == 'excerpt') {
-                    $query = $query->orderBy('excerpt');
+                    $query = $query->orderBy('excerpt_'.config('app.locale'));
                 }
                 if ($sort == '-excerpt') {
-                    $query = $query->orderBy('excerpt', 'desc');
+                    $query = $query->orderBy('excerpt_'.config('app.locale'), 'desc');
+                }
+                foreach (config('cms.locales') as $locale => $localeName) {
+                    if ($sort == 'excerpt_'.$locale) {
+                        $query = $query->orderBy('excerpt_'.$locale);
+                    }
+                    if ($sort == '-excerpt_'.$locale) {
+                        $query = $query->orderBy('excerpt_'.$locale, 'desc');
+                    }
                 }
                 if ($sort == 'content') {
-                    $query = $query->orderBy('content');
+                    $query = $query->orderBy('content_'.config('app.locale'));
                 }
                 if ($sort == '-content') {
-                    $query = $query->orderBy('content', 'desc');
+                    $query = $query->orderBy('content_'.config('app.locale'), 'desc');
+                }
+                foreach (config('cms.locales') as $locale => $localeName) {
+                    if ($sort == 'content_'.$locale) {
+                        $query = $query->orderBy('content_'.$locale);
+                    }
+                    if ($sort == '-content_'.$locale) {
+                        $query = $query->orderBy('content_'.$locale, 'desc');
+                    }
                 }
                 if ($sort == 'updated_at') {
                     $query = $query->orderBy('updated_at');
@@ -66,7 +118,6 @@ trait PageTrait
 
     public static function createAttributes(array $attributes = [])
     {
-        $attributes['slug'] = str_slug($attributes['title']);
         $page = self::create($attributes);
 
         $page = self::updateAttributesById($attributes, $page->id);
@@ -88,7 +139,9 @@ trait PageTrait
 
     public static function updateAttributesById(array $attributes = [], int $id)
     {
-        $attributes['slug'] = str_slug($attributes['title']).'-'.$id;
+        foreach (config('cms.locales') as $locale => $localeName) {
+            $attributes['slug_'.$locale] = str_slug($attributes['title_'.$locale]).'-'.$id;
+        }
         $page = self::updateById($attributes, $id);
 
         // delete image

@@ -23,10 +23,15 @@ class UpdateRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'title' => ['required'],
-            'image.*' => ['image'],
-            'gallery.*' => ['image'],
-        ];
+        $rules = [];
+
+        foreach (config('cms.locales') as $locale => $localeName) {
+            $rules['title_'.$locale] = ['required'];
+        }
+
+        $rules['image.*'] = ['image'];
+        $rules['gallery.*'] = ['image'];
+
+        return $rules;
     }
 }

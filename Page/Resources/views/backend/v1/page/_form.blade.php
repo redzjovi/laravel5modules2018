@@ -1,34 +1,45 @@
 {!! csrf_field() !!}
+<div>
+    <b-card no-body>
+        <b-tabs card>
+            @foreach (config('cms.locales') as $locale => $localeName)
+                <b-tab>
+                    <template slot="title">{{ $locale }}</template>
+                    <div class="form-group row">
+                        <label class="col-sm-2" for="title_{{ $locale }}">@lang('cms::cms.title') *</label>
+                        <div class="col-sm-10">
+                            <input class="form-control form-control-sm {{ $errors->has('title_'.$locale) ? 'is-invalid ' : '' }}" id="title_{{ $locale }}" name="title_{{ $locale }}" required type="text" value="{{ old('title_'.$locale, $model->{'title_'.$locale}) }}" />
+
+                            @if ($errors->has('title_'.$locale))
+                                <span class="invalid-feedback">{{ $errors->first('title_'.$locale) }}</span>
+                            @endif
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2" for="slug_{{ $locale }}">@lang('cms::cms.slug')</label>
+                        <div class="col-sm-10">
+                            <input class="form-control form-control-sm" id="slug_{{ $locale }}" readonly type="text" value="{{ old('slug_'.$locale, $model->{'slug_'.$locale}) }}" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2" for="excerpt_{{ $locale }}">@lang('cms::cms.excerpt')</label>
+                        <div class="col-sm-10">
+                            <textarea class="form-control form-control-sm" id="excerpt_{{ $locale }}" name="excerpt_{{ $locale }}">{{ old('excerpt_'.$locale, $model->{'excerpt_'.$locale}) }}</textarea>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2" for="content_{{ $locale }}">@lang('cms::cms.content')</label>
+                        <div class="col-sm-10">
+                            <textarea class="form-control form-control-sm" id="content_{{ $locale }}" name="content_{{ $locale }}">{{ old('content_'.$locale, $model->{'content_'.$locale}) }}</textarea>
+                        </div>
+                    </div>
+                </b-tab>
+            @endforeach
+        </b-tabs>
+    </b-card>
+</div>
 <div class="card">
     <div class="card-body">
-        <div class="form-group row">
-            <label class="col-sm-2" for="title">@lang('cms::cms.title') *</label>
-            <div class="col-sm-10">
-                <input class="form-control form-control-sm" id="title" name="title" required type="text" value="{{ old('title', $model->title) }}" />
-
-                @if ($errors->has('title'))
-                    <span class="invalid-feedback">{{ $errors->first('title') }}</span>
-                @endif
-            </div>
-        </div>
-        <div class="form-group row">
-            <label class="col-sm-2" for="slug">@lang('cms::cms.slug')</label>
-            <div class="col-sm-10">
-                <input class="form-control form-control-sm" readonly type="text" value="{{ $model->slug }}" />
-            </div>
-        </div>
-        <div class="form-group row">
-            <label class="col-sm-2" for="excerpt">@lang('cms::cms.excerpt')</label>
-            <div class="col-sm-10">
-                <textarea class="form-control form-control-sm" name="excerpt">{{ $model->excerpt }}</textarea>
-            </div>
-        </div>
-        <div class="form-group row">
-            <label class="col-sm-2" for="content">@lang('cms::cms.content')</label>
-            <div class="col-sm-10">
-                <textarea class="form-control form-control-sm" name="content">{{ $model->content }}</textarea>
-            </div>
-        </div>
         <div class="form-group row">
             <label class="col-sm-2" for="content">@lang('cms::cms.image')</label>
             <div class="col-sm-10">

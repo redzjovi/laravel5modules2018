@@ -118,19 +118,23 @@ class PageController extends \Modules\Cms\Http\Controllers\Controller
     {
         $csv = \League\Csv\Writer::createFromFileObject(new \SplTempFileObject());
 
-        $columns[] = trans('cms::cms.title');
-        $columns[] = trans('cms::cms.slug');
-        $columns[] = trans('cms::cms.excerpt');
-        $columns[] = trans('cms::cms.content');
+        foreach (config('cms.locales') as $locale => $locales) {
+            $columns[] = trans('cms::cms.title').' '.$locale;
+            $columns[] = trans('cms::cms.slug').' '.$locale;
+            $columns[] = trans('cms::cms.excerpt').' '.$locale;
+            $columns[] = trans('cms::cms.content').' '.$locale;
+        }
         $csv->insertOne($columns);
 
         $pages = Page::getPages($request->query());
         $pages->each(function ($page) use ($csv) {
             $columns = [];
-            $columns[] = $page->title;
-            $columns[] = $page->slug;
-            $columns[] = $page->excerpt;
-            $columns[] = $page->content;
+            foreach (config('cms.locales') as $locale => $locales) {
+                $columns[] = $page->{'title_'.$locale};
+                $columns[] = $page->{'slug_'.$locale};
+                $columns[] = $page->{'excerpt_'.$locale};
+                $columns[] = $page->{'content_'.$locale};
+            }
             $csv->insertOne($columns);
         });
 

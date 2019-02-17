@@ -2,7 +2,7 @@
 
 namespace Modules\Page\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use Modules\Cms\Models\Model;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
 
 class Page extends Model implements HasMedia
@@ -12,23 +12,25 @@ class Page extends Model implements HasMedia
     use \Modules\Page\Traits\PageTrait;
     use \Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 
-    protected $fillable = [
-        'title',
-        'slug',
-        'excerpt',
-        'content',
-    ];
-
-    protected $sortable = [
-        'id',
-        'title',
-        'slug',
-        'excerpt',
-        'content',
-
-        'created_at',
-        'updated_at',
-    ];
-
     protected $table = 'page';
+
+    public function getContentAttribute()
+    {
+        return $this->{'content_'.config('app.locale')};
+    }
+
+    public function getExcerptAttribute()
+    {
+        return $this->{'excerpt_'.config('app.locale')};
+    }
+
+    public function getTitleAttribute()
+    {
+        return $this->{'title_'.config('app.locale')};
+    }
+
+    public function getSlugAttribute()
+    {
+        return $this->{'slug_'.config('app.locale')};
+    }
 }
