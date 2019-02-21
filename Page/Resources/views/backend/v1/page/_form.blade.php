@@ -30,7 +30,7 @@
                     <div class="form-group row">
                         <label class="col-sm-2" for="content_{{ $locale }}">@lang('cms::cms.content')</label>
                         <div class="col-sm-10">
-                            <textarea class="form-control form-control-sm" id="content_{{ $locale }}" name="content_{{ $locale }}">{{ old('content_'.$locale, $model->{'content_'.$locale}) }}</textarea>
+                            <textarea-tinymce id="content_{{ $locale }}" name="content_{{ $locale }}" value="{{ old('content_'.$locale, $model->{'content_'.$locale}) }}"></textarea-tinymce>
                         </div>
                     </div>
                 </b-tab>

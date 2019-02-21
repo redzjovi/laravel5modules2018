@@ -49,7 +49,8 @@ class MediumServiceProvider extends ServiceProvider
             __DIR__.'/../Config/config.php' => config_path('medium.php'),
         ], 'config');
         $this->mergeConfigFrom(
-            __DIR__.'/../Config/config.php', 'medium'
+            __DIR__.'/../Config/config.php',
+            'medium'
         );
     }
 
@@ -66,7 +67,7 @@ class MediumServiceProvider extends ServiceProvider
 
         $this->publishes([
             $sourcePath => $viewPath
-        ],'views');
+        ], 'views');
 
         $this->loadViewsFrom(array_merge(array_map(function ($path) {
             return $path . '/modules/medium';
@@ -91,7 +92,7 @@ class MediumServiceProvider extends ServiceProvider
 
     /**
      * Register an additional directory of factories.
-     * 
+     *
      * @return void
      */
     public function registerFactories()

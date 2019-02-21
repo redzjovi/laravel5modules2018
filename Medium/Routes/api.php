@@ -13,6 +13,4 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/medium', function (Request $request) {
-    return $request->user();
-});
+Route::resource('v1/medium/tinymce/image', 'Api\V1\Medium\Tinymce\ImageController', ['as' => 'api.v1.medium.tinymce'])->only(['store']);

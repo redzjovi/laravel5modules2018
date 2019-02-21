@@ -11,6 +11,6 @@
 |
 */
 
-Route::prefix('medium')->group(function() {
+Route::prefix('medium')->group(function () {
     Route::get('/', 'MediumController@index');
 });
