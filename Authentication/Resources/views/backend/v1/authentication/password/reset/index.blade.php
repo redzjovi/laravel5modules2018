@@ -69,7 +69,3 @@
         </div>
     </div>
 @endsection
-
-@push('scripts')
-    {!! JsValidator::formRequest('\Modules\Authentication\Http\Requests\Backend\V1\Authentication\Password\Reset\UpdateRequest', '#form_reset') !!}
-@endpush

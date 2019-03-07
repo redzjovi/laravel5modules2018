@@ -16,7 +16,3 @@
         @include('role::backend/v1/role/_form')
     </form>
 @endsection
-
-@push('scripts')
-    {!! JsValidator::formRequest('\Modules\Role\Http\Requests\Backend\V1\Role\StoreRequest', '#form_role') !!}
-@endpush

@@ -16,7 +16,3 @@
         @include('user::backend/v1/user/_form')
     </form>
 @endsection
-
-@push('scripts')
-    {!! JsValidator::formRequest('\Modules\User\Http\Requests\Backend\V1\User\StoreRequest', '#form_user') !!}
-@endpush

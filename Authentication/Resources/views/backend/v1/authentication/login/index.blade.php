@@ -58,7 +58,3 @@
         </div>
     </div>
 @endsection
-
-@push('scripts')
-    {!! JsValidator::formRequest('\Modules\Authentication\Http\Requests\Api\V1\Authentication\Login\StoreRequest', '#form_login') !!}
-@endpush

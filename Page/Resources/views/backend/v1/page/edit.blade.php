@@ -19,7 +19,3 @@
         @include('page::backend/v1/page/_form')
     </form>
 @endsection
-
-@push('scripts')
-    {!! JsValidator::formRequest('\Modules\Page\Http\Requests\Api\V1\Page\UpdateRequest', '#form_page') !!}
-@endpush

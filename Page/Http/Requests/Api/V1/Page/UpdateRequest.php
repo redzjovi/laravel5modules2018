@@ -25,10 +25,6 @@ class UpdateRequest extends FormRequest
     {
         $rules = [];
 
-        foreach (config('cms.locales') as $locale => $localeName) {
-            $rules['title_'.$locale] = ['required'];
-        }
-
         $rules['image.*'] = ['image'];
         $rules['gallery.*'] = ['image'];
 

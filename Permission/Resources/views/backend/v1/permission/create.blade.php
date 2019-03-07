@@ -16,7 +16,3 @@
         @include('permission::backend/v1/permission/_form')
     </form>
 @endsection
-
-@push('scripts')
-    {!! JsValidator::formRequest('\Modules\Permission\Http\Requests\Backend\V1\Permission\StoreRequest', '#form_permission') !!}
-@endpush

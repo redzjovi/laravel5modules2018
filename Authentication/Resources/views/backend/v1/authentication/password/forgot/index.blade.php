@@ -45,7 +45,3 @@
         </div>
     </div>
 @endsection
-
-@push('scripts')
-    {!! JsValidator::formRequest('\Modules\Authentication\Http\Requests\Api\V1\Authentication\Password\Forgot\StoreRequest', '#form_forgot') !!}
-@endpush

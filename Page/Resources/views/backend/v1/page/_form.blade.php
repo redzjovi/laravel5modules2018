@@ -6,9 +6,9 @@
                 <b-tab>
                     <template slot="title">{{ $locale }}</template>
                     <div class="form-group row">
-                        <label class="col-sm-2" for="title_{{ $locale }}">@lang('cms::cms.title') *</label>
+                        <label class="col-sm-2" for="title_{{ $locale }}">@lang('cms::cms.title')</label>
                         <div class="col-sm-10">
-                            <input class="form-control form-control-sm {{ $errors->has('title_'.$locale) ? 'is-invalid ' : '' }}" id="title_{{ $locale }}" name="title_{{ $locale }}" required type="text" value="{{ old('title_'.$locale, $model->{'title_'.$locale}) }}" />
+                            <input class="form-control form-control-sm {{ $errors->has('title_'.$locale) ? 'is-invalid ' : '' }}" id="title_{{ $locale }}" name="title_{{ $locale }}" type="text" value="{{ old('title_'.$locale, $model->{'title_'.$locale}) }}" />
 
                             @if ($errors->has('title_'.$locale))
                                 <span class="invalid-feedback">{{ $errors->first('title_'.$locale) }}</span>
