@@ -25,7 +25,7 @@ class ForgotController extends Controller
      */
     public function store(\Modules\Authentication\Http\Requests\Api\V1\Authentication\Password\Forgot\StoreRequest $request)
     {
-        $user = User::findByField('email', $request->input('email'));
+        $user = User::findModelByField('email', $request->input('email'));
         $user = User::updateVerificationCodeById($user->id);
         $user->notify(new \Modules\Authentication\Notifications\PasswordResetLink($user));
 

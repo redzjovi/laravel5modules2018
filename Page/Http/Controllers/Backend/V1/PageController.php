@@ -97,7 +97,7 @@ class PageController extends \Modules\Cms\Http\Controllers\Controller
             if ($action == 'actionDelete') {
                 if ($ids = $request->id) {
                     foreach ($ids as $id) {
-                        Page::deleteModelById($id);
+                        Page::deleteModel($id);
                     }
                     flash(trans('cms::cms.deleted').' ('.count($ids).')')->important()->success();
                 }
@@ -109,7 +109,7 @@ class PageController extends \Modules\Cms\Http\Controllers\Controller
 
     public function delete(Page $page)
     {
-        Page::deleteModelById($page->id);
+        Page::deleteModel($page->id);
         flash(trans('cms::cms.deleted'))->important()->success();
         return redirect()->back();
     }

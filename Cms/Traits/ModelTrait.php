@@ -8,7 +8,7 @@ trait ModelTrait
      * @param array $attributes
      * @return object $model
      */
-    public static function create(array $attributes = [])
+    public static function createModel(array $attributes = [])
     {
         $model = new self;
         $model->fill($attributes)->save();
@@ -19,27 +19,47 @@ trait ModelTrait
      * @param int $id
      * @return int count
      */
-    public static function deleteModelById(int $id)
+    public static function deleteModel(int $id)
     {
         return self::destroy($id);
     }
 
-    public static function findById(int $id, array $columns = ['*'])
+    /**
+     * @param int $id
+     * @param array $columns
+     * @return object
+     */
+    public static function findModel(int $id, array $columns = ['*'])
     {
         return self::find($id, $columns);
     }
 
-    public static function findOrFailById(int $id, array $columns = ['*'])
+    /**
+     * @param int $id
+     * @param array $columns
+     * @return object
+     */
+    public static function findOrFailModel(int $id, array $columns = ['*'])
     {
         return self::findOrFail($id, $columns);
     }
 
-    public static function findByField(string $field, $value)
+    /**
+     * @param string $field
+     * @param [type] $value [description]
+     * @return object
+     */
+    public static function findModelByField(string $field, $value)
     {
         return self::where($field, $value)->first();
     }
 
-    public static function updateById(array $attributes, int $id)
+    /**
+     * @param array $attributes
+     * @param int $id
+     * @return object $model
+     */
+    public static function updateModelById(array $attributes, int $id)
     {
         $model = self::find($id);
         $model->fill($attributes)->save();

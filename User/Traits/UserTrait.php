@@ -59,7 +59,7 @@ trait UserTrait
 
     public static function deleteUserById(int $id)
     {
-        return self::deleteModelById($id);
+        return self::deleteModel($id);
     }
 
     public static function getUserByEmail(string $email)
@@ -99,12 +99,12 @@ trait UserTrait
     {
         $attributes['password'] = $password;
         $attributes['verification_code'] = rand(111111, 999999);
-        return self::updateById($attributes, $id);
+        return self::updateModelById($attributes, $id);
     }
 
     public static function createUser(array $parameters)
     {
-        $user = self::create($parameters);
+        $user = self::createModel($parameters);
 
         if (isset($parameters['role_name'])) {
             if (auth()->user()->can('modules.user.backend.v1.user.role.*')) {
@@ -117,7 +117,7 @@ trait UserTrait
 
     public static function updateUserById(array $parameters, int $id)
     {
-        $user = self::updateById($parameters, $id);
+        $user = self::updateModelById($parameters, $id);
 
         if (isset($parameters['role_name'])) {
             if (auth()->user()->can('modules.user.backend.v1.user.role.*')) {
@@ -131,6 +131,6 @@ trait UserTrait
     public static function updateVerificationCodeById(int $id)
     {
         $attributes['verification_code'] = rand(111111, 999999);
-        return self::updateById($attributes, $id);
+        return self::updateModelById($attributes, $id);
     }
 }

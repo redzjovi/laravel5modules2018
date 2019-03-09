@@ -118,7 +118,7 @@ trait PageTrait
 
     public static function createAttributes(array $attributes = [])
     {
-        $page = self::create($attributes);
+        $page = self::createModel($attributes);
 
         $page = self::updateAttributesById($attributes, $page->id);
         return $page;
@@ -142,7 +142,7 @@ trait PageTrait
         foreach (config('cms.locales') as $locale => $localeName) {
             $attributes['slug_'.$locale] = str_slug($attributes['title_'.$locale]).'-'.$id;
         }
-        $page = self::updateById($attributes, $id);
+        $page = self::updateModelById($attributes, $id);
 
         // delete image
         $media = $page->getMedia('page_image');
