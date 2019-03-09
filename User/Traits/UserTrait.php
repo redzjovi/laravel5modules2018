@@ -6,6 +6,9 @@ trait UserTrait
 {
     public function scopeSearch($query, $parameters)
     {
+        if (isset($parameters['id'])) {
+            $query = $query->where('id', $parameters['id']);
+        }
         if (isset($parameters['name'])) {
             $query = $query->where('name', 'like', '%'.$parameters['name'].'%');
         }
@@ -54,6 +57,11 @@ trait UserTrait
         return $query;
     }
 
+    public static function deleteUserById(int $id)
+    {
+        return self::deleteModelById($id);
+    }
+
     public static function getUserByEmail(string $email)
     {
         return self::where('email', $email)->first();
@@ -92,6 +100,32 @@ trait UserTrait
         $attributes['password'] = $password;
         $attributes['verification_code'] = rand(111111, 999999);
         return self::updateById($attributes, $id);
+    }
+
+    public static function createUser(array $parameters)
+    {
+        $user = self::create($parameters);
+
+        if (isset($parameters['role_name'])) {
+            if (auth()->user()->can('modules.user.backend.v1.user.role.*')) {
+                $user->syncRoles($parameters['role_name']);
+            }
+        }
+
+        return $user;
+    }
+
+    public static function updateUserById(array $parameters, int $id)
+    {
+        $user = self::updateById($parameters, $id);
+
+        if (isset($parameters['role_name'])) {
+            if (auth()->user()->can('modules.user.backend.v1.user.role.*')) {
+                $user->syncRoles($parameters['role_name']);
+            }
+        }
+
+        return $user;
     }
 
     public static function updateVerificationCodeById(int $id)

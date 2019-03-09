@@ -1,12 +1,12 @@
 <?php
 
-namespace Modules\User\Http\Requests\Backend\V1\User;
+namespace Modules\User\Http\Requests\Api\V1\User;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 use Modules\User\Models\User;
 
-class StoreRequest extends FormRequest
+class UpdateRequest extends FormRequest
 {
     protected $model;
 
@@ -36,9 +36,8 @@ class StoreRequest extends FormRequest
             'name' => ['required'],
             'email' => [
                 'required', 'email',
-                Rule::unique($this->model->getTable()),
+                Rule::unique($this->model->getTable())->ignore(request()->route()->parameter('user')),
             ],
-            'password' => ['required'],
         ];
     }
 }

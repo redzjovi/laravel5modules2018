@@ -5,8 +5,8 @@ namespace Modules\User\Http\Controllers\Backend\V1;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Modules\Role\Models\Role;
-use Modules\User\Http\Requests\Backend\V1\User\StoreRequest;
-use Modules\User\Http\Requests\Backend\V1\User\UpdateRequest;
+use Modules\User\Http\Requests\Api\V1\User\StoreRequest;
+use Modules\User\Http\Requests\Api\V1\User\UpdateRequest;
 use Modules\User\Models\User;
 
 class UserController extends \Modules\Cms\Http\Controllers\Controller
@@ -48,12 +48,7 @@ class UserController extends \Modules\Cms\Http\Controllers\Controller
      */
     public function store(StoreRequest $request)
     {
-        $model = User::create($request->input());
-
-        if (auth()->user()->can('modules.user.backend.v1.user.role.*')) {
-            $model->syncRoles($request->input('role_name'));
-        }
-
+        User::createUser($request->all());
         flash(trans('cms::cms.stored'))->important()->success();
         return redirect()->back();
     }
@@ -86,13 +81,7 @@ class UserController extends \Modules\Cms\Http\Controllers\Controller
      */
     public function update(UpdateRequest $request, User $user)
     {
-        ! $request->input('password') ? $request->request->remove('password') : '';
-        $model = User::updateById($request->input(), $user->id);
-
-        if (auth()->user()->can('modules.user.backend.v1.user.role.*')) {
-            $model->syncRoles($request->input('role_name'));
-        }
-
+        User::updateUserById($request->all(), $user->id);
         flash(trans('cms::cms.updated'))->important()->success();
         return redirect()->back();
     }
@@ -113,7 +102,7 @@ class UserController extends \Modules\Cms\Http\Controllers\Controller
             if ($action == 'actionDelete') {
                 if ($ids = $request->id) {
                     foreach ($ids as $id) {
-                        User::deleteById($id);
+                        User::deleteUserById($id);
                     }
                     flash(trans('cms::cms.deleted').' ('.count($ids).')')->important()->success();
                 }
@@ -125,7 +114,7 @@ class UserController extends \Modules\Cms\Http\Controllers\Controller
 
     public function delete(User $user)
     {
-        User::deleteById($user->id);
+        User::deleteUserById($user->id);
         flash(trans('cms::cms.deleted'))->important()->success();
         return redirect()->back();
     }

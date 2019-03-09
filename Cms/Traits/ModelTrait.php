@@ -4,6 +4,10 @@ namespace Modules\Cms\Traits;
 
 trait ModelTrait
 {
+    /**
+     * @param array $attributes
+     * @return object $model
+     */
     public static function create(array $attributes = [])
     {
         $model = new self;
@@ -11,7 +15,11 @@ trait ModelTrait
         return $model;
     }
 
-    public static function deleteById(int $id)
+    /**
+     * @param int $id
+     * @return int count
+     */
+    public static function deleteModelById(int $id)
     {
         return self::destroy($id);
     }
