@@ -116,11 +116,11 @@ trait PageTrait
         return $query;
     }
 
-    public static function createAttributes(array $attributes = [])
+    public static function createPage(array $attributes = [])
     {
         $page = self::createModel($attributes);
 
-        $page = self::updateAttributesById($attributes, $page->id);
+        $page = self::updatePageById($attributes, $page->id);
         return $page;
     }
 
@@ -137,7 +137,7 @@ trait PageTrait
         return $query;
     }
 
-    public static function updateAttributesById(array $attributes = [], int $id)
+    public static function updatePageById(array $attributes = [], int $id)
     {
         foreach (config('cms.locales') as $locale => $localeName) {
             $attributes['slug_'.$locale] = str_slug($attributes['title_'.$locale]).'-'.$id;

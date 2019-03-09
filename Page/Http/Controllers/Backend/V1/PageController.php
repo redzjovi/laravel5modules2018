@@ -44,7 +44,7 @@ class PageController extends \Modules\Cms\Http\Controllers\Controller
      */
     public function store(StoreRequest $request)
     {
-        Page::createAttributes($request->all());
+        Page::createPage($request->all());
         flash(trans('cms::cms.stored'))->important()->success();
         return redirect()->back();
     }
@@ -76,7 +76,7 @@ class PageController extends \Modules\Cms\Http\Controllers\Controller
      */
     public function update(UpdateRequest $request, Page $page)
     {
-        Page::updateAttributesById($request->all(), $page->id);
+        Page::updatePageById($request->all(), $page->id);
         flash(trans('cms::cms.updated'))->important()->success();
         return redirect()->back();
     }

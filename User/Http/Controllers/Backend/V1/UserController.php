@@ -102,7 +102,7 @@ class UserController extends \Modules\Cms\Http\Controllers\Controller
             if ($action == 'actionDelete') {
                 if ($ids = $request->id) {
                     foreach ($ids as $id) {
-                        User::deleteUserById($id);
+                        User::deleteModel($id);
                     }
                     flash(trans('cms::cms.deleted').' ('.count($ids).')')->important()->success();
                 }
@@ -114,7 +114,7 @@ class UserController extends \Modules\Cms\Http\Controllers\Controller
 
     public function delete(User $user)
     {
-        User::deleteUserById($user->id);
+        User::deleteModel($user->id);
         flash(trans('cms::cms.deleted'))->important()->success();
         return redirect()->back();
     }

@@ -57,11 +57,6 @@ trait UserTrait
         return $query;
     }
 
-    public static function deleteUserById(int $id)
-    {
-        return self::deleteModel($id);
-    }
-
     public static function getUserByEmail(string $email)
     {
         return self::where('email', $email)->first();

@@ -79,7 +79,7 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        $data['count'] = User::deleteUserById($user->id);
+        $data['count'] = User::deleteModel($user->id);
         return response()->json($data);
     }
 }
