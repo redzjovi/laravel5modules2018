@@ -2,7 +2,9 @@
 
 namespace Modules\User\Models;
 
-class User extends \Illuminate\Foundation\Auth\User
+use Tymon\JWTAuth\Contracts\JWTSubject;
+
+class User extends \Illuminate\Foundation\Auth\User implements JWTSubject
 {
     use \Illuminate\Notifications\Notifiable;
     use \Modules\Cms\Traits\ModelTrait;
@@ -31,6 +33,26 @@ class User extends \Illuminate\Foundation\Auth\User
     ];
 
     protected $table = 'users';
+
+    /**
+     * Return a key value array, containing any custom claims to be added to the JWT.
+     *
+     * @return array
+     */
+    public function getJWTCustomClaims()
+    {
+        return [];
+    }
+
+    /**
+     * Get the identifier that will be stored in the subject claim of the JWT.
+     *
+     * @return mixed
+     */
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
 
     public function getRoleNameAttribute()
     {
