@@ -20,14 +20,17 @@ class LoginController extends Controller
 
     public function store(\Modules\Authentication\Http\Requests\Api\V1\Authentication\Login\StoreRequest $request)
     {
-        if (\Auth::attempt($request->only('email', 'password'), $request->has('remember'))) {
-            if ($request->query('url')) {
-                return redirect($request->query('url'));
-            }
+        $credentials = $request->only('email', 'password');
+        $remember = $request->has('remember');
 
-            return redirect()->route('modules.user.backend.v1.user.index');
-        } else {
+        if (! \Auth::attempt($credentials, $remember)) {
             return redirect()->back()->withErrors(['email' => [trans('auth.failed')]]);
         }
+
+        if ($request->query('url')) {
+            return redirect($request->query('url'));
+        }
+
+        return redirect()->route('modules.user.backend.v1.user.index');
     }
 }

@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "728edd93-5d22-47ed-9fdb-1e5589e680a9",
+		"_postman_id": "a361cc5d-ad9a-40b1-b80a-ea2bd7e1f0e3",
 		"name": "laravel5skeleton2018",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -9,10 +9,251 @@
 			"name": "v1",
 			"item": [
 				{
+					"name": "authentication",
+					"item": [
+						{
+							"name": "password",
+							"item": [
+								{
+									"name": "forgot",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "ae2d3819-5101-4447-b2d4-93e21f577aeb",
+												"exec": [
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/x-www-form-urlencoded"
+											}
+										],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"key": "email",
+													"value": "superadmin@mailinator.com",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{laravel5skeleton2018__APP_URL}}/api/v1/authentication/password/forgot",
+											"host": [
+												"{{laravel5skeleton2018__APP_URL}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"authentication",
+												"password",
+												"forgot"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "reset",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "ae2d3819-5101-4447-b2d4-93e21f577aeb",
+												"exec": [
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/x-www-form-urlencoded"
+											}
+										],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"key": "email",
+													"value": "superadmin@mailinator.com",
+													"type": "text"
+												},
+												{
+													"key": "password",
+													"value": "superadmin@mailinator.com",
+													"type": "text"
+												},
+												{
+													"key": "password_confirmation",
+													"value": "superadmin@mailinator.com",
+													"type": "text"
+												},
+												{
+													"key": "verification_code",
+													"value": "517148",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{laravel5skeleton2018__APP_URL}}/api/v1/authentication/password/reset",
+											"host": [
+												"{{laravel5skeleton2018__APP_URL}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"authentication",
+												"password",
+												"reset"
+											]
+										}
+									},
+									"response": []
+								}
+							],
+							"_postman_isSubFolder": true
+						},
+						{
+							"name": "login",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "ae2d3819-5101-4447-b2d4-93e21f577aeb",
+										"exec": [
+											"if (responseCode.code === 200) {",
+											"    var jsonData = JSON.parse(responseBody);",
+											"    postman.setEnvironmentVariable('laravel5skeleton2018__ACCESS_TOKEN', jsonData.access_token);",
+											"} else {",
+											"    postman.setEnvironmentVariable('laravel5skeleton2018__ACCESS_TOKEN', '');",
+											"}"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/x-www-form-urlencoded"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "email",
+											"value": "superadmin@mailinator.com",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "superadmin@mailinator.com",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{laravel5skeleton2018__APP_URL}}/api/v1/authentication/login",
+									"host": [
+										"{{laravel5skeleton2018__APP_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"authentication",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "logout",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{laravel5skeleton2018__ACCESS_TOKEN}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/x-www-form-urlencoded"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "email",
+											"value": "superadmin@mailinator.com",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "superadmin@mailinator.com",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{laravel5skeleton2018__APP_URL}}/api/v1/authentication/logout",
+									"host": [
+										"{{laravel5skeleton2018__APP_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"authentication",
+										"logout"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
 					"name": "user",
 					"item": [
 						{
-							"name": "api/v1/user",
+							"name": "user",
 							"request": {
 								"method": "GET",
 								"header": [
@@ -21,9 +262,12 @@
 										"value": "application/json"
 									}
 								],
-								"body": {},
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
 								"url": {
-									"raw": "{{laravel5skeleton2018__APP_URL}}/api/v1/user?",
+									"raw": "{{laravel5skeleton2018__APP_URL}}/api/v1/user",
 									"host": [
 										"{{laravel5skeleton2018__APP_URL}}"
 									],
@@ -76,7 +320,7 @@
 							"response": []
 						},
 						{
-							"name": "api/v1/user",
+							"name": "user",
 							"request": {
 								"method": "POST",
 								"header": [
@@ -138,7 +382,7 @@
 							"response": []
 						},
 						{
-							"name": "api/v1/user/:id",
+							"name": "user/:id",
 							"request": {
 								"method": "GET",
 								"header": [
@@ -152,31 +396,8 @@
 									}
 								],
 								"body": {
-									"mode": "urlencoded",
-									"urlencoded": [
-										{
-											"key": "name",
-											"value": "User1",
-											"type": "text"
-										},
-										{
-											"key": "email",
-											"value": "user1@mailinator.com",
-											"type": "text"
-										},
-										{
-											"key": "password",
-											"value": "password",
-											"type": "text"
-										},
-										{
-											"key": "role_name",
-											"value": "Super Admin",
-											"description": "roles.name",
-											"type": "text",
-											"disabled": true
-										}
-									]
+									"mode": "raw",
+									"raw": ""
 								},
 								"url": {
 									"raw": "{{laravel5skeleton2018__APP_URL}}/api/v1/user/:id?",
@@ -207,7 +428,7 @@
 							"response": []
 						},
 						{
-							"name": "api/v1/user/:id",
+							"name": "user/:id",
 							"request": {
 								"method": "PUT",
 								"header": [
@@ -277,7 +498,7 @@
 							"response": []
 						},
 						{
-							"name": "api/v1/user/:id",
+							"name": "user/:id",
 							"request": {
 								"method": "DELETE",
 								"header": [
@@ -290,7 +511,10 @@
 										"value": "application/x-www-form-urlencoded"
 									}
 								],
-								"body": {},
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
 								"url": {
 									"raw": "{{laravel5skeleton2018__APP_URL}}/api/v1/user/:id",
 									"host": [

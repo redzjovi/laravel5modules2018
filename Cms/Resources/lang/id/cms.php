@@ -250,6 +250,7 @@ return [
     'submit' => 'Submit',
     'subtotal' => 'Subtotal',
     'success' => 'Berhasil',
+    'successfully_logged_out' => 'Berhasil keluar',
     'sync' => 'Sinkronisasi',
     'tag' => 'Tag',
     'tags' => 'Tag',

@@ -250,6 +250,7 @@ return [
     'submit' => 'Submit',
     'subtotal' => 'Subtotal',
     'success' => 'Success',
+    'successfully_logged_out' => 'Successfully logged out',
     'sync' => 'Sync',
     'tag' => 'Tag',
     'tags' => 'Tags',

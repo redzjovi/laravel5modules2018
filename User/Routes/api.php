@@ -13,6 +13,6 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::group(['middleware' => []], function () {
-    Route::resource('v1/user', 'Api\V1\UserController', ['as' => 'api'])->only(['index', 'store', 'show', 'update', 'destroy']);
+Route::group(['middleware' => ['auth:api']], function () {
+    Route::resource('v1/user', 'Api\V1\UserController', ['as' => 'api.v1'])->only(['index', 'store', 'show', 'update', 'destroy']);
 });
