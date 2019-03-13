@@ -13,4 +13,4 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::resource('v1/medium/tinymce/image', 'Api\V1\Medium\Tinymce\ImageController', ['as' => 'api.v1.medium.tinymce'])->only(['store']);
+Route::post('v1/medium/tinymce/image')->name('api.v1.medium.tinymce.image.store')->uses('Api\V1\Medium\Tinymce\ImageController@store');

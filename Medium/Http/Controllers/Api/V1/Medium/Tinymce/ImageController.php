@@ -7,30 +7,28 @@ use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Modules\Medium\Http\Requests\Api\V1\Medium\Tinymce\Image\StoreRequest;
 
+/**
+ * @group Medium
+ * @bodyParam file file required File
+ */
 class ImageController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     * @return Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     * @return Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     * @param  Request $request
-     * @return Response
+     * Tinymce image
+     * @bodyParam file file required File
+     * @response {
+     *  "data": {
+     *      "location": "http://laravel5skeleton2018.docker/storage/tinymce/2019/03/12/20190312-070717--All"
+     *  }
+     * }
+     * @response 422 {
+     *  "errors": {
+     *      "file": [
+     *          "The file field is required."
+     *      ]
+     *  },
+     *  "message": "The file field is required."
+     * }
      */
     public function store(StoreRequest $request)
     {
@@ -44,42 +42,5 @@ class ImageController extends Controller
         $data['data']['location'] = $storage->url($url);
 
         return response()->json($data);
-    }
-
-    /**
-     * Show the specified resource.
-     * @return Response
-     */
-    public function show()
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     * @return Response
-     */
-    public function edit()
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     * @param  Request $request
-     * @return Response
-     */
-    public function update(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     * @return Response
-     */
-    public function destroy()
-    {
-        //
     }
 }

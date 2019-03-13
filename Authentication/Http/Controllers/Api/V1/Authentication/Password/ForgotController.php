@@ -7,30 +7,25 @@ use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Modules\User\Models\User;
 
+/**
+ * @group Authentication
+ */
 class ForgotController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     * @return Response
-     */
-    public function index()
-    {
-        return view('authentication::index');
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     * @return Response
-     */
-    public function create()
-    {
-        return view('authentication::create');
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     * @param  Request $request
-     * @return Response
+     * Forgot password
+     * @bodyParam email email required Email Example: superadmin@mailinator.com
+     * @response {
+     *  "message": "Success"
+     * }
+     * @response 422 {
+     *  "message": "The given data was invalid.",
+     *  "errors": {
+     *      "email": [
+     *          "The Email field is required."
+     *      ]
+     *  }
+     * }
      */
     public function store(\Modules\Authentication\Http\Requests\Api\V1\Authentication\Password\Forgot\StoreRequest $request)
     {
@@ -39,40 +34,5 @@ class ForgotController extends Controller
         $user->notify(new \Modules\Authentication\Notifications\PasswordResetLink($user));
 
         return response()->json(['message' => trans('cms::cms.success')]);
-    }
-
-    /**
-     * Show the specified resource.
-     * @return Response
-     */
-    public function show()
-    {
-        return view('authentication::show');
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     * @return Response
-     */
-    public function edit()
-    {
-        return view('authentication::edit');
-    }
-
-    /**
-     * Update the specified resource in storage.
-     * @param  Request $request
-     * @return Response
-     */
-    public function update(Request $request)
-    {
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     * @return Response
-     */
-    public function destroy()
-    {
     }
 }
