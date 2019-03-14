@@ -19,12 +19,8 @@ class UserDatabaseSeeder extends Seeder
 
         $users = [
             [
-                'name' => 'Admin', 'email' => 'admin@mailinator.com', 'password' => 'admin@mailinator.com',
-                'roles' => 'Admin',
-            ],
-            [
                 'name' => 'Super Admin', 'email' => 'superadmin@mailinator.com', 'password' => 'superadmin@mailinator.com',
-                'roles' => 'Super Admin',
+                'roles' => ['Super Admin'],
             ],
         ];
 

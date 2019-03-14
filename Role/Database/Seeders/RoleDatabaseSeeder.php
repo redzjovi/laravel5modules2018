@@ -23,8 +23,7 @@ class RoleDatabaseSeeder extends Seeder
 
         $permissions = Permission::all();
         $roles = [
-            ['name' => 'Admin', 'guard_name' => 'web'],
-            ['name' => 'Super Admin', 'guard_name' => 'web'],
+            ['name' => 'Super Admin'],
         ];
 
         foreach ($roles as $role) {

@@ -37,7 +37,6 @@ class UpdateRequest extends FormRequest
                 'required',
                 Rule::unique($this->model->getTable())->ignore(request()->route()->parameter('permission')),
             ],
-            'guard_name' => ['required'],
         ];
     }
 }

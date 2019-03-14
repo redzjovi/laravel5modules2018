@@ -33,8 +33,8 @@ class UpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'permission_id.*' => [
-                'exists:'.$this->permission->getTable().',id',
+            'permission_name.*' => [
+                'exists:'.$this->permission->getTable().',name',
             ],
         ];
     }

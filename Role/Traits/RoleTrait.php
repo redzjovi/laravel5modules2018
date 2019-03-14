@@ -9,9 +9,6 @@ trait RoleTrait
         if (isset($parameters['name'])) {
             $query = $query->where('name', 'like', '%'.$parameters['name'].'%');
         }
-        if (isset($parameters['guard_name'])) {
-            $query = $query->where('guard_name', $parameters['guard_name']);
-        }
 
 
         if (isset($parameters['sort'])) {
@@ -22,12 +19,6 @@ trait RoleTrait
                 }
                 if ($sort == '-name') {
                     $query = $query->orderBy('name', 'desc');
-                }
-                if ($sort == 'guard_name') {
-                    $query = $query->orderBy('guard_name');
-                }
-                if ($sort == '-guard_name') {
-                    $query = $query->orderBy('guard_name', 'desc');
                 }
                 if ($sort == 'updated_at') {
                     $query = $query->orderBy('updated_at');

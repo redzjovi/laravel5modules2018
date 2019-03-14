@@ -67,7 +67,7 @@ class PermissionController extends \Modules\Cms\Http\Controllers\Controller
     public function update(UpdateRequest $request, $id)
     {
         $role = Role::findOrFail($id);
-        $role->syncPermissions($request->input('permission_id'));
+        $role->syncPermissions($request->input('permission_name'));
         flash(trans('cms::cms.updated'))->important()->success();
         return redirect()->back();
     }

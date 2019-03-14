@@ -28,7 +28,6 @@
                             <tr>
                                 <th><input class="table_row_checkbox_all" type="checkbox" /></th>
                                 <th>{!! $model->sortablelink('name', trans('cms::cms.name')) !!}</th>
-                                <th>{!! $model->sortablelink('guard_name', trans('cms::cms.guard_name')) !!}</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -37,7 +36,6 @@
                                 <tr>
                                     <td><input {{ @in_array($role->id, old('id')) ? 'checked' : '' }} class="table_row_checkbox" name="id[]" type="checkbox" value="{{ $role->id }}" /></td>
                                     <td>{{ $role->name }}</td>
-                                    <td>{{ $role->guard_name }}</td>
                                     <td>
                                         <a href="{{ route('modules.role.backend.v1.role.edit', [$role->id] + request()->query()) }}"><i class="fas fa-edit"></i></a>
                                         <a class="text-danger" href="{{ route('modules.role.backend.v1.role.delete', $role->id) }}" onclick="return confirm('@lang('cms::cms.are_you_sure_to_delete_this_permanently')?')"><i class="fas fa-trash"></i></a>
@@ -54,7 +52,7 @@
                         </tbody>
                         <tfoot>
                             <tr>
-                                <th colspan="4">
+                                <th colspan="3">
                                     <i class="text-danger">{{ $errors->first('id') }}</i>
                                     <div class="input-group">
                                         <select name="action" required>
@@ -70,7 +68,7 @@
                             </tr>
                             @if ($roles->hasPages())
                                 <tr>
-                                    <th colspan="4">{{ $roles->links('cms::vendor/pagination/bootstrap-4-custom') }}</th>
+                                    <th colspan="3">{{ $roles->links('cms::vendor/pagination/bootstrap-4-custom') }}</th>
                                 </tr>
                             @endif
                         </tfoot>

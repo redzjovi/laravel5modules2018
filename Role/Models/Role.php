@@ -9,13 +9,11 @@ class Role extends \Spatie\Permission\Models\Role
 
     protected $fillable = [
         'name',
-        'guard_name',
     ];
 
     protected $sortable = [
         'id',
         'name',
-        'guard_name',
         'created_at',
         'updated_at',
     ];

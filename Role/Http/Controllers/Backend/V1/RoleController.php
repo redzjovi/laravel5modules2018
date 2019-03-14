@@ -118,14 +118,12 @@ class RoleController extends \Modules\Cms\Http\Controllers\Controller
         $csv = \League\Csv\Writer::createFromFileObject(new \SplTempFileObject());
 
         $columns[] = trans('cms::cms.name');
-        $columns[] = trans('cms::cms.guard_name');
         $csv->insertOne($columns);
 
         $roles = Role::getRoles($request->query());
         $roles->each(function ($role) use ($csv) {
             $columns = [];
             $columns[] = $role->name;
-            $columns[] = $role->guard_name;
             $csv->insertOne($columns);
         });
 

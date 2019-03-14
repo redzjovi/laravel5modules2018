@@ -21,12 +21,13 @@ class PermissionDatabaseSeeder extends Seeder
         app()['cache']->forget('spatie.permission.cache');
 
         $permissions = [
-            ['name' => 'modules.page.backend.v1.page.*', 'guard_name' => 'web'],
-            ['name' => 'modules.permission.backend.v1.permission.*', 'guard_name' => 'web'],
-            ['name' => 'modules.role.backend.v1.role.*', 'guard_name' => 'web'],
-            ['name' => 'modules.role.backend.v1.role.permission.*', 'guard_name' => 'web'],
-            ['name' => 'modules.user.backend.v1.user.*', 'guard_name' => 'web'],
-            ['name' => 'modules.user.backend.v1.user.role.*', 'guard_name' => 'web'],
+            ['name' => 'api.v1.user.*'],
+            ['name' => 'modules.page.backend.v1.page.*'],
+            ['name' => 'modules.permission.backend.v1.permission.*'],
+            ['name' => 'modules.role.backend.v1.role.*'],
+            ['name' => 'modules.role.backend.v1.role.permission.*'],
+            ['name' => 'modules.user.backend.v1.user.*'],
+            ['name' => 'modules.user.backend.v1.user.role.*'],
         ];
 
         foreach ($permissions as $permission) {

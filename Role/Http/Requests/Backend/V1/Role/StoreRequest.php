@@ -37,7 +37,6 @@ class StoreRequest extends FormRequest
                 'required',
                 Rule::unique($this->model->getTable()),
             ],
-            'guard_name' => ['required'],
         ];
     }
 }

@@ -11,17 +11,6 @@
                         <input class="form-control form-control-sm" id="name" name="name" type="text" value="{{ request()->query('name') }}" />
                     </div>
                 </div>
-                <div class="form-group row">
-                    <label class="col-sm-2" for="guard_name">@lang('cms::cms.guard_name')</label>
-                    <div class="col-sm-10">
-                        <select class="form-control form-control-sm" id="guard_name" name="guard_name">
-                            <option></option>
-                            @foreach ($model->getGuardNameOptions() as $guardName => $guardNameDescription)
-                                <option {{ $guardName == request()->query('guard_name') ? 'selected' : '' }} value="{{ $guardName }}">{{ $guardNameDescription }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                </div>
             </div>
             <div class="card-footer">
                 <button class="btn btn-sm btn-success" type="submit">

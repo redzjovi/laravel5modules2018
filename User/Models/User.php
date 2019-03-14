@@ -19,8 +19,6 @@ class User extends \Illuminate\Foundation\Auth\User implements JWTSubject
         'verification_code',
     ];
 
-    protected $guard_name = 'web';
-
     protected $sortable = [
         'id',
         'name',

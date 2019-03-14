@@ -28,7 +28,6 @@
                             <tr>
                                 <th><input class="table_row_checkbox_all" type="checkbox" /></th>
                                 <th>{!! $model->sortablelink('name', trans('cms::cms.name')) !!}</th>
-                                <th>{!! $model->sortablelink('guard_name', trans('cms::cms.guard_name')) !!}</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -37,7 +36,6 @@
                                 <tr>
                                     <td><input {{ @in_array($permission->id, old('id')) ? 'checked' : '' }} class="table_row_checkbox" name="id[]" type="checkbox" value="{{ $permission->id }}" /></td>
                                     <td>{{ $permission->name }}</td>
-                                    <td>{{ $permission->guard_name }}</td>
                                     <td>
                                         <a href="{{ route('modules.permission.backend.v1.permission.edit', [$permission->id] + request()->query()) }}"><i class="fas fa-edit"></i></a>
                                         <a class="text-danger" href="{{ route('modules.permission.backend.v1.permission.delete', $permission->id) }}" onclick="return confirm('@lang('cms::cms.are_you_sure_to_delete_this_permanently')?')"><i class="fas fa-trash"></i></a>
@@ -51,7 +49,7 @@
                         </tbody>
                         <tfoot>
                             <tr>
-                                <th colspan="4">
+                                <th colspan="3">
                                     <i class="text-danger">{{ $errors->first('id') }}</i>
                                     <div class="input-group">
                                         <select name="action" required>
@@ -67,7 +65,7 @@
                             </tr>
                             @if ($permissions->hasPages())
                                 <tr>
-                                    <th colspan="4">{{ $permissions->links('cms::vendor/pagination/bootstrap-4-custom') }}</th>
+                                    <th colspan="3">{{ $permissions->links('cms::vendor/pagination/bootstrap-4-custom') }}</th>
                                 </tr>
                             @endif
                         </tfoot>

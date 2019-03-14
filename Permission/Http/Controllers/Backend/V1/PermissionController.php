@@ -121,14 +121,12 @@ class PermissionController extends \Modules\Cms\Http\Controllers\Controller
         $csv = \League\Csv\Writer::createFromFileObject(new \SplTempFileObject());
 
         $columns[] = trans('cms::cms.name');
-        $columns[] = trans('cms::cms.guard_name');
         $csv->insertOne($columns);
 
         $permissions = Permission::search(request()->query())->get();
         $permissions->each(function ($permission) use ($csv) {
             $columns = [];
             $columns[] = $permission->name;
-            $columns[] = $permission->guard_name;
             $csv->insertOne($columns);
         });
 
