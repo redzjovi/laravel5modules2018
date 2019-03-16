@@ -4,7 +4,7 @@ namespace Modules\Role\Traits;
 
 trait RoleTrait
 {
-    public function scopeSearch($query, $parameters)
+    public function scopeSearch($query, array $parameters)
     {
         if (isset($parameters['id'])) {
             $query = $query->where('id', $parameters['id']);
@@ -40,7 +40,7 @@ trait RoleTrait
         return $query;
     }
 
-    public static function getRoles($parameters)
+    public static function getRoles(array $parameters)
     {
         $query = self::query()->search($parameters);
 

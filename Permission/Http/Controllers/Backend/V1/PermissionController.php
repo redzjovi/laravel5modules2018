@@ -4,8 +4,8 @@ namespace Modules\Permission\Http\Controllers\Backend\V1;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Modules\Permission\Http\Requests\Backend\V1\Permission\StoreRequest;
-use Modules\Permission\Http\Requests\Backend\V1\Permission\UpdateRequest;
+use Modules\Permission\Http\Requests\Api\V1\Permission\StoreRequest;
+use Modules\Permission\Http\Requests\Api\V1\Permission\UpdateRequest;
 use Modules\Permission\Models\Permission;
 
 class PermissionController extends \Modules\Cms\Http\Controllers\Controller
@@ -21,9 +21,7 @@ class PermissionController extends \Modules\Cms\Http\Controllers\Controller
         $parameters = request()->query();
 
         $data['model'] = new Permission;
-        $data['permissions'] = Permission::search($parameters)
-            ->paginate((int) $parameters['per_page'])
-            ->appends($parameters);
+        $data['permissions'] = Permission::getPermissionsByParameters($parameters);
 
         return view('permission::backend/v1/permission/index', $data);
     }
@@ -46,7 +44,7 @@ class PermissionController extends \Modules\Cms\Http\Controllers\Controller
      */
     public function store(StoreRequest $request)
     {
-        Permission::create($request->input());
+        Permission::createModel($request->input());
         flash(trans('cms::cms.stored'))->important()->success();
         return redirect()->back();
     }
@@ -78,7 +76,7 @@ class PermissionController extends \Modules\Cms\Http\Controllers\Controller
      */
     public function update(UpdateRequest $request, Permission $permission)
     {
-        $permission->fill($request->input())->save();
+        Permission::updateModelById($request->input(), $permission->id);
         flash(trans('cms::cms.updated'))->important()->success();
         return redirect()->back();
     }
@@ -99,7 +97,7 @@ class PermissionController extends \Modules\Cms\Http\Controllers\Controller
             if ($action == 'actionDelete') {
                 if ($ids = $request->id) {
                     foreach ($ids as $id) {
-                        Permission::destroy($id);
+                        Permission::deleteModel($id);
                     }
                     flash(trans('cms::cms.deleted').' ('.count($ids).')')->important()->success();
                 }
@@ -111,7 +109,7 @@ class PermissionController extends \Modules\Cms\Http\Controllers\Controller
 
     public function delete(Permission $permission)
     {
-        $permission->delete();
+        Permission::deleteModel($permission->id);
         flash(trans('cms::cms.deleted'))->important()->success();
         return redirect()->back();
     }

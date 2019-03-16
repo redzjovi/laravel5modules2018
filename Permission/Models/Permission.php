@@ -4,6 +4,7 @@ namespace Modules\Permission\Models;
 
 class Permission extends \Spatie\Permission\Models\Permission
 {
+    use \Modules\Cms\Traits\ModelTrait;
     use \Modules\Cms\Traits\SortableTrait;
     use \Modules\Permission\Traits\PermissionTrait;
 

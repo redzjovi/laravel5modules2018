@@ -1,31 +1,30 @@
 <?php
 
-namespace Modules\Role\Http\Controllers\Api\V1;
+namespace Modules\Permission\Http\Controllers\Api\V1;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
-use Modules\Role\Http\Resources\Api\V1\RoleResource;
-use Modules\Role\Models\Role;
+use Modules\Permission\Http\Resources\Api\V1\PermissionResource;
+use Modules\Permission\Models\Permission;
 
 /**
- * @group Role
+ * @group Permission
  */
-class RoleController extends Controller
+class PermissionController extends Controller
 {
     /**
      * Index
      * @queryParam id Id (number)
      * @queryParam name Name
      * @queryParam sort Sort ie. sort=name,-name
-     * @queryParam with[] With ie. with[]=permissions
      * @queryParam per_page Per page (number)
      * @queryParam id Id
      * @response {
      *  "data": [
      *      {
      *          "id": 1,
-     *          "name": "Super Admin",
+     *          "name": "api.v1.user.*",
      *          "created_at": {
      *              "date": "2019-02-20 14:54:56.000000",
      *              "timezone_type": 3,
@@ -43,9 +42,9 @@ class RoleController extends Controller
     public function index(Request $request)
     {
         $parameters = $request->query();
-        $roles = Role::getRoles($parameters);
+        $permissions = Permission::getPermissionsByParameters($parameters);
 
-        return RoleResource::collection($roles);
+        return PermissionResource::collection($permissions);
     }
 
     /**
@@ -54,7 +53,7 @@ class RoleController extends Controller
      * @response {
      *  "data": {
      *      "id": 2,
-     *      "name": "Role2",
+     *      "name": "Permission2",
      *      "created_at": {
      *          "date": "2019-03-12 10:17:42.000000",
      *          "timezone_type": 3,
@@ -76,20 +75,19 @@ class RoleController extends Controller
      *  }
      * }
      */
-    public function store(\Modules\Role\Http\Requests\Api\V1\Role\StoreRequest $request)
+    public function store(\Modules\Permission\Http\Requests\Api\V1\Permission\StoreRequest $request)
     {
-        $role = Role::create($request->input());
-        return new RoleResource($role);
+        $permission = Permission::createModel($request->input());
+        return new PermissionResource($permission);
     }
 
     /**
      * Show
-     * {role} number required Id
-     * @queryParam with[] With ie. with[]=permissions
+     * {permission} number required Id
      * @response {
      *  "data": {
      *      "id": 1,
-     *      "name": "Super Admin",
+     *      "name": "api.v1.user.*",
      *      "created_at": {
      *          "date": "2019-02-20 14:54:56.000000",
      *          "timezone_type": 3,
@@ -106,20 +104,19 @@ class RoleController extends Controller
      *  "message": "Data not found"
      * }
      */
-    public function show(Role $role)
+    public function show(Permission $permission)
     {
-        return new RoleResource($role);
+        return new PermissionResource($permission);
     }
 
     /**
      * Update
-     * {role} number required Id
-     * @queryParam with[] With ie. with[]=permissions
+     * {permission} number required Id
      * @bodyParam name text required Name
      * @response {
      *  "data": {
      *      "id": 1,
-     *      "name": "Super Admin",
+     *      "name": "api.v1.user.*",
      *      "created_at": {
      *          "date": "2019-02-20 14:54:56.000000",
      *          "timezone_type": 3,
@@ -144,15 +141,15 @@ class RoleController extends Controller
      *  }
      * }
      */
-    public function update(\Modules\Role\Http\Requests\Api\V1\Role\UpdateRequest $request, Role $role)
+    public function update(\Modules\Permission\Http\Requests\Api\V1\Permission\UpdateRequest $request, Permission $permission)
     {
-        $role->fill($request->input())->save();
-        return new RoleResource($role);
+        $permission = Permission::updateModelById($request->input(), $permission->id);
+        return new PermissionResource($permission);
     }
 
     /**
      * Destroy
-     * {role} number required Id
+     * {permission} number required Id
      * @response {
      *  "count": 1
      * }
@@ -160,9 +157,9 @@ class RoleController extends Controller
      *  "message": "Data not found"
      * }
      */
-    public function destroy(Role $role)
+    public function destroy(Permission $permission)
     {
-        $data['count'] = Role::destroy($role->id);
+        $data['count'] = Permission::deleteModel($permission->id);
         return response()->json($data);
     }
 }

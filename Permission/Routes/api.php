@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -13,6 +11,8 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/permission', function (Request $request) {
-    return $request->user();
+Route::group(['middleware' => ['auth:api']], function () {
+    Route::group(['middleware' => ['permission:api.v1.permission.*']], function () {
+        Route::resource('v1/permission', 'Api\V1\PermissionController', ['as' => 'api.v1'])->only(['index', 'store', 'show', 'update', 'destroy']);
+    });
 });

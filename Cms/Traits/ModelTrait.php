@@ -26,6 +26,15 @@ trait ModelTrait
 
     /**
      * @param int $id
+     * @return int count
+     */
+    public static function destroyModel(int $id)
+    {
+        return self::destroy($id);
+    }
+
+    /**
+     * @param int $id
      * @param array $columns
      * @return object
      */
