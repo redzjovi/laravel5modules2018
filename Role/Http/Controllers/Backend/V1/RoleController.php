@@ -4,8 +4,8 @@ namespace Modules\Role\Http\Controllers\Backend\V1;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Modules\Role\Http\Requests\Backend\V1\Role\StoreRequest;
-use Modules\Role\Http\Requests\Backend\V1\Role\UpdateRequest;
+use Modules\Role\Http\Requests\Api\V1\Role\StoreRequest;
+use Modules\Role\Http\Requests\Api\V1\Role\UpdateRequest;
 use Modules\Role\Models\Role;
 
 class RoleController extends \Modules\Cms\Http\Controllers\Controller

@@ -6,6 +6,9 @@ trait RoleTrait
 {
     public function scopeSearch($query, $parameters)
     {
+        if (isset($parameters['id'])) {
+            $query = $query->where('id', $parameters['id']);
+        }
         if (isset($parameters['name'])) {
             $query = $query->where('name', 'like', '%'.$parameters['name'].'%');
         }

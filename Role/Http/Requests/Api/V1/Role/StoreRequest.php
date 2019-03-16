@@ -1,12 +1,12 @@
 <?php
 
-namespace Modules\Role\Http\Requests\Backend\V1\Role;
+namespace Modules\Role\Http\Requests\Api\V1\Role;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 use Modules\Role\Models\Role;
 
-class UpdateRequest extends FormRequest
+class StoreRequest extends FormRequest
 {
     protected $model;
 
@@ -35,7 +35,7 @@ class UpdateRequest extends FormRequest
         return [
             'name' => [
                 'required',
-                Rule::unique($this->model->getTable())->ignore(request()->route()->parameter('role')),
+                Rule::unique($this->model->getTable()),
             ],
         ];
     }

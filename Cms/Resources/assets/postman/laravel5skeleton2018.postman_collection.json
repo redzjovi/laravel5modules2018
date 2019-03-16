@@ -277,6 +277,258 @@
 					"_postman_isSubFolder": true
 				},
 				{
+					"name": "role",
+					"item": [
+						{
+							"name": "role",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "Bearer {{laravel5skeleton2018__ACCESS_TOKEN}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{laravel5skeleton2018__APP_URL}}/api/v1/role",
+									"host": [
+										"{{laravel5skeleton2018__APP_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"role"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "",
+											"disabled": true
+										},
+										{
+											"key": "name",
+											"value": "",
+											"disabled": true
+										},
+										{
+											"key": "sort",
+											"value": "",
+											"description": "sort=name,-name",
+											"disabled": true
+										},
+										{
+											"key": "with[]",
+											"value": "permissions",
+											"disabled": true
+										},
+										{
+											"key": "per_page",
+											"value": "10",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "role",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "Bearer {{laravel5skeleton2018__ACCESS_TOKEN}}"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "Role2",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{laravel5skeleton2018__APP_URL}}/api/v1/role",
+									"host": [
+										"{{laravel5skeleton2018__APP_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"role"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "role/:id",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{laravel5skeleton2018__ACCESS_TOKEN}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{laravel5skeleton2018__APP_URL}}/api/v1/role/:id",
+									"host": [
+										"{{laravel5skeleton2018__APP_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"role",
+										":id"
+									],
+									"query": [
+										{
+											"key": "with[]",
+											"value": "permissions",
+											"disabled": true
+										}
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "role/:id",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{laravel5skeleton2018__ACCESS_TOKEN}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/x-www-form-urlencoded",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "name",
+											"value": "Super Admin",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{laravel5skeleton2018__APP_URL}}/api/v1/role/:id",
+									"host": [
+										"{{laravel5skeleton2018__APP_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"role",
+										":id"
+									],
+									"query": [
+										{
+											"key": "with[]",
+											"value": "permissions",
+											"disabled": true
+										}
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "role/:id",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "Bearer {{laravel5skeleton2018__ACCESS_TOKEN}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{laravel5skeleton2018__APP_URL}}/api/v1/role/:id",
+									"host": [
+										"{{laravel5skeleton2018__APP_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"role",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
 					"name": "user",
 					"item": [
 						{
@@ -371,12 +623,12 @@
 									"formdata": [
 										{
 											"key": "name",
-											"value": "User3",
+											"value": "User2",
 											"type": "text"
 										},
 										{
 											"key": "email",
-											"value": "user3@mailinator.com",
+											"value": "user2@mailinator.com",
 											"type": "text"
 										},
 										{
@@ -386,7 +638,7 @@
 										},
 										{
 											"key": "role_name[]",
-											"value": "Admin",
+											"value": "Super Admin",
 											"type": "text"
 										}
 									]
@@ -485,23 +737,23 @@
 									"urlencoded": [
 										{
 											"key": "name",
-											"value": "Admin",
+											"value": "Super Admin",
 											"type": "text"
 										},
 										{
 											"key": "email",
-											"value": "admin@mailinator.com",
+											"value": "superadmin@mailinator.com",
 											"type": "text"
 										},
 										{
 											"key": "password",
-											"value": "admin@mailinator.com",
+											"value": "superadmin@mailinator.com",
 											"type": "text",
 											"disabled": true
 										},
 										{
 											"key": "role_name[]",
-											"value": "Admin",
+											"value": "Super Admin",
 											"type": "text",
 											"disabled": true
 										}
@@ -568,7 +820,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "3"
+											"value": "2"
 										}
 									]
 								}

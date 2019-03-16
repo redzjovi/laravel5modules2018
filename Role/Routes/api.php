@@ -13,6 +13,8 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/role', function (Request $request) {
-    return $request->user();
+Route::group(['middleware' => ['auth:api']], function () {
+    Route::group(['middleware' => ['permission:api.v1.role.*']], function () {
+        Route::resource('v1/role', 'Api\V1\RoleController', ['as' => 'api.v1'])->only(['index', 'store', 'show', 'update', 'destroy']);
+    });
 });

@@ -21,6 +21,7 @@ class PermissionDatabaseSeeder extends Seeder
         app()['cache']->forget('spatie.permission.cache');
 
         $permissions = [
+            ['name' => 'api.v1.role.*'],
             ['name' => 'api.v1.user.*'],
             ['name' => 'modules.page.backend.v1.page.*'],
             ['name' => 'modules.permission.backend.v1.permission.*'],
