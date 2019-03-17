@@ -19,7 +19,6 @@ class PermissionController extends Controller
      * @queryParam name Name
      * @queryParam sort Sort ie. sort=name,-name
      * @queryParam per_page Per page (number)
-     * @queryParam id Id
      * @response {
      *  "data": [
      *      {

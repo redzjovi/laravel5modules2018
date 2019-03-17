@@ -20,7 +20,6 @@ class RoleController extends Controller
      * @queryParam sort Sort ie. sort=name,-name
      * @queryParam with[] With ie. with[]=permissions
      * @queryParam per_page Per page (number)
-     * @queryParam id Id
      * @response {
      *  "data": [
      *      {

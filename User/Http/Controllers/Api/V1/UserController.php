@@ -22,7 +22,6 @@ class UserController extends Controller
      * @queryParam sort Sort ie. sort=name,-name,email,-email
      * @queryParam with[] With ie. with[]=roles
      * @queryParam per_page Per page (number)
-     * @queryParam id Id
      * @response {
      *  "data": [
      *      {
