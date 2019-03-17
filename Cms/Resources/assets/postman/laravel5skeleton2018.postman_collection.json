@@ -2,7 +2,7 @@
 	"info": {
 		"_postman_id": "a361cc5d-ad9a-40b1-b80a-ea2bd7e1f0e3",
 		"name": "laravel5skeleton2018",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
 	},
 	"item": [
 		{
@@ -35,7 +35,13 @@
 								"header": [
 									{
 										"key": "Accept",
-										"value": "application/json"
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept-Language",
+										"value": "{{laravel5skeleton2018__APP_LOCALE}}",
+										"type": "text"
 									}
 								],
 								"body": {
@@ -53,18 +59,7 @@
 										}
 									]
 								},
-								"url": {
-									"raw": "{{laravel5skeleton2018__APP_URL}}/api/v1/authentication/login",
-									"host": [
-										"{{laravel5skeleton2018__APP_URL}}"
-									],
-									"path": [
-										"api",
-										"v1",
-										"authentication",
-										"login"
-									]
-								}
+								"url": "{{laravel5skeleton2018__APP_URL}}/api/v1/authentication/login"
 							},
 							"response": []
 						},
@@ -75,7 +70,13 @@
 								"header": [
 									{
 										"key": "Accept",
-										"value": "application/json"
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept-Language",
+										"value": "{{laravel5skeleton2018__APP_LOCALE}}",
+										"type": "text"
 									},
 									{
 										"key": "Authorization",
@@ -87,18 +88,7 @@
 									"mode": "raw",
 									"raw": ""
 								},
-								"url": {
-									"raw": "{{laravel5skeleton2018__APP_URL}}/api/v1/authentication/logout",
-									"host": [
-										"{{laravel5skeleton2018__APP_URL}}"
-									],
-									"path": [
-										"api",
-										"v1",
-										"authentication",
-										"logout"
-									]
-								}
+								"url": "{{laravel5skeleton2018__APP_URL}}/api/v1/authentication/logout"
 							},
 							"response": []
 						},
@@ -121,7 +111,13 @@
 								"header": [
 									{
 										"key": "Accept",
-										"value": "application/json"
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept-Language",
+										"value": "{{laravel5skeleton2018__APP_LOCALE}}",
+										"type": "text"
 									}
 								],
 								"body": {
@@ -134,19 +130,7 @@
 										}
 									]
 								},
-								"url": {
-									"raw": "{{laravel5skeleton2018__APP_URL}}/api/v1/authentication/password/forgot",
-									"host": [
-										"{{laravel5skeleton2018__APP_URL}}"
-									],
-									"path": [
-										"api",
-										"v1",
-										"authentication",
-										"password",
-										"forgot"
-									]
-								}
+								"url": "{{laravel5skeleton2018__APP_URL}}/api/v1/authentication/password/forgot"
 							},
 							"response": []
 						},
@@ -169,11 +153,16 @@
 								"header": [
 									{
 										"key": "Accept",
-										"value": "application/json"
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept-Language",
+										"value": "{{laravel5skeleton2018__APP_LOCALE}}",
+										"type": "text"
 									},
 									{
 										"key": "Content-Type",
-										"name": "Content-Type",
 										"value": "application/x-www-form-urlencoded",
 										"type": "text"
 									}
@@ -203,19 +192,7 @@
 										}
 									]
 								},
-								"url": {
-									"raw": "{{laravel5skeleton2018__APP_URL}}/api/v1/authentication/password/reset",
-									"host": [
-										"{{laravel5skeleton2018__APP_URL}}"
-									],
-									"path": [
-										"api",
-										"v1",
-										"authentication",
-										"password",
-										"reset"
-									]
-								}
+								"url": "{{laravel5skeleton2018__APP_URL}}/api/v1/authentication/password/reset"
 							},
 							"response": []
 						}
@@ -244,7 +221,13 @@
 								"header": [
 									{
 										"key": "Accept",
-										"value": "application/json"
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept-Language",
+										"value": "{{laravel5skeleton2018__APP_LOCALE}}",
+										"type": "text"
 									}
 								],
 								"body": {
@@ -257,19 +240,7 @@
 										}
 									]
 								},
-								"url": {
-									"raw": "{{laravel5skeleton2018__APP_URL}}/api/v1/medium/tinymce/image",
-									"host": [
-										"{{laravel5skeleton2018__APP_URL}}"
-									],
-									"path": [
-										"api",
-										"v1",
-										"medium",
-										"tinymce",
-										"image"
-									]
-								}
+								"url": "{{laravel5skeleton2018__APP_URL}}/api/v1/medium/tinymce/image"
 							},
 							"response": []
 						}
@@ -286,12 +257,18 @@
 								"header": [
 									{
 										"key": "Accept",
-										"value": "application/json"
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept-Language",
+										"value": "{{laravel5skeleton2018__APP_LOCALE}}",
+										"type": "text"
 									},
 									{
 										"key": "Authorization",
-										"type": "text",
-										"value": "Bearer {{laravel5skeleton2018__ACCESS_TOKEN}}"
+										"value": "Bearer {{laravel5skeleton2018__ACCESS_TOKEN}}",
+										"type": "text"
 									}
 								],
 								"body": {
@@ -342,12 +319,18 @@
 								"header": [
 									{
 										"key": "Accept",
-										"value": "application/json"
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept-Language",
+										"value": "{{laravel5skeleton2018__APP_LOCALE}}",
+										"type": "text"
 									},
 									{
 										"key": "Authorization",
-										"type": "text",
-										"value": "Bearer {{laravel5skeleton2018__ACCESS_TOKEN}}"
+										"value": "Bearer {{laravel5skeleton2018__ACCESS_TOKEN}}",
+										"type": "text"
 									}
 								],
 								"body": {
@@ -360,17 +343,7 @@
 										}
 									]
 								},
-								"url": {
-									"raw": "{{laravel5skeleton2018__APP_URL}}/api/v1/permission",
-									"host": [
-										"{{laravel5skeleton2018__APP_URL}}"
-									],
-									"path": [
-										"api",
-										"v1",
-										"permission"
-									]
-								}
+								"url": "{{laravel5skeleton2018__APP_URL}}/api/v1/permission"
 							},
 							"response": []
 						},
@@ -381,12 +354,18 @@
 								"header": [
 									{
 										"key": "Accept",
-										"value": "application/json"
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept-Language",
+										"value": "{{laravel5skeleton2018__APP_LOCALE}}",
+										"type": "text"
 									},
 									{
 										"key": "Authorization",
-										"type": "text",
-										"value": "Bearer {{laravel5skeleton2018__ACCESS_TOKEN}}"
+										"value": "Bearer {{laravel5skeleton2018__ACCESS_TOKEN}}",
+										"type": "text"
 									}
 								],
 								"body": {
@@ -421,18 +400,23 @@
 								"header": [
 									{
 										"key": "Accept",
-										"value": "application/json"
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept-Language",
+										"value": "{{laravel5skeleton2018__APP_LOCALE}}",
+										"type": "text"
 									},
 									{
 										"key": "Authorization",
-										"type": "text",
-										"value": "Bearer {{laravel5skeleton2018__ACCESS_TOKEN}}"
+										"value": "Bearer {{laravel5skeleton2018__ACCESS_TOKEN}}",
+										"type": "text"
 									},
 									{
 										"key": "Content-Type",
-										"name": "Content-Type",
-										"type": "text",
-										"value": "application/x-www-form-urlencoded"
+										"value": "application/x-www-form-urlencoded",
+										"type": "text"
 									}
 								],
 								"body": {
@@ -473,12 +457,18 @@
 								"header": [
 									{
 										"key": "Accept",
-										"value": "application/json"
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept-Language",
+										"value": "{{laravel5skeleton2018__APP_LOCALE}}",
+										"type": "text"
 									},
 									{
 										"key": "Authorization",
-										"type": "text",
-										"value": "Bearer {{laravel5skeleton2018__ACCESS_TOKEN}}"
+										"value": "Bearer {{laravel5skeleton2018__ACCESS_TOKEN}}",
+										"type": "text"
 									}
 								],
 								"body": {
@@ -519,12 +509,18 @@
 								"header": [
 									{
 										"key": "Accept",
-										"value": "application/json"
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept-Language",
+										"value": "{{laravel5skeleton2018__APP_LOCALE}}",
+										"type": "text"
 									},
 									{
 										"key": "Authorization",
-										"type": "text",
-										"value": "Bearer {{laravel5skeleton2018__ACCESS_TOKEN}}"
+										"value": "Bearer {{laravel5skeleton2018__ACCESS_TOKEN}}",
+										"type": "text"
 									}
 								],
 								"body": {
@@ -580,12 +576,18 @@
 								"header": [
 									{
 										"key": "Accept",
-										"value": "application/json"
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept-Language",
+										"value": "{{laravel5skeleton2018__APP_LOCALE}}",
+										"type": "text"
 									},
 									{
 										"key": "Authorization",
-										"type": "text",
-										"value": "Bearer {{laravel5skeleton2018__ACCESS_TOKEN}}"
+										"value": "Bearer {{laravel5skeleton2018__ACCESS_TOKEN}}",
+										"type": "text"
 									}
 								],
 								"body": {
@@ -598,17 +600,7 @@
 										}
 									]
 								},
-								"url": {
-									"raw": "{{laravel5skeleton2018__APP_URL}}/api/v1/role",
-									"host": [
-										"{{laravel5skeleton2018__APP_URL}}"
-									],
-									"path": [
-										"api",
-										"v1",
-										"role"
-									]
-								}
+								"url": "{{laravel5skeleton2018__APP_URL}}/api/v1/role"
 							},
 							"response": []
 						},
@@ -619,7 +611,13 @@
 								"header": [
 									{
 										"key": "Accept",
-										"value": "application/json"
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept-Language",
+										"value": "{{laravel5skeleton2018__APP_LOCALE}}",
+										"type": "text"
 									},
 									{
 										"key": "Authorization",
@@ -666,7 +664,13 @@
 								"header": [
 									{
 										"key": "Accept",
-										"value": "application/json"
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept-Language",
+										"value": "{{laravel5skeleton2018__APP_LOCALE}}",
+										"type": "text"
 									},
 									{
 										"key": "Authorization",
@@ -675,7 +679,6 @@
 									},
 									{
 										"key": "Content-Type",
-										"name": "Content-Type",
 										"value": "application/x-www-form-urlencoded",
 										"type": "text"
 									}
@@ -725,12 +728,18 @@
 								"header": [
 									{
 										"key": "Accept",
-										"value": "application/json"
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept-Language",
+										"value": "{{laravel5skeleton2018__APP_LOCALE}}",
+										"type": "text"
 									},
 									{
 										"key": "Authorization",
-										"type": "text",
-										"value": "Bearer {{laravel5skeleton2018__ACCESS_TOKEN}}"
+										"value": "Bearer {{laravel5skeleton2018__ACCESS_TOKEN}}",
+										"type": "text"
 									}
 								],
 								"body": {
@@ -771,7 +780,13 @@
 								"header": [
 									{
 										"key": "Accept",
-										"value": "application/json"
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept-Language",
+										"value": "{{laravel5skeleton2018__APP_LOCALE}}",
+										"type": "text"
 									},
 									{
 										"key": "Authorization",
@@ -843,7 +858,13 @@
 								"header": [
 									{
 										"key": "Accept",
-										"value": "application/json"
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept-Language",
+										"value": "{{laravel5skeleton2018__APP_LOCALE}}",
+										"type": "text"
 									},
 									{
 										"key": "Authorization",
@@ -904,7 +925,13 @@
 								"header": [
 									{
 										"key": "Accept",
-										"value": "application/json"
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept-Language",
+										"value": "{{laravel5skeleton2018__APP_LOCALE}}",
+										"type": "text"
 									},
 									{
 										"key": "Authorization",
@@ -951,7 +978,13 @@
 								"header": [
 									{
 										"key": "Accept",
-										"value": "application/json"
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept-Language",
+										"value": "{{laravel5skeleton2018__APP_LOCALE}}",
+										"type": "text"
 									},
 									{
 										"key": "Authorization",
@@ -960,7 +993,6 @@
 									},
 									{
 										"key": "Content-Type",
-										"name": "Content-Type",
 										"value": "application/x-www-form-urlencoded",
 										"type": "text"
 									}
@@ -1027,7 +1059,13 @@
 								"header": [
 									{
 										"key": "Accept",
-										"value": "application/json"
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept-Language",
+										"value": "{{laravel5skeleton2018__APP_LOCALE}}",
+										"type": "text"
 									},
 									{
 										"key": "Authorization",
