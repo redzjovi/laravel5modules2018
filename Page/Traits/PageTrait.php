@@ -110,6 +110,13 @@ trait PageTrait
 
 
         if (isset($parameters['with'])) {
+            $parameters['with'] = collect($parameters['with'])->filter(function ($with) use ($query) {
+                if (isset($query->{$with})) {
+                    return true;
+                }
+                return false;
+            })->toArray();
+
             $query = $query->with($parameters['with']);
         }
 
@@ -140,7 +147,9 @@ trait PageTrait
     public static function updatePageById(array $attributes = [], int $id)
     {
         foreach (config('cms.locales') as $locale => $localeName) {
-            $attributes['slug_'.$locale] = str_slug($attributes['title_'.$locale]).'-'.$id;
+            if (isset($attributes['title_'.$locale])) {
+                $attributes['slug_'.$locale] = str_slug($attributes['title_'.$locale]).'-'.$id;
+            }
         }
         $page = self::updateModelById($attributes, $id);
 

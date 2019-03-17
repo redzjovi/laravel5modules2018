@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "a361cc5d-ad9a-40b1-b80a-ea2bd7e1f0e3",
+		"_postman_id": "99e2ba62-2219-4e62-9992-052989864a95",
 		"name": "laravel5skeleton2018",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
 	},
@@ -248,6 +248,355 @@
 					"_postman_isSubFolder": true
 				},
 				{
+					"name": "page",
+					"item": [
+						{
+							"name": "page",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept-Language",
+										"value": "{{laravel5skeleton2018__APP_LOCALE}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "Bearer {{laravel5skeleton2018__ACCESS_TOKEN}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{laravel5skeleton2018__APP_URL}}/api/v1/page?",
+									"host": [
+										"{{laravel5skeleton2018__APP_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"page"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "",
+											"disabled": true
+										},
+										{
+											"key": "title",
+											"value": "",
+											"disabled": true
+										},
+										{
+											"key": "slug",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "excerpt",
+											"value": "",
+											"description": "roles.id",
+											"disabled": true
+										},
+										{
+											"key": "sort",
+											"value": "",
+											"description": "sort=name,-name,email,-email",
+											"disabled": true
+										},
+										{
+											"key": "with[]",
+											"value": "translations",
+											"disabled": true
+										},
+										{
+											"key": "per_page",
+											"value": "10",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "page",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept-Language",
+										"value": "{{laravel5skeleton2018__APP_LOCALE}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "Bearer {{laravel5skeleton2018__ACCESS_TOKEN}}"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "title_en",
+											"value": "Page1 En",
+											"type": "text"
+										},
+										{
+											"key": "excerpt_en",
+											"value": "Excerpt1 En",
+											"type": "text"
+										},
+										{
+											"key": "content_en",
+											"value": "Content1 En",
+											"type": "text"
+										},
+										{
+											"key": "image[]",
+											"type": "file",
+											"src": ""
+										},
+										{
+											"key": "gallery[]",
+											"type": "file",
+											"src": ""
+										}
+									]
+								},
+								"url": {
+									"raw": "{{laravel5skeleton2018__APP_URL}}/api/v1/page?",
+									"host": [
+										"{{laravel5skeleton2018__APP_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"page"
+									],
+									"query": [
+										{
+											"key": "with[]",
+											"value": "translations",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "page/:id",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept-Language",
+										"value": "{{laravel5skeleton2018__APP_LOCALE}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "Bearer {{laravel5skeleton2018__ACCESS_TOKEN}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{laravel5skeleton2018__APP_URL}}/api/v1/page/:id?",
+									"host": [
+										"{{laravel5skeleton2018__APP_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"page",
+										":id"
+									],
+									"query": [
+										{
+											"key": "with[]",
+											"value": "translations",
+											"disabled": true
+										}
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "page/:id",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept-Language",
+										"value": "{{laravel5skeleton2018__APP_LOCALE}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{laravel5skeleton2018__ACCESS_TOKEN}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/x-www-form-urlencoded",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "title_en",
+											"value": "Page1 En",
+											"type": "text"
+										},
+										{
+											"key": "excerpt_en",
+											"value": "Excerpt1 En",
+											"type": "text"
+										},
+										{
+											"key": "content_en",
+											"value": "Content1 En",
+											"type": "text"
+										},
+										{
+											"key": "gallery[]",
+											"value": "",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "gallery_id",
+											"value": "",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "image[]",
+											"value": "",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "image_id[]",
+											"value": "",
+											"type": "text",
+											"disabled": true
+										}
+									]
+								},
+								"url": {
+									"raw": "{{laravel5skeleton2018__APP_URL}}/api/v1/page/:id?",
+									"host": [
+										"{{laravel5skeleton2018__APP_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"page",
+										":id"
+									],
+									"query": [
+										{
+											"key": "with[]",
+											"value": "translations",
+											"disabled": true
+										}
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "page/:id",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept-Language",
+										"type": "text",
+										"value": "{{laravel5skeleton2018__APP_LOCALE}}"
+									},
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "Bearer {{laravel5skeleton2018__ACCESS_TOKEN}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{laravel5skeleton2018__APP_URL}}/api/v1/page/:id",
+									"host": [
+										"{{laravel5skeleton2018__APP_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"page",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
 					"name": "permission",
 					"item": [
 						{
@@ -276,7 +625,7 @@
 									"raw": ""
 								},
 								"url": {
-									"raw": "{{laravel5skeleton2018__APP_URL}}/api/v1/permission",
+									"raw": "{{laravel5skeleton2018__APP_URL}}/api/v1/permission?",
 									"host": [
 										"{{laravel5skeleton2018__APP_URL}}"
 									],
@@ -528,7 +877,7 @@
 									"raw": ""
 								},
 								"url": {
-									"raw": "{{laravel5skeleton2018__APP_URL}}/api/v1/role",
+									"raw": "{{laravel5skeleton2018__APP_URL}}/api/v1/role?",
 									"host": [
 										"{{laravel5skeleton2018__APP_URL}}"
 									],
@@ -630,7 +979,7 @@
 									"raw": ""
 								},
 								"url": {
-									"raw": "{{laravel5skeleton2018__APP_URL}}/api/v1/role/:id",
+									"raw": "{{laravel5skeleton2018__APP_URL}}/api/v1/role/:id?",
 									"host": [
 										"{{laravel5skeleton2018__APP_URL}}"
 									],
@@ -694,7 +1043,7 @@
 									]
 								},
 								"url": {
-									"raw": "{{laravel5skeleton2018__APP_URL}}/api/v1/role/:id",
+									"raw": "{{laravel5skeleton2018__APP_URL}}/api/v1/role/:id?",
 									"host": [
 										"{{laravel5skeleton2018__APP_URL}}"
 									],
@@ -799,7 +1148,7 @@
 									"raw": ""
 								},
 								"url": {
-									"raw": "{{laravel5skeleton2018__APP_URL}}/api/v1/user",
+									"raw": "{{laravel5skeleton2018__APP_URL}}/api/v1/user?",
 									"host": [
 										"{{laravel5skeleton2018__APP_URL}}"
 									],
