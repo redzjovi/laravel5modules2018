@@ -102,7 +102,7 @@ trait UserTrait
         $user = self::createModel($parameters);
 
         if (isset($parameters['role_name'])) {
-            if (auth()->user()->can('modules.user.backend.v1.user.role.*')) {
+            if (auth()->user()->can('api.v1.user.role.*, modules.user.backend.v1.user.role.*')) {
                 $user->syncRoles($parameters['role_name']);
             }
         }

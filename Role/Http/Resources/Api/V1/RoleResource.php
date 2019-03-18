@@ -16,14 +16,15 @@ class RoleResource extends Resource
     {
         $data['id'] = $this->id;
         $data['name'] = $this->name;
-        $data['created_at'] = $this->created_at;
-        $data['updated_at'] = $this->updated_at;
 
         if ($withs = $request->query('with')) {
             if (in_array('permissions', $withs)) {
                 $data['permissions'] = $this->permissions;
             }
         }
+
+        $data['created_at'] = $this->created_at;
+        $data['updated_at'] = $this->updated_at;
 
         return $data;
     }

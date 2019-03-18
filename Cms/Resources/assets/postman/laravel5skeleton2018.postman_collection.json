@@ -1115,6 +1115,70 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "role/permission/:id",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept-Language",
+										"type": "text",
+										"value": "{{laravel5skeleton2018__APP_LOCALE}}"
+									},
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "Bearer {{laravel5skeleton2018__ACCESS_TOKEN}}"
+									},
+									{
+										"key": "Content-Type",
+										"type": "text",
+										"value": "application/x-www-form-urlencoded"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "permission_name[]",
+											"value": "api.v1.user.*\t",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{laravel5skeleton2018__APP_URL}}/api/v1/role/permission/:id?with[]=permissions",
+									"host": [
+										"{{laravel5skeleton2018__APP_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"role",
+										"permission",
+										":id"
+									],
+									"query": [
+										{
+											"key": "with[]",
+											"value": "permissions"
+										}
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
 						}
 					],
 					"_postman_isSubFolder": true

@@ -43,9 +43,9 @@
                                     <td>{{ $user->email }}</td>
                                     @can('modules.user.backend.v1.user.role.*')
                                         <td>
-                                            @if ($user->roles)
+                                            @if ($roles = $user->roles->sortBy('name'))
                                                 <ul>
-                                                    @foreach ($user->roles as $role)
+                                                    @foreach ($roles as $role)
                                                         <li>
                                                             @can('modules.role.backend.v1.role.permission.*')
                                                                 <a href="{{ route('modules.role.backend.v1.role.permission.edit', $role->id) }}">{{ $role->name }}</a>

@@ -21,6 +21,7 @@ Route::group(['middleware' => [AuthenticationMiddleware::class]], function () {
         Route::get('modules/role/backend/v1/role/export-csv')->name('modules.role.backend.v1.role.export-csv')->uses('Backend\V1\RoleController@exportCsv');
     });
     Route::group(['middleware' => ['permission:modules.role.backend.v1.role.permission.*']], function () {
-        Route::resource('modules/role/backend/v1/role/permission', 'Backend\V1\Role\PermissionController', ['as' => 'modules.role.backend.v1.role'])->only(['edit', 'update']);
+        Route::get('modules/role/backend/v1/role/permission/{role}')->name('modules.role.backend.v1.role.permission.edit')->uses('Backend\V1\Role\PermissionController@edit');
+        Route::put('modules/role/backend/v1/role/permission/{role}')->name('modules.role.backend.v1.role.permission.update')->uses('Backend\V1\Role\PermissionController@update');
     });
 });
