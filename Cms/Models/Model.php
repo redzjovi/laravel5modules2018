@@ -11,7 +11,9 @@ class Model extends \Illuminate\Database\Eloquent\Model
 
     public function setFillable()
     {
-        $fields = \Schema::getColumnListing($this->table);
+        $fields = \Cache::remember($this->getTable().'_model_fillable', 60, function () {
+            return \Schema::getColumnListing($this->table);
+        });
         $this->fillable = $fields;
     }
 }
