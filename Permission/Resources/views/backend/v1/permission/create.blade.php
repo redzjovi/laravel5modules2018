@@ -12,7 +12,7 @@
 @endsection
 
 @section('content')
-    <form action="{{ route('modules.permission.backend.v1.permission.store') }}" id="form_permission" method="POST">
+    <form action="{{ route('modules.permission.backend.v1.permission.store') }}" method="POST">
         @include('permission::backend/v1/permission/_form')
     </form>
 @endsection

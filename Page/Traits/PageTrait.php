@@ -19,7 +19,7 @@ trait PageTrait
         }
         foreach (config('cms.locales') as $locale => $localeName) {
             if (isset($parameters['slug_'.$locale])) {
-                $query = $query->where('slug_'.$locale, 'like', '%'.$parameters['slug_'.$locale].'%');
+                $query = $query->where('slug_'.$locale, $parameters['slug_'.$locale]);
             }
         }
         if (isset($parameters['excerpt'])) {
@@ -126,8 +126,8 @@ trait PageTrait
     public static function createPage(array $attributes = [])
     {
         $page = self::createModel($attributes);
-
         $page = self::updatePageById($attributes, $page->id);
+
         return $page;
     }
 

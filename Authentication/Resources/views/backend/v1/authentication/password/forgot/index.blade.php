@@ -20,7 +20,7 @@
                         @lang('cms::cms.forgot_password')
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('modules.authentication.backend.v1.authentication.password.forgot.store', request()->query()) }}" class="form-horizontal" id="form_forgot" method="POST">
+                        <form action="{{ route('modules.authentication.backend.v1.authentication.password.forgot.store', request()->query()) }}" class="form-horizontal" method="POST">
                             {{ csrf_field() }}
 
                             <div class="form-group row">

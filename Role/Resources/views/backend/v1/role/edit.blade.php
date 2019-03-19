@@ -13,7 +13,7 @@
 @endsection
 
 @section('content')
-    <form action="{{ route('modules.role.backend.v1.role.update', $model->id) }}" id="form_role" method="POST">
+    <form action="{{ route('modules.role.backend.v1.role.update', $model->id) }}" method="POST">
         {!! method_field('PUT') !!}
         <input name="id" type="hidden" value="{{ $model->id }}" />
         @include('role::backend/v1/role/_form')

@@ -13,7 +13,7 @@
                 <div class="card">
                     <div align="center" class="card-header">@lang('cms::cms.login')</div>
                     <div class="card-body">
-                        <form action="{{ route('modules.authentication.backend.v1.authentication.login.store', request()->query()) }}" class="form-horizontal" id="form_login" method="POST">
+                        <form action="{{ route('modules.authentication.backend.v1.authentication.login.store', request()->query()) }}" class="form-horizontal" method="POST">
                             {{ csrf_field() }}
 
                             <div class="form-group row">

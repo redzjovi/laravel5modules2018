@@ -13,7 +13,7 @@
                 <div class="card">
                     <div class="card-header">@lang('cms::cms.reset_password')</div>
                     <div class="card-body">
-                        <form action="{{ route('modules.authentication.backend.v1.authentication.password.reset.update', request()->query()) }}" class="form-horizontal" id="form_reset" method="POST">
+                        <form action="{{ route('modules.authentication.backend.v1.authentication.password.reset.update', request()->query()) }}" class="form-horizontal" method="POST">
                             {{ csrf_field() }}
                             {{ method_field('PUT') }}
 

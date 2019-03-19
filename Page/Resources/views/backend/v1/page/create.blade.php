@@ -12,7 +12,7 @@
 @endsection
 
 @section('content')
-    <form action="{{ route('modules.page.backend.v1.page.store') }}" enctype="multipart/form-data" id="form_page" method="POST">
+    <form action="{{ route('modules.page.backend.v1.page.store') }}" enctype="multipart/form-data" method="POST">
         @include('page::backend/v1/page/_form')
     </form>
 @endsection

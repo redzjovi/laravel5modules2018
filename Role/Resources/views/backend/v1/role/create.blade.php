@@ -12,7 +12,7 @@
 @endsection
 
 @section('content')
-    <form action="{{ route('modules.role.backend.v1.role.store') }}" id="form_role" method="POST">
+    <form action="{{ route('modules.role.backend.v1.role.store') }}" method="POST">
         @include('role::backend/v1/role/_form')
     </form>
 @endsection

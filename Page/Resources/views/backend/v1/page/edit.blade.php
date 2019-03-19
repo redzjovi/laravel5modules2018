@@ -13,7 +13,7 @@
 @endsection
 
 @section('content')
-    <form action="{{ route('modules.page.backend.v1.page.update', $model->id) }}" enctype="multipart/form-data" id="form_page" method="POST">
+    <form action="{{ route('modules.page.backend.v1.page.update', $model->id) }}" enctype="multipart/form-data" method="POST">
         {!! method_field('PUT') !!}
         <input name="id" type="hidden" value="{{ $model->id }}" />
         @include('page::backend/v1/page/_form')

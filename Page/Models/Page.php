@@ -24,13 +24,13 @@ class Page extends Model implements HasMedia
         return $this->{'excerpt_'.config('app.locale')};
     }
 
-    public function getTitleAttribute()
-    {
-        return $this->{'title_'.config('app.locale')};
-    }
-
     public function getSlugAttribute()
     {
         return $this->{'slug_'.config('app.locale')};
+    }
+
+    public function getTitleAttribute()
+    {
+        return $this->{'title_'.config('app.locale')};
     }
 }

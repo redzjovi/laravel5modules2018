@@ -13,7 +13,7 @@
 @endsection
 
 @section('content')
-    <form action="{{ route('modules.user.backend.v1.user.update', $model->id) }}" id="form_user" method="POST">
+    <form action="{{ route('modules.user.backend.v1.user.update', $model->id) }}" method="POST">
         {!! method_field('PUT') !!}
         <input name="id" type="hidden" value="{{ $model->id }}" />
         @include('user::backend/v1/user/_form')

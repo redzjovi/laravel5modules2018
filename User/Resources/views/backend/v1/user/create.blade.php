@@ -12,7 +12,7 @@
 @endsection
 
 @section('content')
-    <form action="{{ route('modules.user.backend.v1.user.store') }}" id="form_user" method="POST">
+    <form action="{{ route('modules.user.backend.v1.user.store') }}" method="POST">
         @include('user::backend/v1/user/_form')
     </form>
 @endsection

@@ -13,7 +13,7 @@
 @endsection
 
 @section('content')
-    <form action="{{ route('modules.permission.backend.v1.permission.update', $model->id) }}" id="form_permission" method="POST">
+    <form action="{{ route('modules.permission.backend.v1.permission.update', $model->id) }}" method="POST">
         {!! method_field('PUT') !!}
         <input name="id" type="hidden" value="{{ $model->id }}" />
         @include('permission::backend/v1/permission/_form')

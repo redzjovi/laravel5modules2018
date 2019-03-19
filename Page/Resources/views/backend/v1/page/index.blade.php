@@ -15,7 +15,7 @@
 
     <div class="row">
         <div class="col-12">
-            <form action="{{ route('modules.page.backend.v1.page.action') }}" id="form_page" method="POST">
+            <form action="{{ route('modules.page.backend.v1.page.action') }}" method="POST">
                 {!! csrf_field() !!}
                 <div class="table-responsive">
                     <table class="table table-bordered table-condensed table-hover table-sm table-striped">
