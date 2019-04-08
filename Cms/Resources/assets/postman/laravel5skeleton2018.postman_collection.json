@@ -263,11 +263,6 @@
 										"key": "Accept-Language",
 										"value": "{{laravel5skeleton2018__APP_LOCALE}}",
 										"type": "text"
-									},
-									{
-										"key": "Authorization",
-										"type": "text",
-										"value": "Bearer {{laravel5skeleton2018__ACCESS_TOKEN}}"
 									}
 								],
 								"body": {
@@ -411,11 +406,6 @@
 										"key": "Accept-Language",
 										"value": "{{laravel5skeleton2018__APP_LOCALE}}",
 										"type": "text"
-									},
-									{
-										"key": "Authorization",
-										"type": "text",
-										"value": "Bearer {{laravel5skeleton2018__ACCESS_TOKEN}}"
 									}
 								],
 								"body": {
