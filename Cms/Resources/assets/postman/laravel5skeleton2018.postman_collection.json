@@ -1174,6 +1174,361 @@
 					"_postman_isSubFolder": true
 				},
 				{
+					"name": "tag",
+					"item": [
+						{
+							"name": "tag",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept-Language",
+										"type": "text",
+										"value": "{{laravel5skeleton2018__APP_LOCALE}}"
+									},
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "Bearer {{laravel5skeleton2018__ACCESS_TOKEN}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{laravel5skeleton2018__APP_URL}}/api/v1/tag",
+									"host": [
+										"{{laravel5skeleton2018__APP_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"tag"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "",
+											"disabled": true
+										},
+										{
+											"key": "title",
+											"value": "",
+											"disabled": true
+										},
+										{
+											"key": "slug",
+											"value": "",
+											"disabled": true
+										},
+										{
+											"key": "excerpt",
+											"value": "",
+											"description": "roles.id",
+											"disabled": true
+										},
+										{
+											"key": "sort",
+											"value": "",
+											"description": "sort=name,-name,email,-email",
+											"disabled": true
+										},
+										{
+											"key": "with[]",
+											"value": "translations",
+											"disabled": true
+										},
+										{
+											"key": "per_page",
+											"value": "10",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "tag",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept-Language",
+										"type": "text",
+										"value": "{{laravel5skeleton2018__APP_LOCALE}}"
+									},
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "Bearer {{laravel5skeleton2018__ACCESS_TOKEN}}"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "title_en",
+											"value": "Tag1 En",
+											"type": "text"
+										},
+										{
+											"key": "excerpt_en",
+											"value": "Excerpt1 En",
+											"type": "text"
+										},
+										{
+											"key": "content_en",
+											"value": "Content1 En",
+											"type": "text"
+										},
+										{
+											"key": "image[]",
+											"type": "file",
+											"src": ""
+										},
+										{
+											"key": "gallery[]",
+											"type": "file",
+											"src": ""
+										}
+									]
+								},
+								"url": {
+									"raw": "{{laravel5skeleton2018__APP_URL}}/api/v1/tag?",
+									"host": [
+										"{{laravel5skeleton2018__APP_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"tag"
+									],
+									"query": [
+										{
+											"key": "with[]",
+											"value": "translations",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "tag/:id",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept-Language",
+										"type": "text",
+										"value": "{{laravel5skeleton2018__APP_LOCALE}}"
+									},
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "Bearer {{laravel5skeleton2018__ACCESS_TOKEN}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{laravel5skeleton2018__APP_URL}}/api/v1/tag/:id?",
+									"host": [
+										"{{laravel5skeleton2018__APP_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"tag",
+										":id"
+									],
+									"query": [
+										{
+											"key": "with[]",
+											"value": "translations",
+											"disabled": true
+										}
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "tag/:id",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept-Language",
+										"type": "text",
+										"value": "{{laravel5skeleton2018__APP_LOCALE}}"
+									},
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "Bearer {{laravel5skeleton2018__ACCESS_TOKEN}}"
+									},
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/x-www-form-urlencoded"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "title_en",
+											"value": "Tag1 En",
+											"type": "text"
+										},
+										{
+											"key": "excerpt_en",
+											"value": "Excerpt1 En",
+											"type": "text"
+										},
+										{
+											"key": "content_en",
+											"value": "Content1 En",
+											"type": "text"
+										},
+										{
+											"key": "gallery[]",
+											"value": "",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "gallery_id",
+											"value": "",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "image[]",
+											"value": "",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "image_id[]",
+											"value": "",
+											"type": "text",
+											"disabled": true
+										}
+									]
+								},
+								"url": {
+									"raw": "{{laravel5skeleton2018__APP_URL}}/api/v1/tag/:id?",
+									"host": [
+										"{{laravel5skeleton2018__APP_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"tag",
+										":id"
+									],
+									"query": [
+										{
+											"key": "with[]",
+											"value": "translations",
+											"disabled": true
+										}
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "tag/:id",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept-Language",
+										"type": "text",
+										"value": "{{laravel5skeleton2018__APP_LOCALE}}"
+									},
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "Bearer {{laravel5skeleton2018__ACCESS_TOKEN}}"
+									},
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/x-www-form-urlencoded",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{laravel5skeleton2018__APP_URL}}/api/v1/tag/:id",
+									"host": [
+										"{{laravel5skeleton2018__APP_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"tag",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
 					"name": "user",
 					"item": [
 						{

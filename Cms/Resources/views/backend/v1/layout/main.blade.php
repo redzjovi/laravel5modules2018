@@ -57,6 +57,7 @@
                                 <a class="dropdown-item" href="{{ route('modules.page.backend.v1.page.index') }}">@lang('cms::cms.page')</a>
                                 <a class="dropdown-item" href="{{ route('modules.permission.backend.v1.permission.index') }}">@lang('cms::cms.permission')</a>
                                 <a class="dropdown-item" href="{{ route('modules.role.backend.v1.role.index') }}">@lang('cms::cms.role')</a>
+                                <a class="dropdown-item" href="{{ route('modules.tag.backend.v1.tag.index') }}">@lang('cms::cms.tag')</a>
                                 <a class="dropdown-item" href="{{ route('modules.user.backend.v1.user.index') }}">@lang('cms::cms.user')</a>
                             </div>
                         </li>
