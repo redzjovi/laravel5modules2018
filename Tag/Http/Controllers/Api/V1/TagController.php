@@ -56,7 +56,7 @@ class TagController extends Controller
     /**
      * Store
      * @queryParam with[] With ie. with[]=translations
-     * @bodyParam title_en text Title
+     * @bodyParam title_en text required Title
      * @bodyParam excerpt_en text Excerpt
      * @bodyParam content_en text Content
      * @bodyParam image[] image Image
@@ -84,6 +84,9 @@ class TagController extends Controller
      * @response 422 {
      *  "message": "The given data was invalid.",
      *  "errors": {
+     *      "title_en": [
+     *          "The title en field is required."
+     *      ],
      *      "image.0": [
      *          "The image.0 must be an image."
      *      ],
@@ -136,7 +139,7 @@ class TagController extends Controller
      * Update
      * {tag} number required Id
      * @queryParam with[] With ie. with[]=translations
-     * @bodyParam title_en text Title
+     * @bodyParam title_en text required Title
      * @bodyParam excerpt_en text Excerpt
      * @bodyParam content_en text Content
      * @bodyParam image[] image Image
@@ -169,6 +172,9 @@ class TagController extends Controller
      * @response 422 {
      *  "message": "The given data was invalid.",
      *  "errors": {
+     *      "title_en": [
+     *          "The title en field is required."
+     *      ],
      *      "image.0": [
      *          "The image.0 must be an image."
      *      ],

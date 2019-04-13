@@ -23,8 +23,7 @@ class StoreRequest extends FormRequest
      */
     public function rules()
     {
-        $rules = [];
-
+        $rules['title_'.config('app.locale')] = ['required'];
         $rules['image.*'] = ['image'];
         $rules['gallery.*'] = ['image'];
 
