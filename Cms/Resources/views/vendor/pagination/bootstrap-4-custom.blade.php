@@ -33,7 +33,7 @@
                     @endfor
                 </select>
 
-                <script>
+                <script type="application/javascript">
                     document.querySelectorAll('.page-item-select').forEach(pageItemSelect => {
                         pageItemSelect.addEventListener('change', function() {
                             window.location.href = this.options[this.selectedIndex].getAttribute('data-href');

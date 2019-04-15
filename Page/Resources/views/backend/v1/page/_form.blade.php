@@ -64,6 +64,31 @@
             </div>
         </div>
     </div>
+</div>
+<div class="card">
+    <div class="card-body">
+        <div class="form-group row">
+            <label class="col-sm-2" for="content">@lang('cms::cms.tag')</label>
+            <div class="col-sm-10">
+                <button class="btn btn-secondary btn-sm" type="button">
+                    <i class="fas fa-plus"></i>
+                </button>
+                <select2 class="form-control form-control-sm" multiple="multiple" name="tag_id[]"
+                    ajax
+                    ajax-data-search="title"
+                    ajax-data-sort="title"
+                    ajax-process-results-id="id"
+                    ajax-process-results-text="title"
+                    ajax-url="{{ route('api.v1.tag.index') }}"
+                    theme="classic"
+                >
+                    @foreach ($model->tags->sortBy('title') as $tag)
+                        <option selected value="{{ $tag->id }}">{{ $tag->title }}</option>
+                    @endforeach
+                </select2>
+            </div>
+        </div>
+    </div>
     <div class="card-footer">
         <input class="btn btn-sm btn-success" type="submit" value="@lang('cms::cms.save')" />
     </div>

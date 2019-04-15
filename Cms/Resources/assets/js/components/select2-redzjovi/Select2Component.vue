@@ -40,10 +40,12 @@ export default {
             }
         }
 
+        configurations.dropdownAutoWidth = true;
         configurations.language = document.documentElement.lang;
         configurations.minimumInputLength = vm.minimumInputLength;
         configurations.tags = vm.tags;
         configurations.theme = vm.theme;
+        configurations.width = vm.width;
 
         $(this.$el).select2(configurations);
     },
@@ -75,7 +77,11 @@ export default {
         multiple: String,
         name: String,
         tags: Boolean,
-        theme: String
+        theme: String,
+        width: {
+            default: 'resolve',
+            type: String
+        }
     }
 }
 </script>

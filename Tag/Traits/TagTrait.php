@@ -6,6 +6,9 @@ trait TagTrait
 {
     public function scopeSearch($query, $parameters)
     {
+        if (isset($parameters['id']) && is_array($parameters['id'])) {
+            $query = $query->whereIn('id', $parameters['id']);
+        }
         if (isset($parameters['title'])) {
             $query = $query->where('title_'.config('app.locale'), 'like', '%'.$parameters['title'].'%');
         }
@@ -144,8 +147,36 @@ trait TagTrait
         return $query;
     }
 
+    /**
+     * @param array $titles
+     * @return array $tagIds
+     */
+    public static function getTagIdsOrCreateTagsByTitles(array $titles)
+    {
+        $tags = collect($titles)->map(function ($title) {
+            $tag = self::where('title_'.config('app.locale'), $title)->first();
+
+            if (! $tag) {
+                $attributes = [];
+
+                foreach (config('cms.locales') as $locale => $localeName) {
+                    $attributes['title_'.$locale] = $title;
+                }
+
+                $tag = self::createTag($attributes);
+            }
+
+            return $tag;
+        });
+
+        $tagIds = $tags->pluck('id', 'id')->values()->toArray();
+
+        return $tagIds;
+    }
+
     public static function updateTagById(array $attributes = [], int $id)
     {
+        // 1. Model update
         foreach (config('cms.locales') as $locale => $localeName) {
             if (isset($attributes['title_'.$locale])) {
                 $attributes['slug_'.$locale] = str_slug($attributes['title_'.$locale]).'-'.$id;
@@ -153,7 +184,7 @@ trait TagTrait
         }
         $tag = self::updateModelById($attributes, $id);
 
-        // delete image
+        // 2. Medium, image, delete
         $media = $tag->getMedia('tag_image');
         if (isset($attributes['image_id'])) {
             $media = $media->whereNotIn('id', $attributes['image_id']);
@@ -161,13 +192,15 @@ trait TagTrait
         $media->each(function ($medium) {
             $medium->delete();
         });
-        // image to media
+
+        // 3. Medium, image, add
         if (isset($attributes['image'])) {
             collect($attributes['image'])->each(function ($image) use ($tag) {
                 $tag->addMedia($image)->toMediaCollection('tag_image', 'media');
             });
         }
-        // delete gallery
+
+        // 4. Medium, gallery, delete
         $media = $tag->getMedia('tag_gallery');
         if (isset($attributes['gallery_id'])) {
             $media = $media->whereNotIn('id', $attributes['gallery_id']);
@@ -175,7 +208,8 @@ trait TagTrait
         $media->each(function ($medium) {
             $medium->delete();
         });
-        // gallery to media
+
+        // 5. Medium, gallery, add
         if (isset($attributes['gallery'])) {
             collect($attributes['gallery'])->each(function ($gallery) use ($tag) {
                 $tag->addMedia($gallery)->toMediaCollection('tag_gallery', 'media');

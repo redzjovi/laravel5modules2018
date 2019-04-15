@@ -2,6 +2,8 @@
 
 namespace Modules\Page\Traits;
 
+use Modules\Tag\Models\Tag;
+
 trait PageTrait
 {
     public function scopeSearch($query, $parameters)
@@ -37,6 +39,11 @@ trait PageTrait
             if (isset($parameters['content_'.$locale])) {
                 $query = $query->where('content_'.$locale, 'like', '%'.$parameters['content_'.$locale].'%');
             }
+        }
+        if (isset($parameters['tag_id']) && is_array($parameters['tag_id'])) {
+            $query = $query->whereHas('tags', function ($queryTag) use ($parameters) {
+                $queryTag->whereIn('id', $parameters['tag_id']);
+            });
         }
 
 
@@ -146,6 +153,7 @@ trait PageTrait
 
     public static function updatePageById(array $attributes = [], int $id)
     {
+        // 1. Model, update
         foreach (config('cms.locales') as $locale => $localeName) {
             if (isset($attributes['title_'.$locale])) {
                 $attributes['slug_'.$locale] = str_slug($attributes['title_'.$locale]).'-'.$id;
@@ -153,7 +161,7 @@ trait PageTrait
         }
         $page = self::updateModelById($attributes, $id);
 
-        // delete image
+        // 2. Medium, image, delete
         $media = $page->getMedia('page_image');
         if (isset($attributes['image_id'])) {
             $media = $media->whereNotIn('id', $attributes['image_id']);
@@ -161,13 +169,15 @@ trait PageTrait
         $media->each(function ($medium) {
             $medium->delete();
         });
-        // image to media
+
+        // 3. Medium, image, add
         if (isset($attributes['image'])) {
             collect($attributes['image'])->each(function ($image) use ($page) {
                 $page->addMedia($image)->toMediaCollection('page_image', 'media');
             });
         }
-        // delete gallery
+
+        // 4. Medium, gallery, delete
         $media = $page->getMedia('page_gallery');
         if (isset($attributes['gallery_id'])) {
             $media = $media->whereNotIn('id', $attributes['gallery_id']);
@@ -175,12 +185,20 @@ trait PageTrait
         $media->each(function ($medium) {
             $medium->delete();
         });
-        // gallery to media
+
+        // 5. Medium, gallery, add
         if (isset($attributes['gallery'])) {
             collect($attributes['gallery'])->each(function ($gallery) use ($page) {
                 $page->addMedia($gallery)->toMediaCollection('page_gallery', 'media');
             });
         }
+
+        // 6. Tag, sync
+        $tagIds = [];
+        if (isset($attributes['tag_id']) && is_array($attributes['tag_id'])) {
+            $tagIds = $attributes['tag_id'];
+        }
+        $page->tags()->sync($tagIds);
 
         return $page;
     }

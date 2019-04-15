@@ -33,4 +33,9 @@ class Tag extends Model implements HasMedia
     {
         return $this->{'title_'.config('app.locale')};
     }
+
+    public function pages()
+    {
+        return $this->morphedByMany(\Modules\Page\Models\Page::class, 'taggable');
+    }
 }

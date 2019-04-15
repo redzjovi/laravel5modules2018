@@ -19,8 +19,9 @@ class PageController extends Controller
      * @queryParam title Title
      * @queryParam slug Slug
      * @queryParam excerpt Excerpt
+     * @queryParam tag_id[] tag.id
      * @queryParam sort Sort ie. sort=title,-title,slug,-slug,excerpt,-excerpt,updated_at,-updated_at
-     * @queryParam with[] With ie. with[]=translations
+     * @queryParam with[] With ie. with[]=tags, with[]=translations
      * @queryParam per_page Per page (number)
      * @response {
      *  "data": [
@@ -55,12 +56,13 @@ class PageController extends Controller
 
     /**
      * Store
-     * @queryParam with[] With ie. with[]=translations
+     * @queryParam with[] With ie. with[]=tags, with[]=translations
      * @bodyParam title_en text required Title
      * @bodyParam excerpt_en text Excerpt
      * @bodyParam content_en text Content
      * @bodyParam image[] image Image
      * @bodyParam gallery[] image Gallery
+     * @bodyParam tag_id[] number tag.id
      * @response {
      *  "data": {
      *      "id": 1,
@@ -105,7 +107,7 @@ class PageController extends Controller
     /**
      * Show
      * {page} number required Id
-     * @queryParam with[] With ie. with[]=translations
+     * @queryParam with[] With ie. with[]=tags, with[]=translations
      * @response {
      *  "data": {
      *      "id": 1,
@@ -138,7 +140,7 @@ class PageController extends Controller
     /**
      * Update
      * {page} number required Id
-     * @queryParam with[] With ie. with[]=translations
+     * @queryParam with[] With ie. with[]=tags, with[]=translations
      * @bodyParam title_en text required Title
      * @bodyParam excerpt_en text Excerpt
      * @bodyParam content_en text Content
@@ -146,6 +148,7 @@ class PageController extends Controller
      * @bodyParam image_id[] number Image id
      * @bodyParam gallery[] image Gallery
      * @bodyParam gallery_id[] number Gallery id
+     * @bodyParam tag_id number tag.id
      * @response
      *  "data": {
      *      "id": 1,

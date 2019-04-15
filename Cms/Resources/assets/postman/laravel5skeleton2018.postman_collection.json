@@ -270,7 +270,7 @@
 									"raw": ""
 								},
 								"url": {
-									"raw": "{{laravel5skeleton2018__APP_URL}}/api/v1/page?",
+									"raw": "{{laravel5skeleton2018__APP_URL}}/api/v1/page",
 									"host": [
 										"{{laravel5skeleton2018__APP_URL}}"
 									],
@@ -292,7 +292,7 @@
 										},
 										{
 											"key": "slug",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
@@ -302,9 +302,20 @@
 											"disabled": true
 										},
 										{
+											"key": "tag_id[]",
+											"value": "1",
+											"description": "tag.id",
+											"disabled": true
+										},
+										{
 											"key": "sort",
 											"value": "",
 											"description": "sort=name,-name,email,-email",
+											"disabled": true
+										},
+										{
+											"key": "with[]",
+											"value": "tags",
 											"disabled": true
 										},
 										{
@@ -353,27 +364,38 @@
 										{
 											"key": "excerpt_en",
 											"value": "Excerpt1 En",
-											"type": "text"
+											"type": "text",
+											"disabled": true
 										},
 										{
 											"key": "content_en",
 											"value": "Content1 En",
-											"type": "text"
+											"type": "text",
+											"disabled": true
 										},
 										{
 											"key": "image[]",
 											"type": "file",
-											"src": ""
+											"src": "",
+											"disabled": true
 										},
 										{
 											"key": "gallery[]",
 											"type": "file",
-											"src": ""
+											"src": "",
+											"disabled": true
+										},
+										{
+											"key": "tag_id[]",
+											"value": "1",
+											"description": "tag.id",
+											"type": "text",
+											"disabled": true
 										}
 									]
 								},
 								"url": {
-									"raw": "{{laravel5skeleton2018__APP_URL}}/api/v1/page?",
+									"raw": "{{laravel5skeleton2018__APP_URL}}/api/v1/page",
 									"host": [
 										"{{laravel5skeleton2018__APP_URL}}"
 									],
@@ -383,6 +405,11 @@
 										"page"
 									],
 									"query": [
+										{
+											"key": "with[]",
+											"value": "tags",
+											"disabled": true
+										},
 										{
 											"key": "with[]",
 											"value": "translations",
@@ -413,7 +440,7 @@
 									"raw": ""
 								},
 								"url": {
-									"raw": "{{laravel5skeleton2018__APP_URL}}/api/v1/page/:id?",
+									"raw": "{{laravel5skeleton2018__APP_URL}}/api/v1/page/:id?with[]=tags",
 									"host": [
 										"{{laravel5skeleton2018__APP_URL}}"
 									],
@@ -424,6 +451,10 @@
 										":id"
 									],
 									"query": [
+										{
+											"key": "with[]",
+											"value": "tags"
+										},
 										{
 											"key": "with[]",
 											"value": "translations",
@@ -477,12 +508,14 @@
 										{
 											"key": "excerpt_en",
 											"value": "Excerpt1 En",
-											"type": "text"
+											"type": "text",
+											"disabled": true
 										},
 										{
 											"key": "content_en",
 											"value": "Content1 En",
-											"type": "text"
+											"type": "text",
+											"disabled": true
 										},
 										{
 											"key": "gallery[]",
@@ -507,6 +540,13 @@
 											"value": "",
 											"type": "text",
 											"disabled": true
+										},
+										{
+											"key": "tag_id[]",
+											"value": "1",
+											"description": "tag.id",
+											"type": "text",
+											"disabled": true
 										}
 									]
 								},
@@ -522,6 +562,11 @@
 										":id"
 									],
 									"query": [
+										{
+											"key": "with[]",
+											"value": "tags",
+											"disabled": true
+										},
 										{
 											"key": "with[]",
 											"value": "translations",
@@ -1284,22 +1329,26 @@
 										{
 											"key": "excerpt_en",
 											"value": "Excerpt1 En",
-											"type": "text"
+											"type": "text",
+											"disabled": true
 										},
 										{
 											"key": "content_en",
 											"value": "Content1 En",
-											"type": "text"
+											"type": "text",
+											"disabled": true
 										},
 										{
 											"key": "image[]",
 											"type": "file",
-											"src": ""
+											"src": "",
+											"disabled": true
 										},
 										{
 											"key": "gallery[]",
 											"type": "file",
-											"src": ""
+											"src": "",
+											"disabled": true
 										}
 									]
 								},
@@ -1413,12 +1462,14 @@
 										{
 											"key": "excerpt_en",
 											"value": "Excerpt1 En",
-											"type": "text"
+											"type": "text",
+											"disabled": true
 										},
 										{
 											"key": "content_en",
 											"value": "Content1 En",
-											"type": "text"
+											"type": "text",
+											"disabled": true
 										},
 										{
 											"key": "gallery[]",

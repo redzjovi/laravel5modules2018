@@ -7,6 +7,7 @@ use Illuminate\Http\Response;
 use Modules\Page\Http\Requests\Api\V1\Page\StoreRequest;
 use Modules\Page\Http\Requests\Api\V1\Page\UpdateRequest;
 use Modules\Page\Models\Page;
+use Modules\Tag\Models\Tag;
 
 class PageController extends \Modules\Cms\Http\Controllers\Controller
 {
@@ -22,6 +23,7 @@ class PageController extends \Modules\Cms\Http\Controllers\Controller
 
         $data['model'] = new Page;
         $data['pages'] = Page::getPages($parameters);
+        $data['tags'] = Tag::getTags(['id' => request()->query('tag_id', [0])]);
 
         return view('page::backend/v1/page/index', $data);
     }
