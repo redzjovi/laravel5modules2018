@@ -70,9 +70,6 @@
         <div class="form-group row">
             <label class="col-sm-2" for="content">@lang('cms::cms.tag')</label>
             <div class="col-sm-10">
-                <button class="btn btn-secondary btn-sm" type="button">
-                    <i class="fas fa-plus"></i>
-                </button>
                 <select2 class="form-control form-control-sm" multiple="multiple" name="tag_id[]"
                     ajax
                     ajax-data-search="title"
@@ -86,6 +83,12 @@
                         <option selected value="{{ $tag->id }}">{{ $tag->title }}</option>
                     @endforeach
                 </select2>
+                <button-prompt-ajax class="btn btn-secondary btn-sm"
+                    ajax-name="title_{{ config('app.locale') }}"
+                    ajax-url="{{ route('api.v1.tag.store') }}"
+                >
+                    <i class="fas fa-plus"></i>
+                </button-prompt-ajax>
             </div>
         </div>
     </div>
