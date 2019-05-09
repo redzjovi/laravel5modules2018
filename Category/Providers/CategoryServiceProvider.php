@@ -49,7 +49,8 @@ class CategoryServiceProvider extends ServiceProvider
             __DIR__.'/../Config/config.php' => config_path('category.php'),
         ], 'config');
         $this->mergeConfigFrom(
-            __DIR__.'/../Config/config.php', 'category'
+            __DIR__.'/../Config/config.php',
+            'category'
         );
     }
 
@@ -66,7 +67,7 @@ class CategoryServiceProvider extends ServiceProvider
 
         $this->publishes([
             $sourcePath => $viewPath
-        ],'views');
+        ], 'views');
 
         $this->loadViewsFrom(array_merge(array_map(function ($path) {
             return $path . '/modules/category';
@@ -91,7 +92,7 @@ class CategoryServiceProvider extends ServiceProvider
 
     /**
      * Register an additional directory of factories.
-     * 
+     *
      * @return void
      */
     public function registerFactories()

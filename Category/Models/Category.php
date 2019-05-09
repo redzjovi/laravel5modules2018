@@ -1,23 +1,18 @@
 <?php
 
-namespace Modules\Page\Models;
+namespace Modules\Category\Models;
 
 use Modules\Cms\Models\Model;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
 
-class Page extends Model implements HasMedia
+class Category extends Model implements HasMedia
 {
+    use \Modules\Category\Traits\CategoryTrait;
     use \Modules\Cms\Traits\ModelTrait;
     use \Modules\Cms\Traits\SortableTrait;
-    use \Modules\Page\Traits\PageTrait;
     use \Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 
-    protected $table = 'page';
-
-    public function categories()
-    {
-        return $this->morphToMany(\Modules\Category\Models\Category::class, 'categorizable', 'categorizable');
-    }
+    protected $table = 'category';
 
     public function getContentAttribute()
     {
@@ -39,8 +34,8 @@ class Page extends Model implements HasMedia
         return $this->{'title_'.config('app.locale')};
     }
 
-    public function tags()
+    public function pages()
     {
-        return $this->morphToMany(\Modules\Tag\Models\Tag::class, 'taggable', 'taggable');
+        return $this->morphedByMany(\Modules\Page\Models\Page::class, 'categorizable');
     }
 }

@@ -1,16 +1,14 @@
 <?php
 
-namespace Modules\Page\Http\Controllers\Backend\V1;
+namespace Modules\Category\Http\Controllers\Backend\V1;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Modules\Category\Http\Requests\Api\V1\Category\StoreRequest;
+use Modules\Category\Http\Requests\Api\V1\Category\UpdateRequest;
 use Modules\Category\Models\Category;
-use Modules\Page\Http\Requests\Api\V1\Page\StoreRequest;
-use Modules\Page\Http\Requests\Api\V1\Page\UpdateRequest;
-use Modules\Page\Models\Page;
-use Modules\Tag\Models\Tag;
 
-class PageController extends \Modules\Cms\Http\Controllers\Controller
+class CategoryController extends \Modules\Cms\Http\Controllers\Controller
 {
     /**
      * Display a listing of the resource.
@@ -22,12 +20,10 @@ class PageController extends \Modules\Cms\Http\Controllers\Controller
         request()->query('sort') ?: request()->query->set('sort', '-updated_at');
         $parameters = request()->query();
 
-        $data['categories'] = Category::getCategories(['id' => request()->query('category_id', [0])]);
-        $data['model'] = new Page;
-        $data['pages'] = Page::getPages($parameters);
-        $data['tags'] = Tag::getTags(['id' => request()->query('tag_id', [0])]);
+        $data['model'] = new Category;
+        $data['categories'] = Category::getCategories($parameters);
 
-        return view('page::backend/v1/page/index', $data);
+        return view('category::backend/v1/category/index', $data);
     }
 
     /**
@@ -36,9 +32,9 @@ class PageController extends \Modules\Cms\Http\Controllers\Controller
      */
     public function create()
     {
-        $data['model'] = new Page;
+        $data['model'] = new Category;
 
-        return view('page::backend/v1/page/create', $data);
+        return view('category::backend/v1/category/create', $data);
     }
 
     /**
@@ -48,7 +44,7 @@ class PageController extends \Modules\Cms\Http\Controllers\Controller
      */
     public function store(StoreRequest $request)
     {
-        Page::createPage($request->all());
+        Category::createCategory($request->all());
         flash(trans('cms::cms.stored'))->important()->success();
         return redirect()->back();
     }
@@ -66,11 +62,11 @@ class PageController extends \Modules\Cms\Http\Controllers\Controller
      * Show the form for editing the specified resource.
      * @return Response
      */
-    public function edit(Page $page)
+    public function edit(Category $category)
     {
-        $data['model'] = $page;
+        $data['model'] = $category;
 
-        return view('page::backend/v1/page/edit', $data);
+        return view('category::backend/v1/category/edit', $data);
     }
 
     /**
@@ -78,9 +74,9 @@ class PageController extends \Modules\Cms\Http\Controllers\Controller
      * @param  Request $request
      * @return Response
      */
-    public function update(UpdateRequest $request, Page $page)
+    public function update(UpdateRequest $request, Category $category)
     {
-        Page::updatePageById($request->all(), $page->id);
+        Category::updateCategoryById($request->all(), $category->id);
         flash(trans('cms::cms.updated'))->important()->success();
         return redirect()->back();
     }
@@ -101,7 +97,7 @@ class PageController extends \Modules\Cms\Http\Controllers\Controller
             if ($action == 'actionDelete') {
                 if ($ids = $request->id) {
                     foreach ($ids as $id) {
-                        Page::deleteModel($id);
+                        Category::deleteModel($id);
                     }
                     flash(trans('cms::cms.deleted').' ('.count($ids).')')->important()->success();
                 }
@@ -111,9 +107,9 @@ class PageController extends \Modules\Cms\Http\Controllers\Controller
         return redirect()->back();
     }
 
-    public function delete(Page $page)
+    public function delete(Category $category)
     {
-        Page::deleteModel($page->id);
+        Category::deleteModel($category->id);
         flash(trans('cms::cms.deleted'))->important()->success();
         return redirect()->back();
     }
@@ -130,18 +126,18 @@ class PageController extends \Modules\Cms\Http\Controllers\Controller
         }
         $csv->insertOne($columns);
 
-        $pages = Page::getPages($request->query());
-        $pages->each(function ($page) use ($csv) {
+        $categories = Category::getCategories($request->query());
+        $categories->each(function ($category) use ($csv) {
             $columns = [];
             foreach (config('cms.locales') as $locale => $locales) {
-                $columns[] = $page->{'title_'.$locale};
-                $columns[] = $page->{'slug_'.$locale};
-                $columns[] = $page->{'excerpt_'.$locale};
-                $columns[] = $page->{'content_'.$locale};
+                $columns[] = $category->{'title_'.$locale};
+                $columns[] = $category->{'slug_'.$locale};
+                $columns[] = $category->{'excerpt_'.$locale};
+                $columns[] = $category->{'content_'.$locale};
             }
             $csv->insertOne($columns);
         });
 
-        $csv->output('page_'.date('Ymd_His').'.csv');
+        $csv->output('category_'.date('Ymd_His').'.csv');
     }
 }

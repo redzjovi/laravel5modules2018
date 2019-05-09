@@ -1,13 +1,14 @@
 <?php
 
-namespace Modules\Page\Traits;
+namespace Modules\Category\Traits;
 
-use Modules\Tag\Models\Tag;
-
-trait PageTrait
+trait CategoryTrait
 {
     public function scopeSearch($query, $parameters)
     {
+        if (isset($parameters['id']) && is_array($parameters['id'])) {
+            $query = $query->whereIn('id', $parameters['id']);
+        }
         if (isset($parameters['title'])) {
             $query = $query->where('title_'.config('app.locale'), 'like', '%'.$parameters['title'].'%');
         }
@@ -39,16 +40,6 @@ trait PageTrait
             if (isset($parameters['content_'.$locale])) {
                 $query = $query->where('content_'.$locale, 'like', '%'.$parameters['content_'.$locale].'%');
             }
-        }
-        if (isset($parameters['category_id']) && is_array($parameters['category_id'])) {
-            $query = $query->whereHas('categories', function ($queryTag) use ($parameters) {
-                $queryTag->whereIn('id', $parameters['category_id']);
-            });
-        }
-        if (isset($parameters['tag_id']) && is_array($parameters['tag_id'])) {
-            $query = $query->whereHas('tags', function ($queryTag) use ($parameters) {
-                $queryTag->whereIn('id', $parameters['tag_id']);
-            });
         }
 
 
@@ -135,15 +126,15 @@ trait PageTrait
         return $query;
     }
 
-    public static function createPage(array $attributes = [])
+    public static function createCategory(array $attributes = [])
     {
-        $page = self::createModel($attributes);
-        $page = self::updatePageById($attributes, $page->id);
+        $category = self::createModel($attributes);
+        $category = self::updateCategoryById($attributes, $category->id);
 
-        return $page;
+        return $category;
     }
 
-    public static function getPages($parameters)
+    public static function getCategories($parameters)
     {
         $query = self::query()->search($parameters);
 
@@ -156,25 +147,18 @@ trait PageTrait
         return $query;
     }
 
-    public static function updatePageById(array $attributes = [], int $id)
+    public static function updateCategoryById(array $attributes = [], int $id)
     {
-        // 1. Model, update
+        // 1. Model update
         foreach (config('cms.locales') as $locale => $localeName) {
             if (isset($attributes['title_'.$locale])) {
                 $attributes['slug_'.$locale] = str_slug($attributes['title_'.$locale]).'-'.$id;
             }
         }
-        $page = self::updateModelById($attributes, $id);
+        $category = self::updateModelById($attributes, $id);
 
-        // 2. Category, sync
-        $categoryIds = [];
-        if (isset($attributes['category_id']) && is_array($attributes['category_id'])) {
-            $categoryIds = $attributes['category_id'];
-        }
-        $page->categories()->sync($categoryIds);
-
-        // 3. Medium, image, delete
-        $media = $page->getMedia('page_image');
+        // 2. Medium, image, delete
+        $media = $category->getMedia('category_image');
         if (isset($attributes['image_id'])) {
             $media = $media->whereNotIn('id', $attributes['image_id']);
         }
@@ -182,15 +166,15 @@ trait PageTrait
             $medium->delete();
         });
 
-        // 4. Medium, image, add
+        // 3. Medium, image, add
         if (isset($attributes['image'])) {
-            collect($attributes['image'])->each(function ($image) use ($page) {
-                $page->addMedia($image)->toMediaCollection('page_image', 'media');
+            collect($attributes['image'])->each(function ($image) use ($category) {
+                $category->addMedia($image)->toMediaCollection('category_image', 'media');
             });
         }
 
-        // 5. Medium, gallery, delete
-        $media = $page->getMedia('page_gallery');
+        // 4. Medium, gallery, delete
+        $media = $category->getMedia('category_gallery');
         if (isset($attributes['gallery_id'])) {
             $media = $media->whereNotIn('id', $attributes['gallery_id']);
         }
@@ -198,20 +182,13 @@ trait PageTrait
             $medium->delete();
         });
 
-        // 6. Medium, gallery, add
+        // 5. Medium, gallery, add
         if (isset($attributes['gallery'])) {
-            collect($attributes['gallery'])->each(function ($gallery) use ($page) {
-                $page->addMedia($gallery)->toMediaCollection('page_gallery', 'media');
+            collect($attributes['gallery'])->each(function ($gallery) use ($category) {
+                $category->addMedia($gallery)->toMediaCollection('category_gallery', 'media');
             });
         }
 
-        // 7. Tag, sync
-        $tagIds = [];
-        if (isset($attributes['tag_id']) && is_array($attributes['tag_id'])) {
-            $tagIds = $attributes['tag_id'];
-        }
-        $page->tags()->sync($tagIds);
-
-        return $page;
+        return $category;
     }
 }

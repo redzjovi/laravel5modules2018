@@ -19,6 +19,26 @@
                 </div>
                 <hr />
                 <div class="form-group row">
+                    <label class="col-sm-2" for="category_id">@lang('cms::cms.category')</label>
+                    <div class="col-sm-10">
+                        <select2 class="form-control form-control-sm" multiple="multiple" name="category_id[]"
+                            ajax
+                            ajax-data-search="title"
+                            ajax-data-sort="title"
+                            ajax-process-results-id="id"
+                            ajax-process-results-text="title"
+                            ajax-url="{{ route('api.v1.category.index') }}"
+                            theme="classic"
+                            width="100%"
+                        >
+                            @foreach ($categories->sortBy('title') as $category)
+                                <option selected value="{{ $category->id }}">{{ $category->title }}</option>
+                            @endforeach
+                        </select2>
+                    </div>
+                </div>
+                <hr />
+                <div class="form-group row">
                     <label class="col-sm-2" for="tag_id">@lang('cms::cms.tag')</label>
                     <div class="col-sm-10">
                         <select2 class="form-control form-control-sm" multiple="multiple" name="tag_id[]"

@@ -11,6 +11,6 @@
 |
 */
 
-Route::prefix('categorizable')->group(function() {
+Route::prefix('categorizable')->group(function () {
     Route::get('/', 'CategorizableController@index');
 });

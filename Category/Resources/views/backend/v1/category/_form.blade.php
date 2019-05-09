@@ -44,37 +44,9 @@
 <div class="card">
     <div class="card-body">
         <div class="form-group row">
-            <label class="col-sm-2" for="content">@lang('cms::cms.category')</label>
-            <div class="col-sm-10">
-                <select2 class="form-control form-control-sm" multiple="multiple" name="category_id[]"
-                    ajax
-                    ajax-data-search="title"
-                    ajax-data-sort="title"
-                    ajax-process-results-id="id"
-                    ajax-process-results-text="title"
-                    ajax-url="{{ route('api.v1.category.index') }}"
-                    theme="classic"
-                >
-                    @foreach ($model->categories->sortBy('title') as $category)
-                        <option selected value="{{ $category->id }}">{{ $category->title }}</option>
-                    @endforeach
-                </select2>
-                <button-prompt-ajax class="btn btn-secondary btn-sm"
-                    ajax-name="title_{{ config('app.locale') }}"
-                    ajax-url="{{ route('api.v1.category.store') }}"
-                >
-                    <i class="fas fa-plus"></i>
-                </button-prompt-ajax>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="card">
-    <div class="card-body">
-        <div class="form-group row">
             <label class="col-sm-2" for="content">@lang('cms::cms.image')</label>
             <div class="col-sm-10">
-                @foreach ($model->getMedia('page_image') as $medium)
+                @foreach ($model->getMedia('category_image') as $medium)
                     <input-file-image-default name="image_id[]" src="{{ $medium->getFullUrl() }}" value="{{ $medium->id }}"></input-file-image-default>
                 @endforeach
 
@@ -84,39 +56,11 @@
         <div class="form-group row">
             <label class="col-sm-2" for="content">@lang('cms::cms.gallery')</label>
             <div class="col-sm-10">
-                @foreach ($model->getMedia('page_gallery') as $medium)
+                @foreach ($model->getMedia('category_gallery') as $medium)
                     <input-file-image-default name="gallery_id[]" src="{{ $medium->getFullUrl() }}" value="{{ $medium->id }}"></input-file-image-default>
                 @endforeach
 
                 <input-file-images name="gallery[]"></input-file-images>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="card">
-    <div class="card-body">
-        <div class="form-group row">
-            <label class="col-sm-2" for="content">@lang('cms::cms.tag')</label>
-            <div class="col-sm-10">
-                <select2 class="form-control form-control-sm" multiple="multiple" name="tag_id[]"
-                    ajax
-                    ajax-data-search="title"
-                    ajax-data-sort="title"
-                    ajax-process-results-id="id"
-                    ajax-process-results-text="title"
-                    ajax-url="{{ route('api.v1.tag.index') }}"
-                    theme="classic"
-                >
-                    @foreach ($model->tags->sortBy('title') as $tag)
-                        <option selected value="{{ $tag->id }}">{{ $tag->title }}</option>
-                    @endforeach
-                </select2>
-                <button-prompt-ajax class="btn btn-secondary btn-sm"
-                    ajax-name="title_{{ config('app.locale') }}"
-                    ajax-url="{{ route('api.v1.tag.store') }}"
-                >
-                    <i class="fas fa-plus"></i>
-                </button-prompt-ajax>
             </div>
         </div>
     </div>
