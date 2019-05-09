@@ -1,0 +1,25 @@
+{
+    "name": "nwidart/categorizable",
+    "description": "",
+    "authors": [
+        {
+            "name": "Nicolas Widart",
+            "email": "n.widart@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Modules\\Categorizable\\Providers\\CategorizableServiceProvider"
+            ],
+            "aliases": {
+                
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\Categorizable\\": ""
+        }
+    }
+}
