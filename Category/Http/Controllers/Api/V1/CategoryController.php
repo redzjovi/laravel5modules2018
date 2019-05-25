@@ -27,6 +27,7 @@ class CategoryController extends Controller
      *      {
      *          "id": 1,
      *          "title": "Category1 En",
+     *          "slug": "category1-en-1",
      *          "excerpt": "Excerpt1 En",
      *          "content": "Content1 En",
      *          "images": [],
@@ -65,6 +66,7 @@ class CategoryController extends Controller
      *  "data": {
      *      "id": 1,
      *      "title": "Category1 En",
+     *      "slug": "category1-en-1",
      *      "excerpt": "Excerpt1 En",
      *      "content": "Content1 En",
      *      "images": [],
@@ -110,6 +112,7 @@ class CategoryController extends Controller
      *  "data": {
      *      "id": 1,
      *      "title": "Category1 En",
+     *      "slug": "category1-en-1",
      *      "excerpt": "Excerpt1 En",
      *      "content": "Content1 En",
      *      "images": [],
@@ -150,6 +153,7 @@ class CategoryController extends Controller
      *  "data": {
      *      "id": 1,
      *      "title": "Category1 En",
+     *      "slug": "category1-en-1",
      *      "excerpt": "Excerpt1 En",
      *      "content": "Content1 En",
      *      "images": [],

@@ -3,6 +3,7 @@
 namespace Modules\Page\Http\Resources\Api\V1;
 
 use Illuminate\Http\Resources\Json\Resource;
+use Modules\Category\Http\Resources\Api\V1\CategoryResource;
 use Modules\Medium\Http\Resources\Api\V1\MediumResource;
 use Modules\Tag\Http\Resources\Api\V1\TagResource;
 
@@ -37,6 +38,9 @@ class PageResource extends Resource
         $data['galleries'] = MediumResource::collection($this->getMedia('page_gallery'));
 
         if ($withs = $request->query('with')) {
+            if (in_array('categories', $withs)) {
+                $data['categories'] = CategoryResource::collection($this->categories);
+            }
             if (in_array('tags', $withs)) {
                 $data['tags'] = TagResource::collection($this->tags);
             }

@@ -21,13 +21,14 @@ class PageController extends Controller
      * @queryParam excerpt Excerpt
      * @queryParam tag_id[] tag.id
      * @queryParam sort Sort ie. sort=title,-title,slug,-slug,excerpt,-excerpt,updated_at,-updated_at
-     * @queryParam with[] With ie. with[]=tags, with[]=translations
+     * @queryParam with[] With ie. with[]=categories, with[]=tags, with[]=translations
      * @queryParam per_page Per page (number)
      * @response {
      *  "data": [
      *      {
      *          "id": 1,
      *          "title": "Page1 En",
+     *          "slug": "page1-en-1",
      *          "excerpt": "Excerpt1 En",
      *          "content": "Content1 En",
      *          "images": [],
@@ -56,7 +57,7 @@ class PageController extends Controller
 
     /**
      * Store
-     * @queryParam with[] With ie. with[]=tags, with[]=translations
+     * @queryParam with[] With ie. with[]=categories, with[]=tags, with[]=translations
      * @bodyParam title_en text required Title
      * @bodyParam excerpt_en text Excerpt
      * @bodyParam content_en text Content
@@ -67,6 +68,7 @@ class PageController extends Controller
      *  "data": {
      *      "id": 1,
      *      "title": "Page1 En",
+     *      "slug": "page1-en-1",
      *      "excerpt": "Excerpt1 En",
      *      "content": "Content1 En",
      *      "images": [],
@@ -107,11 +109,12 @@ class PageController extends Controller
     /**
      * Show
      * {page} number required Id
-     * @queryParam with[] With ie. with[]=tags, with[]=translations
+     * @queryParam with[] With ie. with[]=categories, with[]=tags, with[]=translations
      * @response {
      *  "data": {
      *      "id": 1,
      *      "title": "Page1 En",
+     *      "slug": "page1-en-1",
      *      "excerpt": "Excerpt1 En",
      *      "content": "Content1 En",
      *      "images": [],
@@ -140,7 +143,7 @@ class PageController extends Controller
     /**
      * Update
      * {page} number required Id
-     * @queryParam with[] With ie. with[]=tags, with[]=translations
+     * @queryParam with[] With ie. with[]=categories, with[]=tags, with[]=translations
      * @bodyParam title_en text required Title
      * @bodyParam excerpt_en text Excerpt
      * @bodyParam content_en text Content
@@ -153,6 +156,7 @@ class PageController extends Controller
      *  "data": {
      *      "id": 1,
      *      "title": "Page1 En",
+     *      "slug": "page1-en-1",
      *      "excerpt": "Excerpt1 En",
      *      "content": "Content1 En",
      *      "images": [],

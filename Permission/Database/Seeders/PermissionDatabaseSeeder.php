@@ -22,6 +22,7 @@ class PermissionDatabaseSeeder extends Seeder
 
         $permissions = [
             ['name' => 'api.v1.category.*'],
+            ['name' => 'api.v1.menu.*'],
             ['name' => 'api.v1.page.*'],
             ['name' => 'api.v1.permission.*'],
             ['name' => 'api.v1.role.*'],
@@ -30,6 +31,7 @@ class PermissionDatabaseSeeder extends Seeder
             ['name' => 'api.v1.user.*'],
             ['name' => 'api.v1.user.role.*'],
             ['name' => 'modules.category.backend.v1.category.*'],
+            ['name' => 'modules.menu.backend.v1.menu.*'],
             ['name' => 'modules.page.backend.v1.page.*'],
             ['name' => 'modules.permission.backend.v1.permission.*'],
             ['name' => 'modules.role.backend.v1.role.*'],

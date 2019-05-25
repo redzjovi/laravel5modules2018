@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -13,6 +11,8 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/menu', function (Request $request) {
-    return $request->user();
-});
+Route::get('v1/menu')->name('api.v1.menu.index')->uses('Api\V1\MenuController@index');
+Route::post('v1/menu')->middleware(['auth:api', 'permission:api.v1.menu.*'])->name('api.v1.menu.store')->uses('Api\V1\MenuController@store');
+Route::get('v1/menu/{menu}')->name('api.v1.menu.show')->uses('Api\V1\MenuController@show');
+Route::put('v1/menu/{menu}')->middleware(['auth:api', 'permission:api.v1.menu.*'])->name('api.v1.menu.update')->uses('Api\V1\MenuController@update');
+Route::delete('v1/menu/{menu}')->middleware(['auth:api', 'permission:api.v1.menu.*'])->name('api.v1.menu.destroy')->uses('Api\V1\MenuController@destroy');
