@@ -14,7 +14,7 @@ use Modules\Menu\Models\Menu;
 class MenuController extends Controller
 {
     /**
-     * Index
+     * menu GET
      * @queryParam id Id (number)
      * @queryParam title Title
      * @queryParam excerpt Excerpt
@@ -52,7 +52,7 @@ class MenuController extends Controller
     }
 
     /**
-     * Store
+     * menu POST
      * @queryParam with[] With ie. with[]=translations
      * @bodyParam title_en text required Title
      * @bodyParam excerpt_en text Excerpt
@@ -99,7 +99,7 @@ class MenuController extends Controller
     }
 
     /**
-     * Show
+     * menu/{menu} GET
      * {menu} number required Id
      * @queryParam with[] With ie. with[]=translations
      * @response {
@@ -131,7 +131,7 @@ class MenuController extends Controller
     }
 
     /**
-     * Update
+     * menu/{menu} PUT
      * {menu} number required Id
      * @queryParam with[] With ie. with[]=translations
      * @bodyParam title_en text required Title
@@ -184,7 +184,7 @@ class MenuController extends Controller
     }
 
     /**
-     * Destroy
+     * menu/{menu} DELETE
      * {menu} number required Id
      * @response {
      *  "count": 1

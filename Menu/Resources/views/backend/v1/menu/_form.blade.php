@@ -32,6 +32,16 @@
 <div class="card">
     <div class="card-body">
         <div class="form-group row">
+            <label class="col-sm-2" for="content">@lang('cms::cms.nestable')</label>
+            <div class="col-sm-10">
+                <menu-nestable name="nestable" :value="{{ $model->nestable ? $model->nestable : '[]' }}"></menu-nestable>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="card">
+    <div class="card-body">
+        <div class="form-group row">
             <label class="col-sm-2" for="content">@lang('cms::cms.image')</label>
             <div class="col-sm-10">
                 @foreach ($model->getMedia('tag_image') as $medium)

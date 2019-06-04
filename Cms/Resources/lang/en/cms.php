@@ -128,6 +128,7 @@ return [
     'my_poin' => 'My Poin',
     'my_wishlist' => 'My Wishlist',
     'name' => 'Name',
+    'nestable' => 'Nestable',
     'new' => 'New',
     'new_arrival' => 'New Arrival',
     'new_user' => 'New User',

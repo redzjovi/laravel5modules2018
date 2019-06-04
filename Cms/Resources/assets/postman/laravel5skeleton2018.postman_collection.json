@@ -2,7 +2,7 @@
 	"info": {
 		"_postman_id": "6ce664b0-6d3f-4fb1-90ac-5de89dd44969",
 		"name": "laravel5skeleton2018",
-		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
@@ -12,7 +12,7 @@
 					"name": "authentication",
 					"item": [
 						{
-							"name": "login",
+							"name": "authentication/login",
 							"event": [
 								{
 									"listen": "test",
@@ -59,12 +59,23 @@
 										}
 									]
 								},
-								"url": "{{laravel5skeleton2018__APP_URL}}/api/v1/authentication/login"
+								"url": {
+									"raw": "{{laravel5skeleton2018__APP_URL}}/api/v1/authentication/login",
+									"host": [
+										"{{laravel5skeleton2018__APP_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"authentication",
+										"login"
+									]
+								}
 							},
 							"response": []
 						},
 						{
-							"name": "logout",
+							"name": "authentication/logout",
 							"request": {
 								"method": "POST",
 								"header": [
@@ -88,12 +99,23 @@
 									"mode": "raw",
 									"raw": ""
 								},
-								"url": "{{laravel5skeleton2018__APP_URL}}/api/v1/authentication/logout"
+								"url": {
+									"raw": "{{laravel5skeleton2018__APP_URL}}/api/v1/authentication/logout",
+									"host": [
+										"{{laravel5skeleton2018__APP_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"authentication",
+										"logout"
+									]
+								}
 							},
 							"response": []
 						},
 						{
-							"name": "forgot",
+							"name": "authentication/forgot",
 							"event": [
 								{
 									"listen": "test",
@@ -130,12 +152,24 @@
 										}
 									]
 								},
-								"url": "{{laravel5skeleton2018__APP_URL}}/api/v1/authentication/password/forgot"
+								"url": {
+									"raw": "{{laravel5skeleton2018__APP_URL}}/api/v1/authentication/password/forgot",
+									"host": [
+										"{{laravel5skeleton2018__APP_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"authentication",
+										"password",
+										"forgot"
+									]
+								}
 							},
 							"response": []
 						},
 						{
-							"name": "reset",
+							"name": "authentication/reset",
 							"event": [
 								{
 									"listen": "test",
@@ -192,7 +226,19 @@
 										}
 									]
 								},
-								"url": "{{laravel5skeleton2018__APP_URL}}/api/v1/authentication/password/reset"
+								"url": {
+									"raw": "{{laravel5skeleton2018__APP_URL}}/api/v1/authentication/password/reset",
+									"host": [
+										"{{laravel5skeleton2018__APP_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"authentication",
+										"password",
+										"reset"
+									]
+								}
 							},
 							"response": []
 						}
@@ -547,7 +593,7 @@
 					"name": "medium",
 					"item": [
 						{
-							"name": "tinymce/image",
+							"name": "medium/tinymce/image",
 							"event": [
 								{
 									"listen": "test",
@@ -584,7 +630,19 @@
 										}
 									]
 								},
-								"url": "{{laravel5skeleton2018__APP_URL}}/api/v1/medium/tinymce/image"
+								"url": {
+									"raw": "{{laravel5skeleton2018__APP_URL}}/api/v1/medium/tinymce/image",
+									"host": [
+										"{{laravel5skeleton2018__APP_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"medium",
+										"tinymce",
+										"image"
+									]
+								}
 							},
 							"response": []
 						}
@@ -777,7 +835,7 @@
 							"response": []
 						},
 						{
-							"name": "category/:id",
+							"name": "menu/:id",
 							"request": {
 								"method": "PUT",
 								"header": [
@@ -909,6 +967,108 @@
 										{
 											"key": "id",
 											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "menu/nestable/type",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept-Language",
+										"type": "text",
+										"value": "{{laravel5skeleton2018__APP_LOCALE}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{laravel5skeleton2018__APP_URL}}/api/v1/menu/nestable/type",
+									"host": [
+										"{{laravel5skeleton2018__APP_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"menu",
+										"nestable",
+										"type"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "menu/nestable/type-title",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept-Language",
+										"type": "text",
+										"value": "{{laravel5skeleton2018__APP_LOCALE}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{laravel5skeleton2018__APP_URL}}/api/v1/menu/nestable/type-title?",
+									"host": [
+										"{{laravel5skeleton2018__APP_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"menu",
+										"nestable",
+										"type-title"
+									],
+									"query": [
+										{
+											"key": "type",
+											"value": "category",
+											"disabled": true
+										},
+										{
+											"key": "type",
+											"value": "tag",
+											"disabled": true
+										},
+										{
+											"key": "type",
+											"value": "page",
+											"disabled": true
+										},
+										{
+											"key": "type",
+											"value": "user",
+											"disabled": true
+										},
+										{
+											"key": "type_title",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "per_page",
+											"value": "10",
+											"disabled": true
 										}
 									]
 								}
@@ -1433,7 +1593,17 @@
 										}
 									]
 								},
-								"url": "{{laravel5skeleton2018__APP_URL}}/api/v1/permission"
+								"url": {
+									"raw": "{{laravel5skeleton2018__APP_URL}}/api/v1/permission",
+									"host": [
+										"{{laravel5skeleton2018__APP_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"permission"
+									]
+								}
 							},
 							"response": []
 						},
@@ -1690,7 +1860,17 @@
 										}
 									]
 								},
-								"url": "{{laravel5skeleton2018__APP_URL}}/api/v1/role"
+								"url": {
+									"raw": "{{laravel5skeleton2018__APP_URL}}/api/v1/role",
+									"host": [
+										"{{laravel5skeleton2018__APP_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"role"
+									]
+								}
 							},
 							"response": []
 						},

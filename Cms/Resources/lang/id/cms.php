@@ -128,6 +128,7 @@ return [
     'my_poin' => 'Poinku',
     'my_wishlist' => 'Daftar Keinginanku',
     'name' => 'Name',
+    'nestable' => 'Bersarang',
     'new' => 'Baru',
     'new_arrival' => 'Baru Datang',
     'new_user' => 'Pengguna Baru',
