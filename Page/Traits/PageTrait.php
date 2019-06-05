@@ -40,6 +40,9 @@ trait PageTrait
                 $query = $query->where('content_'.$locale, 'like', '%'.$parameters['content_'.$locale].'%');
             }
         }
+        if (isset($parameters['redirect_to'])) {
+            $query = $query->where('redirect_to', 'like', '%'.$parameters['redirect_to'].'%');
+        }
         if (isset($parameters['category_id']) && is_array($parameters['category_id'])) {
             $query = $query->whereHas('categories', function ($queryTag) use ($parameters) {
                 $queryTag->whereIn('id', $parameters['category_id']);

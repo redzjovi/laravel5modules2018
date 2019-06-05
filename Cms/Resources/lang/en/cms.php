@@ -207,6 +207,7 @@ return [
     'received' => 'Received',
     'receiver_name' => 'Receiver Name',
     'redeem' => 'Redeem',
+    'redirect_to' => 'Redirect to',
     'reject' => 'Reject',
     'regards' => 'Regards',
     'regency' => 'Regency',

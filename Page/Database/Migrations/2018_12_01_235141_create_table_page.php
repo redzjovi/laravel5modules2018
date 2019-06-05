@@ -23,6 +23,8 @@ class CreateTablePage extends Migration
                 $table->longText('content_'.$locale)->nullable();
             }
 
+            $table->longText('redirect_to')->nullable();
+
             $table->timestamps();
         });
     }

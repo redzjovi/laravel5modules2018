@@ -1145,6 +1145,11 @@
 											"disabled": true
 										},
 										{
+											"key": "redirect_to",
+											"value": "",
+											"disabled": true
+										},
+										{
 											"key": "tag_id[]",
 											"value": "1",
 											"description": "tag.id",
@@ -1218,6 +1223,12 @@
 										{
 											"key": "content_en",
 											"value": "Content1 En",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "redirect_to",
+											"value": "",
 											"type": "text",
 											"disabled": true
 										},
@@ -1380,6 +1391,12 @@
 										{
 											"key": "content_en",
 											"value": "Content1 En",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "redirect_to",
+											"value": "",
 											"type": "text",
 											"disabled": true
 										},

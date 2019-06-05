@@ -19,6 +19,7 @@ class PageController extends Controller
      * @queryParam title Title
      * @queryParam slug Slug
      * @queryParam excerpt Excerpt
+     * $queryParam redirect_to Redirect to
      * @queryParam tag_id[] tag.id
      * @queryParam sort Sort ie. sort=title,-title,slug,-slug,excerpt,-excerpt,updated_at,-updated_at
      * @queryParam with[] With ie. with[]=categories, with[]=tags, with[]=translations
@@ -31,6 +32,7 @@ class PageController extends Controller
      *          "slug": "page1-en-1",
      *          "excerpt": "Excerpt1 En",
      *          "content": "Content1 En",
+     *          "redirect_to": "",
      *          "images": [],
      *          "galleries": [],
      *          "created_at": {
@@ -61,6 +63,7 @@ class PageController extends Controller
      * @bodyParam title_en text required Title
      * @bodyParam excerpt_en text Excerpt
      * @bodyParam content_en text Content
+     * @bodyParam redirect_to url Redirect to
      * @bodyParam image[] image Image
      * @bodyParam gallery[] image Gallery
      * @bodyParam tag_id[] number tag.id
@@ -71,6 +74,7 @@ class PageController extends Controller
      *      "slug": "page1-en-1",
      *      "excerpt": "Excerpt1 En",
      *      "content": "Content1 En",
+     *      "redirect_to": "",
      *      "images": [],
      *      "galleries": [],
      *      "created_at": {
@@ -90,6 +94,9 @@ class PageController extends Controller
      *  "errors": {
      *      "title_en": [
      *          "The title en field is required."
+     *      ],
+     *      "redirect_to": [
+     *          "The redirect to format is invalid."
      *      ],
      *      "image.0": [
      *          "The image.0 must be an image."
@@ -117,6 +124,7 @@ class PageController extends Controller
      *      "slug": "page1-en-1",
      *      "excerpt": "Excerpt1 En",
      *      "content": "Content1 En",
+     *      "redirect_to": "",
      *      "images": [],
      *      "galleries": [],
      *      "created_at": {
@@ -147,6 +155,7 @@ class PageController extends Controller
      * @bodyParam title_en text required Title
      * @bodyParam excerpt_en text Excerpt
      * @bodyParam content_en text Content
+     * @bodyParam redirect_to url Redirect to
      * @bodyParam image[] image Image
      * @bodyParam image_id[] number Image id
      * @bodyParam gallery[] image Gallery
@@ -159,6 +168,7 @@ class PageController extends Controller
      *      "slug": "page1-en-1",
      *      "excerpt": "Excerpt1 En",
      *      "content": "Content1 En",
+     *      "redirect_to": "",
      *      "images": [],
      *      "galleries": [],
      *      "created_at": {
@@ -181,6 +191,9 @@ class PageController extends Controller
      *  "errors": {
      *      "title_en": [
      *          "The title en field is required."
+     *      ],
+     *      "redirect_to": [
+     *          "The redirect to format is invalid."
      *      ],
      *      "image.0": [
      *          "The image.0 must be an image."

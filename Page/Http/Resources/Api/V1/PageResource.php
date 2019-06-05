@@ -34,6 +34,7 @@ class PageResource extends Resource
             }
         }
 
+        $data['redirect_to'] = $this->redirect_to;
         $data['images'] = MediumResource::collection($this->getMedia('page_image'));
         $data['galleries'] = MediumResource::collection($this->getMedia('page_gallery'));
 

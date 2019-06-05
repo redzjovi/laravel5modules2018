@@ -24,6 +24,7 @@ class UpdateRequest extends FormRequest
     public function rules()
     {
         $rules['title_'.config('app.locale')] = ['required'];
+        $rules['redirect_to'] = ['url'];
         $rules['image.*'] = ['image'];
         $rules['gallery.*'] = ['image'];
 

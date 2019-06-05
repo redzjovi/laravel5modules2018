@@ -207,6 +207,7 @@ return [
     'received' => 'Diterima',
     'receiver_name' => 'Nama Penerima',
     'redeem' => 'Tebus',
+    'redirect_to' => 'Dialihkan ke',
     'reject' => 'Tolak',
     'regards' => 'Salam',
     'regency' => 'Kabupaten',

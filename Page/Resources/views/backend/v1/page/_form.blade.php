@@ -44,6 +44,16 @@
 <div class="card">
     <div class="card-body">
         <div class="form-group row">
+            <label class="col-sm-2" for="redirect_to">@lang('cms::cms.redirect_to')</label>
+            <div class="col-sm-10">
+                <input class="form-control form-control-sm" id="redirect_to" name="redirect_to" type="url" value="{{ old('redirect_to', $model->redirect_to) }}" />
+            </div>
+        </div>
+    </div>
+</div>
+<div class="card">
+    <div class="card-body">
+        <div class="form-group row">
             <label class="col-sm-2" for="content">@lang('cms::cms.category')</label>
             <div class="col-sm-10">
                 <select2 class="form-control form-control-sm" multiple="multiple" name="category_id[]"
