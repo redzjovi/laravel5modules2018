@@ -753,6 +753,12 @@
 											"disabled": true
 										},
 										{
+											"key": "nestable",
+											"value": "",
+											"type": "text",
+											"disabled": true
+										},
+										{
 											"key": "image[]",
 											"type": "file",
 											"src": "",
@@ -871,6 +877,12 @@
 										{
 											"key": "excerpt_en",
 											"value": "Excerpt1 En",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "nestable",
+											"value": "",
 											"type": "text",
 											"disabled": true
 										},

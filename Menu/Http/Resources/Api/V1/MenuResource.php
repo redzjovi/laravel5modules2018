@@ -28,6 +28,7 @@ class MenuResource extends Resource
             }
         }
 
+        $data['nestable'] = $this->nestable;
         $data['images'] = MediumResource::collection($this->getMedia('tag_image'));
         $data['galleries'] = MediumResource::collection($this->getMedia('tag_gallery'));
         $data['created_at'] = $this->created_at;

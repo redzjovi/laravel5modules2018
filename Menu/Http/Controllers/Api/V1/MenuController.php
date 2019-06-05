@@ -27,6 +27,7 @@ class MenuController extends Controller
      *          "id": 1,
      *          "title": "Menu1 En",
      *          "excerpt": "Excerpt1 En",
+     *          "nestable": "",
      *          "images": [],
      *          "galleries": [],
      *          "created_at": {
@@ -56,6 +57,7 @@ class MenuController extends Controller
      * @queryParam with[] With ie. with[]=translations
      * @bodyParam title_en text required Title
      * @bodyParam excerpt_en text Excerpt
+     * @bodyParam nestable text Nestable
      * @bodyParam image[] image Image
      * @bodyParam gallery[] image Gallery
      * @response {
@@ -63,6 +65,7 @@ class MenuController extends Controller
      *      "id": 1,
      *      "title": "Menu1 En",
      *      "excerpt": "Excerpt1 En",
+     *      "nestable": "",
      *      "images": [],
      *      "galleries": [],
      *      "created_at": {
@@ -107,6 +110,7 @@ class MenuController extends Controller
      *      "id": 1,
      *      "title": "Menu1 En",
      *      "excerpt": "Excerpt1 En",
+     *      "nestable": "",
      *      "images": [],
      *      "galleries": [],
      *      "created_at": {
@@ -136,6 +140,7 @@ class MenuController extends Controller
      * @queryParam with[] With ie. with[]=translations
      * @bodyParam title_en text required Title
      * @bodyParam excerpt_en text Excerpt
+     * @bodyParam nestable text Nestable
      * @bodyParam image[] image Image
      * @bodyParam image_id[] number Image id
      * @bodyParam gallery[] image Gallery
@@ -145,6 +150,7 @@ class MenuController extends Controller
      *      "id": 1,
      *      "title": "Menu1 En",
      *      "excerpt": "Excerpt1 En",
+     *      "nestable": "",
      *      "images": [],
      *      "galleries": [],
      *      "created_at": {
