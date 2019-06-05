@@ -27,8 +27,8 @@ class LoginController extends Controller
             return redirect()->back()->withErrors(['email' => [trans('auth.failed')]]);
         }
 
-        if ($request->query('url')) {
-            return redirect($request->query('url'));
+        if ($request->query('redirect_back_url')) {
+            return redirect($request->query('redirect_back_url'));
         }
 
         return redirect()->route('modules.user.backend.v1.user.index');

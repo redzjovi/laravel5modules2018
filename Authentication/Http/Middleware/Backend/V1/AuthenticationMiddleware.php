@@ -17,7 +17,7 @@ class AuthenticationMiddleware
     public function handle(Request $request, Closure $next)
     {
         if (! auth()->check()) {
-            $parameters['url'] = url()->full();
+            $parameters['redirect_back_url'] = url()->full();
             return redirect()->route('modules.authentication.backend.v1.authentication.login.index', $parameters);
         }
 
