@@ -11,6 +11,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
+    <meta name="access-token" content="{{ auth()->check() ? 'Bearer '.auth('api')->login(auth()->user()) : '' }}" />
     <meta name="app_name" content="{{ config('app.name') }}" />
     <meta name="app_url" content="{{ config('app.url') }}" />
     <meta name="csrf-token" content="{{ csrf_token() }}" />
