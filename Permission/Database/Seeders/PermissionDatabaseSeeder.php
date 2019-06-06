@@ -28,6 +28,7 @@ class PermissionDatabaseSeeder extends Seeder
             ['name' => 'api.v1.role.*'],
             ['name' => 'api.v1.role.permission.*'],
             ['name' => 'api.v1.tag.*'],
+            ['name' => 'api.v1.theme.*'],
             ['name' => 'api.v1.user.*'],
             ['name' => 'api.v1.user.role.*'],
             ['name' => 'modules.category.backend.v1.category.*'],
@@ -37,6 +38,7 @@ class PermissionDatabaseSeeder extends Seeder
             ['name' => 'modules.role.backend.v1.role.*'],
             ['name' => 'modules.role.backend.v1.role.permission.*'],
             ['name' => 'modules.tag.backend.v1.tag.*'],
+            ['name' => 'modules.theme.backend.v1.theme.*'],
             ['name' => 'modules.user.backend.v1.user.*'],
             ['name' => 'modules.user.backend.v1.user.role.*'],
         ];

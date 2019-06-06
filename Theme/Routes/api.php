@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -13,6 +11,8 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/theme', function (Request $request) {
-    return $request->user();
-});
+Route::get('v1/theme')->name('api.v1.theme.index')->uses('Api\V1\ThemeController@index');
+Route::post('v1/theme')->middleware(['auth:api', 'permission:api.v1.theme.*'])->name('api.v1.theme.store')->uses('Api\V1\ThemeController@store');
+Route::get('v1/theme/{theme}')->name('api.v1.theme.show')->uses('Api\V1\ThemeController@show');
+Route::put('v1/theme/{theme}')->middleware(['auth:api', 'permission:api.v1.theme.*'])->name('api.v1.theme.update')->uses('Api\V1\ThemeController@update');
+Route::delete('v1/theme/{theme}')->middleware(['auth:api', 'permission:api.v1.theme.*'])->name('api.v1.theme.destroy')->uses('Api\V1\ThemeController@destroy');
