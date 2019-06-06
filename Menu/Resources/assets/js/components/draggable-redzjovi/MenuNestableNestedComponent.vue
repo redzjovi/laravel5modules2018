@@ -35,6 +35,27 @@
                             </b-form-checkbox>
                         </div>
                     </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2">Permission</label>
+                        <div class="col-sm-10">
+                            <Multiselect
+                                @search-change="permissionSearchChangeMethod"
+                                class="form-control"
+                                placeholder=""
+                                v-model="item.permission"
+                                :id="'menu__permission_' + Date.now()"
+                                :internal-search="false"
+                                :options="permissions"
+                            >
+                                <template slot="option" slot-scope="props">
+                                    {{ props.option.name }}
+                                </template>
+                                <template slot="singleLabel" slot-scope="props">
+                                    {{ props.option.name }}
+                                </template>
+                            </Multiselect>
+                        </div>
+                    </div>
                 </b-card>
             </b-collapse>
             <menu-nestable-nested :children="item.children" :types="types" />
@@ -43,15 +64,38 @@
 </template>
 
 <script>
-import draggable from 'vuedraggable'
+import draggable from 'vuedraggable';
+import Multiselect from 'vue-multiselect';
 
 export default {
     components: {
-        draggable
+        draggable,
+        Multiselect
+    },
+    data() {
+        return {
+            permissions: []
+        }
     },
     methods: {
         itemDeleteMethod(id) {
             this.$root.$emit('itemDeleteEmit', id);
+        },
+        permissionSearchChangeMethod(search) {
+            this.permissionsGet(search);
+        },
+        permissionsGet(search) {
+            axios.get('/api/v1/permission', {
+                    params: {
+                        'name': search,
+                        'per_page': 100
+                    }
+                })
+                .then(response => {
+                    this.permissions = response.data.data;
+                });
+
+            return this.permissions;
         }
     },
     name: 'menu-nestable-nested',

@@ -63,6 +63,7 @@ export default {
             //     {
             //         id: 0,
             //         open_link_in_a_new_tab: 0,
+            //         permission: '',
             //         type: 'page',
             //         typeId: 0,
             //         typeTitle: 'Andy',
@@ -70,6 +71,7 @@ export default {
             //             {
             //                 id: 1,
             //                 open_link_in_a_new_tab: 1,
+            //                 permission: '',
             //                 type: 'page',
             //                 typeId: 0,
             //                 typeTitle: 'Harry',
@@ -92,6 +94,7 @@ export default {
                 this.items.push({
                     id: Date.now(),
                     open_link_in_a_new_tab: 0,
+                    permission: '',
                     type: this.nestableType,
                     typeId: this.nestableTypeTitle.id,
                     typeTitle: this.nestableTypeTitle.title,
