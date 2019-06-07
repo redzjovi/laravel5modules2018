@@ -5,8 +5,8 @@ namespace Modules\User\Http\Controllers\Backend\V1;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Modules\Role\Models\Role;
-use Modules\User\Http\Requests\Api\V1\User\StoreRequest;
-use Modules\User\Http\Requests\Api\V1\User\UpdateRequest;
+use Modules\User\Http\Requests\Api\User\StoreRequest;
+use Modules\User\Http\Requests\Api\User\UpdateRequest;
 use Modules\User\Models\User;
 
 class UserController extends \Modules\Cms\Http\Controllers\Controller

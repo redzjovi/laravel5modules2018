@@ -23,7 +23,7 @@ class PermissionController extends Controller
      *  "data": [
      *      {
      *          "id": 1,
-     *          "name": "api.v1.user.*",
+     *          "name": "api.user.*",
      *          "created_at": {
      *              "date": "2019-02-20 14:54:56.000000",
      *              "timezone_type": 3,
@@ -86,7 +86,7 @@ class PermissionController extends Controller
      * @response {
      *  "data": {
      *      "id": 1,
-     *      "name": "api.v1.user.*",
+     *      "name": "api.user.*",
      *      "created_at": {
      *          "date": "2019-02-20 14:54:56.000000",
      *          "timezone_type": 3,
@@ -115,7 +115,7 @@ class PermissionController extends Controller
      * @response {
      *  "data": {
      *      "id": 1,
-     *      "name": "api.v1.user.*",
+     *      "name": "api.user.*",
      *      "created_at": {
      *          "date": "2019-02-20 14:54:56.000000",
      *          "timezone_type": 3,

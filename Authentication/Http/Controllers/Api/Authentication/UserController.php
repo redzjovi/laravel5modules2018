@@ -5,7 +5,7 @@ namespace Modules\Authentication\Http\Controllers\Api\Authentication;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
-use Modules\User\Http\Resources\Api\V1\UserResource;
+use Modules\User\Http\Resources\Api\UserResource;
 
 /**
  * @group Authentication

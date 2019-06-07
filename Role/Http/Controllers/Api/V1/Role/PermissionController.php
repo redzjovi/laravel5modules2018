@@ -25,7 +25,7 @@ class PermissionController extends Controller
      *      "permissions": [
      *          {
      *              "id": 1,
-     *              "name": "api.v1.user.*",
+     *              "name": "api.user.*",
      *              "created_at": "2019-03-17 11:01:24",
      *              "updated_at": "2019-03-17 11:01:24",
      *              "pivot": {

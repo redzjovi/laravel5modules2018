@@ -1,11 +1,11 @@
 <?php
 
-namespace Modules\User\Http\Controllers\Api\V1;
+namespace Modules\User\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
-use Modules\User\Http\Resources\Api\V1\UserResource;
+use Modules\User\Http\Resources\Api\UserResource;
 use Modules\User\Models\User;
 
 /**
@@ -91,7 +91,7 @@ class UserController extends Controller
      *  }
      * }
      */
-    public function store(\Modules\User\Http\Requests\Api\V1\User\StoreRequest $request)
+    public function store(\Modules\User\Http\Requests\Api\User\StoreRequest $request)
     {
         $user = User::createUser($request->all());
         return new UserResource($user);
@@ -169,7 +169,7 @@ class UserController extends Controller
      *  }
      * }
      */
-    public function update(\Modules\User\Http\Requests\Api\V1\User\UpdateRequest $request, User $user)
+    public function update(\Modules\User\Http\Requests\Api\User\UpdateRequest $request, User $user)
     {
         $user = User::updateUserById($request->all(), $user->id);
         return new UserResource($user);
