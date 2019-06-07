@@ -237,6 +237,52 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "user",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept-Language",
+								"type": "text",
+								"value": "{{laravel5skeleton2018__APP_LOCALE}}"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{laravel5skeleton2018__ACCESS_TOKEN}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{laravel5skeleton2018__APP_URL}}/api/authentication/user",
+							"host": [
+								"{{laravel5skeleton2018__APP_URL}}"
+							],
+							"path": [
+								"api",
+								"authentication",
+								"user"
+							],
+							"query": [
+								{
+									"key": "with[]",
+									"value": "roles",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
