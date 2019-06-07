@@ -264,7 +264,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{laravel5skeleton2018__APP_URL}}/api/authentication/user",
+							"raw": "{{laravel5skeleton2018__APP_URL}}/api/authentication/user?",
 							"host": [
 								"{{laravel5skeleton2018__APP_URL}}"
 							],
@@ -274,6 +274,11 @@
 								"user"
 							],
 							"query": [
+								{
+									"key": "with[]",
+									"value": "permissions",
+									"disabled": true
+								},
 								{
 									"key": "with[]",
 									"value": "roles",

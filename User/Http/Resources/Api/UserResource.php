@@ -22,6 +22,9 @@ class UserResource extends Resource
         $data['updated_at'] = $this->updated_at;
 
         if ($withs = $request->query('with')) {
+            if (in_array('permissions', $withs)) {
+                $data['permissions'] = $this->getAllPermissions();
+            }
             if (in_array('roles', $withs)) {
                 $data['roles'] = $this->roles;
             }

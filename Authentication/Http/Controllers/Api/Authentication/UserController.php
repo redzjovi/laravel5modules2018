@@ -14,7 +14,7 @@ class UserController extends Controller
 {
     /**
      * user GET
-     * @queryParam with[] With ie. with[]=roles
+     * @queryParam with[] With ie. with[]=permissions, with[]=roles
      * @response {
      *  "data": [
      *      {

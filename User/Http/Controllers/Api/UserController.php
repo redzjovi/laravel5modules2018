@@ -20,7 +20,7 @@ class UserController extends Controller
      * @queryParam email Email
      * @queryParam role_id roles.id (number)
      * @queryParam sort Sort ie. sort=name,-name,email,-email
-     * @queryParam with[] With ie. with[]=roles
+     * @queryParam with[] With ie. with[]=permissions, with[]=roles
      * @queryParam per_page Per page (number)
      * @response {
      *  "data": [
@@ -53,7 +53,7 @@ class UserController extends Controller
 
     /**
      * Store
-     * @queryParam with[] With ie. with[]=roles
+     * @queryParam with[] With ie. with[]=permissions, with[]=roles
      * @bodyParam name text required Name
      * @bodyParam email email required Email
      * @bodyParam password password required Password
@@ -100,7 +100,7 @@ class UserController extends Controller
     /**
      * Show
      * {user} number required Id
-     * @queryParam with[] With ie. with[]=roles
+     * @queryParam with[] With ie. with[]=permissions, with[]=roles
      * @response {
      *  "data": {
      *      "id": 1,
@@ -131,7 +131,7 @@ class UserController extends Controller
     /**
      * Update
      * {user} number required Id
-     * @queryParam with[] With ie. with[]=roles
+     * @queryParam with[] With ie. with[]=permissions, with[]=roles
      * @bodyParam name text required Name
      * @bodyParam email email required Email
      * @bodyParam password password Password
