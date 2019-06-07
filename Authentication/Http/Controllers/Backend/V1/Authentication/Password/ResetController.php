@@ -23,7 +23,7 @@ class ResetController extends Controller
         }
     }
 
-    public function update(\Modules\Authentication\Http\Requests\Api\V1\Authentication\Password\Reset\UpdateRequest $request)
+    public function update(\Modules\Authentication\Http\Requests\Api\Authentication\Password\Reset\UpdateRequest $request)
     {
         $user = User::getUserByEmailAndVerificationCode(
             $request->input('email'),

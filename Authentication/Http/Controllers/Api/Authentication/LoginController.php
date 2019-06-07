@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Authentication\Http\Controllers\Api\V1\Authentication;
+namespace Modules\Authentication\Http\Controllers\Api\Authentication;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -12,7 +12,7 @@ use Illuminate\Routing\Controller;
 class LoginController extends Controller
 {
     /**
-     * Login
+     * login POST
      * @bodyParam email email required Email Example: superadmin@mailinator.com
      * @bodyParam password password required Password Example: superadmin@mailinator.com
      * @response {
@@ -35,7 +35,7 @@ class LoginController extends Controller
      *  }
      * }
      */
-    public function store(\Modules\Authentication\Http\Requests\Api\V1\Authentication\Login\StoreRequest $request)
+    public function store(\Modules\Authentication\Http\Requests\Api\Authentication\Login\StoreRequest $request)
     {
         $credentials = request(['email', 'password']);
 

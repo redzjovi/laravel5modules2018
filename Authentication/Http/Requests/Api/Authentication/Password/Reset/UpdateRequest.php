@@ -1,10 +1,10 @@
 <?php
 
-namespace Modules\Authentication\Http\Requests\Api\V1\Authentication\Password\Forgot;
+namespace Modules\Authentication\Http\Requests\Api\Authentication\Password\Reset;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreRequest extends FormRequest
+class UpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,6 +25,12 @@ class StoreRequest extends FormRequest
     {
         return [
             'email' => ['required', 'email', 'exists:users,email'],
+            'password' => ['required', 'confirmed'],
+            'password_confirmation' => ['required'],
+            'verification_code' => [
+                'required',
+                new \Modules\User\Rules\Email\VerificationCodeCheck($this->input()),
+            ],
         ];
     }
 }

@@ -11,7 +11,7 @@
 |
 */
 
-Route::post('v1/authentication/login')->name('api.v1.authentication.login.store')->uses('Api\V1\Authentication\LoginController@store');
-Route::post('v1/authentication/logout')->middleware(['auth:api'])->name('api.v1.authentication.logout.store')->uses('Api\V1\Authentication\LogoutController@store');
-Route::post('v1/authentication/password/forgot')->name('api.v1.authentication.password.forgot.store')->uses('Api\V1\Authentication\Password\ForgotController@store');
-Route::put('v1/authentication/password/reset')->name('api.v1.authentication.password.reset.store')->uses('Api\V1\Authentication\Password\ResetController@update');
+Route::post('authentication/login')->name('api.authentication.login.store')->uses('Api\Authentication\LoginController@store');
+Route::post('authentication/logout')->middleware(['auth:api'])->name('api.authentication.logout.store')->uses('Api\Authentication\LogoutController@store');
+Route::post('authentication/password/forgot')->name('api.authentication.password.forgot.store')->uses('Api\Authentication\Password\ForgotController@store');
+Route::put('authentication/password/reset')->name('api.authentication.password.reset.store')->uses('Api\Authentication\Password\ResetController@update');

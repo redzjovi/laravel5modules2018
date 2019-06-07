@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Authentication\Http\Controllers\Api\V1\Authentication\Password;
+namespace Modules\Authentication\Http\Controllers\Api\Authentication\Password;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -13,7 +13,7 @@ use Modules\User\Models\User;
 class ResetController extends Controller
 {
     /**
-     * Reset password
+     * password/reset PUT
      * @bodyParam email email required Email Example: superadmin@mailinator.com
      * @bodyParam password password required Password Example: superadmin@mailinator.com
      * @bodyParam password_confirmation password required Password Confirmation Example: superadmin@mailinator.com
@@ -39,7 +39,7 @@ class ResetController extends Controller
      *  }
      * }
      */
-    public function update(\Modules\Authentication\Http\Requests\Api\V1\Authentication\Password\Reset\UpdateRequest $request)
+    public function update(\Modules\Authentication\Http\Requests\Api\Authentication\Password\Reset\UpdateRequest $request)
     {
         $user = User::getUserByEmailAndVerificationCode(
             $request->input('email'),

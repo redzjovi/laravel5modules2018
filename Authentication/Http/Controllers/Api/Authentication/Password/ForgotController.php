@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Authentication\Http\Controllers\Api\V1\Authentication\Password;
+namespace Modules\Authentication\Http\Controllers\Api\Authentication\Password;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -13,7 +13,7 @@ use Modules\User\Models\User;
 class ForgotController extends Controller
 {
     /**
-     * Forgot password
+     * password/forgot POST
      * @bodyParam email email required Email Example: superadmin@mailinator.com
      * @response {
      *  "message": "Success"
@@ -27,7 +27,7 @@ class ForgotController extends Controller
      *  }
      * }
      */
-    public function store(\Modules\Authentication\Http\Requests\Api\V1\Authentication\Password\Forgot\StoreRequest $request)
+    public function store(\Modules\Authentication\Http\Requests\Api\Authentication\Password\Forgot\StoreRequest $request)
     {
         $user = User::findModelByField('email', $request->input('email'));
         $user = User::updateVerificationCodeById($user->id);

@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Authentication\Http\Controllers\Api\V1\Authentication;
+namespace Modules\Authentication\Http\Controllers\Api\Authentication;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -12,7 +12,7 @@ use Illuminate\Routing\Controller;
 class LogoutController extends Controller
 {
     /**
-     * Logout
+     * logout POST
      * @headerParam AccessToken required
      * @response {
      *  "message": "Successfully logged out"

@@ -23,7 +23,7 @@ class ForgotController extends Controller
      * @param  Request $request
      * @return Response
      */
-    public function store(\Modules\Authentication\Http\Requests\Api\V1\Authentication\Password\Forgot\StoreRequest $request)
+    public function store(\Modules\Authentication\Http\Requests\Api\Authentication\Password\Forgot\StoreRequest $request)
     {
         $user = User::findModelByField('email', $request->input('email'));
         $user = User::updateVerificationCodeById($user->id);
