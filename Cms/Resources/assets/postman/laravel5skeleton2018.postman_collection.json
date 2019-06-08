@@ -57,14 +57,15 @@
 							]
 						},
 						"url": {
-							"raw": "{{laravel5skeleton2018__APP_URL}}/api/authentication/login",
+							"raw": "{{laravel5skeleton2018__APP_URL}}/api/authentication/login/email-password",
 							"host": [
 								"{{laravel5skeleton2018__APP_URL}}"
 							],
 							"path": [
 								"api",
 								"authentication",
-								"login"
+								"login",
+								"email-password"
 							]
 						}
 					},

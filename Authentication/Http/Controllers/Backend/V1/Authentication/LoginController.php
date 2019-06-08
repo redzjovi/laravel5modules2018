@@ -18,7 +18,7 @@ class LoginController extends Controller
         return view('authentication::backend/v1/authentication/login/index');
     }
 
-    public function store(\Modules\Authentication\Http\Requests\Api\Authentication\Login\StoreRequest $request)
+    public function store(\Modules\Authentication\Http\Requests\Api\Authentication\Login\EmailPassword\StoreRequest $request)
     {
         $credentials = $request->only('email', 'password');
         $remember = $request->has('remember');

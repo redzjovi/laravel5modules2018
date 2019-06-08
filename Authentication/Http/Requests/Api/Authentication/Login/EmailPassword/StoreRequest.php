@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Authentication\Http\Requests\Api\Authentication\Login;
+namespace Modules\Authentication\Http\Requests\Api\Authentication\Login\EmailPassword;
 
 use Illuminate\Foundation\Http\FormRequest;
 
