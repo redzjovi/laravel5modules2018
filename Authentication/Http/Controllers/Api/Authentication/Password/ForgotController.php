@@ -31,7 +31,16 @@ class ForgotController extends Controller
     {
         $user = User::findModelByField('email', $request->input('email'));
         $user = User::updateVerificationCodeById($user->id);
-        $user->notify(new \Modules\Authentication\Notifications\PasswordResetLink($user));
+
+        $actionUrlQuery = [
+            'email' => $user->email,
+            'verification_code' => $user->verification_code
+        ];
+        $actionUrl = config('cms.backend.app.url').'/authentication/password/reset?'.http_build_query($actionUrlQuery);
+
+        $user->notify(
+            new \Modules\Authentication\Notifications\PasswordResetLink($user, $actionUrl)
+        );
 
         return response()->json(['message' => trans('cms::cms.success')]);
     }
