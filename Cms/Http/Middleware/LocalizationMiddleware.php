@@ -19,7 +19,7 @@ class LocalizationMiddleware
         $locales = array_keys(config('cms.locales'));
 
         if ($request->expectsJson()) {
-            $locale = $request->header('Accept-Language') ? $request->header('Accept-Language') : $locale;
+            $locale = $request->header('Accept-Language', $locale);
         } else {
             $locale = $request->session()->get('locale') ? $request->session()->get('locale') : $locale;
         }
