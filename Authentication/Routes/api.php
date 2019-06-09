@@ -11,6 +11,7 @@
 |
 */
 
+Route::post('authentication/email/verification-code/check')->uses('Api\Authentication\Email\VerificationCode\CheckController@store');
 Route::post('authentication/login/email-password')->uses('Api\Authentication\Login\EmailPasswordController@store');
 Route::post('authentication/logout')->middleware(['auth:api'])->name('api.authentication.logout.store')->uses('Api\Authentication\LogoutController@store');
 Route::post('authentication/password/forgot')->name('api.authentication.password.forgot.store')->uses('Api\Authentication\Password\ForgotController@store');

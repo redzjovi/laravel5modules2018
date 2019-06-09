@@ -9,6 +9,65 @@
 			"name": "authentication",
 			"item": [
 				{
+					"name": "email/verification-code/check",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "ae2d3819-5101-4447-b2d4-93e21f577aeb",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept-Language",
+								"value": "{{laravel5skeleton2018__APP_LOCALE}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "superadmin@mailinator.com",
+									"type": "text"
+								},
+								{
+									"key": "verification_code",
+									"value": "123456",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{laravel5skeleton2018__APP_URL}}/api/authentication/email/verification-code/check",
+							"host": [
+								"{{laravel5skeleton2018__APP_URL}}"
+							],
+							"path": [
+								"api",
+								"authentication",
+								"email",
+								"verification-code",
+								"check"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "login",
 					"event": [
 						{
@@ -150,13 +209,12 @@
 							]
 						},
 						"url": {
-							"raw": "{{laravel5skeleton2018__APP_URL}}/api/v1/authentication/password/forgot",
+							"raw": "{{laravel5skeleton2018__APP_URL}}/api/authentication/password/forgot",
 							"host": [
 								"{{laravel5skeleton2018__APP_URL}}"
 							],
 							"path": [
 								"api",
-								"v1",
 								"authentication",
 								"password",
 								"forgot"
