@@ -262,6 +262,7 @@ return [
     'terms' => 'Term',
     'thank_you_for_using_our_application' => 'Terima kasih telah menggunakan aplikasi kami',
     'thank_you_param1' => 'Terima Kasih %s',
+    'the_given_data_was_invalid' => 'Data yang diberikan tidak valid.',
     'theme' => 'Tema',
     'themes' => 'Tema',
     'this_item_has_been_successfully_added_to_bag' => 'Barang ini telah berhasil ditambahkan ke tas',

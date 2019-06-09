@@ -52,6 +52,8 @@ class Handler extends ExceptionHandler
     {
         if ($exception instanceof \Illuminate\Database\Eloquent\ModelNotFoundException) {
             return response()->json(['message' => trans('cms::cms.data_not_found')], Response::HTTP_NOT_FOUND);
+        } elseif ($exception instanceof \Illuminate\Validation\ValidationException) {
+            return response()->json(['message' => trans('cms::cms.the_given_data_was_invalid'), 'errors' => $exception->validator->getMessageBag()], Response::HTTP_UNPROCESSABLE_ENTITY);
         } elseif ($this->isHttpException($exception)) {
             $status = $exception->getStatusCode();
             return response()->json(['message' => Response::$statusTexts[$status]], $status);

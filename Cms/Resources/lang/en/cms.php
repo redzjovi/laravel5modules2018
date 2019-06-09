@@ -262,6 +262,7 @@ return [
     'terms' => 'Terms',
     'thank_you_for_using_our_application' => 'Thank you for using our application',
     'thank_you_param1' => 'Thank You %s',
+    'the_given_data_was_invalid' => 'The given data was invalid.',
     'theme' => 'Theme',
     'themes' => 'Themes',
     'this_item_has_been_successfully_added_to_bag' => 'This item has been successfully added to bag',
