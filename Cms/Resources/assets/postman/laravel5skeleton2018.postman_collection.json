@@ -276,19 +276,18 @@
 								},
 								{
 									"key": "verification_code",
-									"value": "608764",
+									"value": "123456",
 									"type": "text"
 								}
 							]
 						},
 						"url": {
-							"raw": "{{laravel5skeleton2018__APP_URL}}/api/v1/authentication/password/reset",
+							"raw": "{{laravel5skeleton2018__APP_URL}}/api/authentication/password/reset",
 							"host": [
 								"{{laravel5skeleton2018__APP_URL}}"
 							],
 							"path": [
 								"api",
-								"v1",
 								"authentication",
 								"password",
 								"reset"
@@ -343,6 +342,45 @@
 									"value": "roles",
 									"disabled": true
 								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "localization",
+			"item": [
+				{
+					"name": "lang",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept-Language",
+								"type": "text",
+								"value": "{{laravel5skeleton2018__APP_LOCALE}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{laravel5skeleton2018__APP_URL}}/api/localization/lang",
+							"host": [
+								"{{laravel5skeleton2018__APP_URL}}"
+							],
+							"path": [
+								"api",
+								"localization",
+								"lang"
 							]
 						}
 					},

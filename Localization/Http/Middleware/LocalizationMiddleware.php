@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Cms\Http\Middleware;
+namespace Modules\Localization\Http\Middleware;
 
 use Closure;
 

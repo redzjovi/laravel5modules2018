@@ -43,10 +43,10 @@ class TypeTitleController extends Controller
         if ($request->query('type') == 'category') {
             $parameters['title'] = $request->query('type_title');
             $resource = \Modules\Category\Models\Category::getCategories($parameters);
-        } else if ($request->query('type') == 'tag') {
+        } elseif ($request->query('type') == 'tag') {
             $parameters['title'] = $request->query('type_title');
             $resource = \Modules\Tag\Models\Tag::getTags($parameters);
-        } else if ($request->query('type') == 'user') {
+        } elseif ($request->query('type') == 'user') {
             $parameters['name'] = $request->query('type_title');
             $resource = \Modules\User\Models\User::getUsers($parameters);
         } else {

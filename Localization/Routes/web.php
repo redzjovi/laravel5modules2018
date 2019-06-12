@@ -11,6 +11,6 @@
 |
 */
 
-Route::prefix('localization')->group(function() {
+Route::prefix('localization')->group(function () {
     Route::get('/', 'LocalizationController@index');
 });
